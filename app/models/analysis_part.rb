@@ -1,0 +1,2 @@
+class AnalysisPart < ApplicationRecord
+end

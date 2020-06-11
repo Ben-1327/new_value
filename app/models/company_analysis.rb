@@ -1,0 +1,2 @@
+class CompanyAnalysis < ApplicationRecord
+end

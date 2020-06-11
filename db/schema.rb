@@ -10,16 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_061503) do
+ActiveRecord::Schema.define(version: 2020_06_11_111614) do
 
   create_table "analysis_parts", force: :cascade do |t|
-    t.string "part_name"
+    t.string "part_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name", null: false
+    t.string "HP"
+    t.text "introduction"
+    t.string "icon_img"
+    t.string "header_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_companies_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
+  end
+
   create_table "company_analyses", force: :cascade do |t|
-    t.string "question"
+    t.string "question", null: false
     t.text "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,6 +50,28 @@ ActiveRecord::Schema.define(version: 2020_06_10_061503) do
     t.integer "range", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name", null: false
+    t.integer "prefectures", null: false
+    t.integer "age", null: false
+    t.integer "user_batch", default: 0, null: false
+    t.text "introduction", null: false
+    t.string "values"
+    t.string "icon_img"
+    t.string "header_img"
+    t.string "twitter_link"
+    t.integer "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
