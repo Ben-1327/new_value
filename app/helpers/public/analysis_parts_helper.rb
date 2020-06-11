@@ -1,0 +1,2 @@
+module Public::AnalysisPartsHelper
+end
