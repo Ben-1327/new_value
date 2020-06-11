@@ -9,5 +9,14 @@ Rails.application.routes.draw do
   sessions: 'companies/sessions',
   passwords: 'companies/passwords'
 }
+
+root 'public/homes#top'
+
+namespace :public do
+  get 'about' => 'homes#about'
+  get 'rule' => 'homes#rule'
+
+end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
