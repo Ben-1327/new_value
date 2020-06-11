@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-sm-9">
+    <div class="row user_header">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-2 icon_img">
+        <%= image_tag @user.icon_img.to_s %>
+      </div>
+      <div class="col-sm-6">
+        <%= @user.values %>
+      </div>
+      <div class="col-sm-2">
+        <div class="row user_batch">
+          <% if @user.user_batch == 0 %>
+            <%= link_to path do %>
+              <!-- Job Hunting Student Batch -->
+              <%= fa_icon 'user-graduate' %>
+            <% end %>
+          <% elsif @user.user_batch == 1 %>
+            <%= link_to path do %>
+              <!-- Normal User Batch -->
+              <%= fa_icon 'user-friends' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="row sns_link">
+          <div class="twitter_link">
+            <%= link_to @user.twitter_link do %>
+              <%= fa_icon 'twitter' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row btn_space">
+      <div class="col-sm-4">
+        <%= @user.active_relationships.count %>フォロー
+      </div>
+      <div class="col-sm-4">
+        <%= @user.passive_relationships.count %>フォロワー
+      </div>
+      <div class="col-sm-2 follow_btn">
+        <% unless current_user == user %>
+          <% if current_user.following?(user) %>
+            <%= link_to "unfollow", user_relationships_path(user.id),method: :delete,class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "follow",user_relationships_path(user.id),method: :post,class: "btn btn-success" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-sm-2 dm_btn">
+
+      </div>
+    </div>
+    <div class="row introduction">
+      <%= @user.introduction %>
+    </div>
+    <div class="row info">
+
+    </div>
+    <div class="row edit_space">
+      <div class="col-sm-10"></div>
+      <div class="col-sm-2 edit_btn">
+        <%= link_to "edit", edit_user_path(user), class: "btn btn-primary" %>
+      </div>
+    </div>
+    <div class="row self_analyses_space">
+      <h2><%= @user.name %>の自己分析</h2>
+      <div class="self_analyses_card">
+        <% @analysis_parts.each do |analysis_part| %>
+          <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header"> <%= link_to analysis_part.part, path %> </div>
+            <div class="card-body text-dark">
+              <ul class="step_list card_text">
+                <% i = 0 %>
+                <% @self_analyses.each do |self_analysis| %>
+                  <% i += 1 %>
+                  <li>Step.<%= i %><%= self_analysis.question %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div id="list-example" class="row list-group">
+      <% @analysis_parts.each do |analysis_part| %>
+        <h4 class="list-group-item "> <%= link_to analysis_part.part, path, class: "link_text" %></h4>
+      <% end %>
+    </div>
+  </div>
+</div>
