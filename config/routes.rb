@@ -16,6 +16,12 @@ namespace :public do
   get 'about' => 'homes#about'
   get 'rule' => 'homes#rule'
 
+  resources :users, only: [:show, :edit, :update, :index] do
+  	resource :relationships, only: [:create, :destroy]
+  	get 'follows' => 'relationships#followed', as: 'follows'
+  	get 'followers' => 'relationships#follower', as: 'followers'
+  end
+
 end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
