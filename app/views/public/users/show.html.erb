@@ -67,7 +67,7 @@
             <div class="card-body text-dark">
               <ul class="step_list card_text">
                 <% i = 0 %>
-                <% @self_analyses.each do |self_analysis| %>
+                <% analysis_part.self_analyses.each do |self_analysis| %>
                   <% i += 1 %>
                   <li>Step.<%= i %><%= self_analysis.question %></li>
                 <% end %>
