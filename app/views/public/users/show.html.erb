@@ -6,21 +6,16 @@
         <%= image_tag @user.icon_img.to_s %>
       </div>
       <div class="col-sm-6">
-        <%= @user.values %>
+        <div class="row name_space">
+          <%= @user.name %>
+        </div>
+        <div class="row value_space">
+          <%= @user.values %>
+        </div>
       </div>
       <div class="col-sm-2">
         <div class="row user_batch">
-          <% if @user.user_batch == 0 %>
-            <%= link_to path do %>
-              <!-- Job Hunting Student Batch -->
-              <%= fa_icon 'user-graduate' %>
-            <% end %>
-          <% elsif @user.user_batch == 1 %>
-            <%= link_to path do %>
-              <!-- Normal User Batch -->
-              <%= fa_icon 'user-friends' %>
-            <% end %>
-          <% end %>
+          <%= render 'public/users/user_batch', user: @user %>
         </div>
         <div class="row sns_link">
           <div class="twitter_link">
