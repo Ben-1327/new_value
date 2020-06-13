@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="title_part">
+    <h1><%= link_to analysis_part.part"編" %></h1>
+  </div>
+  <div class="step_list">
+    <% i = 0 %>
+    <% self_analyses.each do |self_analysis| %>
+      <% i += 1 %>
+      <h2>STEP.<%= i %><%= link_to self_analysis.question, path, class:"link_text" %></h2>
+      <div class="row self_analysis_text">
+        <div class="col-sm-6">
+          <%= self_analysis.answer %>
+        </div>
+        <div class="col-sm-6">
+          <%= self_analysis.analysis %>
+        </div>
+      </div>
+      <div class="row tool_space">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 favorite_btn">
+          <% if self_analysis.favorited_by?(current_user) %>
+            <li>
+            <%= link_to path, method: :delete do %>
+            <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+            <%= self_analysis.favorites.count %> いいね
+            <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to path, method: :post do %>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+              <%= self_analysis.favorites.count %> いいね
+              <% end %>
+            </li>
+          <% end %>
+        </div>
+        <div class="col-sm-4">
+          <%= link_to "コメント数：#{self_analysis.comments.count}", path %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

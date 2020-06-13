@@ -1,0 +1,73 @@
+<div class="title_part">
+  <h1><%= link_to @analysis_part.part"編" %></h1>
+</div>
+<div class="step_no">
+  <h2>STEP.<%= i %><%= link_to @self_analysis.question, path, class:"link_text" %></h2>
+</div>
+<div class="row self_analysis_text">
+  <div class="col-sm-6">
+    <%= @self_analysis.answer %>
+  </div>
+  <div class="col-sm-6">
+    <%= @self_analysis.analysis %>
+  </div>
+</div>
+<div class="row tool_space">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4 favorite_btn">
+    <% if @self_analysis.favorited_by?(current_user) %>
+      <li>
+      <%= link_to path, method: :delete do %>
+      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+      <%= @self_analysis.favorites.count %> いいね
+      <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to path, method: :post do %>
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <%= @self_analysis.favorites.count %> いいね
+        <% end %>
+      </li>
+    <% end %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to "コメント数：#{@self_analysis.comments.count}", path %>
+  </div>
+</div>
+<div class="row btn_space">
+  <div class="col-sm-8"></div>
+  <div class="col-sm-2">
+    <%= link_to "Edit",path(@self_analysis), class: "btn-sm btn-success " %>
+  </div>
+  <div class="col-sm-2">
+    <%= link_to "Destroy",@self_analysis, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger " %>
+  </div>
+</div>
+<div class="comment_form">
+  <%= form_with model: @self_analysis, @comment do |f| %>
+    <div class="row">
+      <div class="col-sm-10">
+        <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントを追加..." %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row comments">
+  <% @self_analysis.self_analysis_comment.each do |self_analysis_comment| %>
+    <div class="col-sm-2 icon_img">
+      <%= image_tag self_analysis_comment.user.icon_img.to_s %>
+    </div>
+    <div class="col-sm-10">
+      <div class="row name_space">
+        <%= link_to self_analysis_comment.user.name, path, class:"link_text"%>
+      </div>
+      <div class="row comment_space">
+        <%= self_analysis_comment.comment %>
+      </div>
+    </div>
+  <% end %>
+</div>
