@@ -9,9 +9,9 @@
         </div>
       </div>
     </div>
-    <% @self_analyses.each do |self_analysis| %>
+    <% self_analyses.each do |self_analysis| %>
       <%= link_to path do %>
-        <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card border-dark col mb-6" style="max-width: 18rem;">
           <div class="row card-header">
             <div class="col-sm-3 icon_img">
               <%= image_tag self_analysis.user.icon_img.to_s %>
@@ -37,7 +37,29 @@
                 <%= self_analysis.analysis %>
               </div>
             </div>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="row tool_space">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4 favorite_btn">
+                <% if book.favorited_by?(current_user) %>
+    							<li>
+        					<%= link_to book_favorites_path(book), method: :delete do %>
+    							<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+        					<%= book.favorites.count %> いいね
+      						<% end %>
+    							</li>
+    						<% else %>
+    							<li>
+        						<%= link_to book_favorites_path(book), method: :post do %>
+        						<i class="fa fa-heart-o" aria-hidden="true"></i>
+        						<%= book.favorites.count %> いいね
+        						<% end %>
+    							</li>
+    						<% end %>
+              </div>
+              <div class="col-sm-4">
+                <%= link_to "コメント数：#{self_analysis.comments.count}", path %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
