@@ -28,10 +28,10 @@
     </div>
     <div class="row btn_space">
       <div class="col-sm-4">
-        <%= @user.active_relationships.count %>フォロー
+        <%= @user.follow_count %>フォロー
       </div>
       <div class="col-sm-4">
-        <%= @user.passive_relationships.count %>フォロワー
+        <%= @user.followers_count %>フォロワー
       </div>
       <div class="col-sm-2 follow_btn">
         <% unless current_user == user %>

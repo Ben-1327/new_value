@@ -6,21 +6,32 @@ class User < ApplicationRecord
 
   has_many :self_analyses,dependent: :destroy
 
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id"
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id"
-  has_many :following_user, through: :active_relationships, source: :followed
-  has_many :follower_user, through: :passive_relationships, source: :follower
+  # relationshipsによるフォローではなくGemを使ったフォローに変更しました
 
-  def follow(user)
-    active_relationships.create(followed_id: user.id)
+  # has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id"
+  # has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id"
+  # has_many :following_user, through: :active_relationships, source: :followed
+  # has_many :follower_user, through: :passive_relationships, source: :follower
+
+  acts_as_followable # フォロワー機能
+  acts_as_follower   # フォロー機能
+
+  def follow
+    @user = User.find(params[:id])
+    # ログイン中のユーザーが対象のユーザー(@user)をフォローする
+    current_user.follow(@user)
   end
 
-  def unfollow(user)
-    active_relationships.find_by(followed_id: user.id).destroy
+  def unfollow
+    @user = User.find(params[:id])
+    # ログイン中のユーザーが対象のユーザー(@user)のフォローを外す
+    current_user.stop_following(@user)
   end
 
-  def following?(user)
-    following_user.include?(user)
+  def following?
+    @user = User.find(params[:id])
+    # ログイン中のユーザーが対象のユーザー(@user)をフォローしているか確認する
+    current_user.following?(@user)
   end
 
 end
