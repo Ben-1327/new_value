@@ -69,6 +69,7 @@ gem 'pry-byebug'
 gem 'kaminari','~> 1.1.1'
 gem 'font-awesome-sass', '~> 5.13.0'
 gem "acts_as_follower", github: "tcocca/acts_as_follower"
+gem 'activeadmin'
 
 gem 'dotenv-rails'
 group :production do
