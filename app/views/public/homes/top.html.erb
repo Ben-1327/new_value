@@ -1,27 +1,45 @@
 <%= stylesheet_link_tag 'homes' %>
 
 <div class="row BG_img">
-  <div class="col-sm-4 text_contents">
-    <p>aaa</p>
+  <div class="col text_contents">
+    <div class="app_name">
+      <ul>
+        <li>New</li> <li>Value</li>
+      </ul>
+    </div>
+    <h3>新しい価値観に触れてみませんか？</h3>
+    <p>他人の自己分析から価値観の変化が生まれるかもしれません</p>
   </div>
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4 login">
-    
+  <div class="col login">
+    <h5>一般ユーザーの方はこちら</h5>
+    <%= link_to "ログイン", new_user_session_path, class:"btn btn-success btn-lg" %>
+    <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary btn-lg" %>
+    <h5 class="company_head">企業の方はこちら</h5>
+    <div class="row for_company">
+      <div class="col">
+        <%= link_to "ログイン", new_company_session_path, class:"btn btn-success" %>
+      </div>
+      <div class="col">
+        <%= link_to "新規登録", new_company_registration_path, class:"btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="BGC">
+  <div class="main_text_contents">
+    <h2>ーあなたを知ればわたしが変わるー</h2>
+    <p>このサービスは</p>
+    <h4>"新しい価値観を知ることで自分自身が成長できるのではないか"</h4>
+    <p>という問いから生まれました。</p>
   </div>
 </div>
 <div class="row BGC">
-  <div class="text_contents">
-
-  </div>
-</div>
-<div class="row BGC">
-  <div class="col-sm-4 img_contents">
+  <div class="col img_contents">
     <img src="assets/" alt="">
     <img src="assets/" alt="">
     <img src="assets/" alt="">
   </div>
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4 text_contents">
+  <div class="col text_contents">
 
   </div>
 </div>

@@ -24,3 +24,14 @@
    padding: 0;
    box-sizing: border-box;
  }
+
+ @font-face {
+  font-family: 'Luminari';
+  src:asset-url('Luminari-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ .container{
+   text-align: center;
+ }

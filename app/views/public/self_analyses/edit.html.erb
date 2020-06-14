@@ -2,7 +2,7 @@
   <h1>編集</h1>
 </div>
 <div class="row form_space">
-  <%= form_with model: @self_analysis do |f| %>
+  <%= form_with model: @self_analysis,local:false do |f| %>
     <div class="row part_form">
       <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]} %>
     </div>

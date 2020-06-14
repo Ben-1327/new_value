@@ -4,7 +4,48 @@
 
 .BG_img{
   background-image: image-url("BGimg.jpeg");
-  height: 800px;
+  height: 500px;
   background-size: cover;
   background-position: center;
+  text-align: center;
+}
+
+.text_contents{
+  color: white;
+}
+
+.app_name{
+  margin-bottom: 100px;
+  font-family: 'Luminari'
+}
+
+.app_name ul,li{
+  list-style: none;
+  font-size: 50px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.app_name li:nth-child(2){
+  color: black;
+}
+
+.text_contents, .login{
+  margin-top: 200px;
+}
+
+.company_head{
+  margin-top: 30px;
+}
+
+.for_company{
+  margin:0 350px;
+}
+
+.BGC{
+  background-color: white;
+}
+
+.main_text_contents{
+  text-align: center;
 }
