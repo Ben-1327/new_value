@@ -30,4 +30,36 @@ class Public::SelfAnalysesController < ApplicationController
     @analysis_part = @self_analysis.analysis_part
   end
 
+  def new
+    @self_analysis = SelfAnalysis.new
+  end
+
+  def edit
+    @self_analysis = SelfAnalysis.find(params[:id])
+  end
+
+  def create
+    @self_analysis = SelfAnalysis.new(self_analysis_params)
+    if @item.save
+  		redirect_to path, notice: "商品の作成に成功しました!"#保存された場合の移動先を指定.
+    else
+  		render :new
+    end
+  end
+
+  def update
+    @self_analysis = SelfAnalysis.find(params[:id])
+  	if @self_analysis.update(self_analysis_params)
+  		redirect_to path, notice: "商品の更新に成功しました!"
+  	else
+  		render :edit
+  	end
+  end
+
+  private
+
+  def self_analysis_params
+    params.require(:self_analysis).permit(:genre_id,:name,:non_taxed_price,:introduction,:item_image,:is_valid)
+  end
+
 end

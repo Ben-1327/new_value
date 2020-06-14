@@ -1,0 +1,28 @@
+<div class="title_part">
+  <h1>編集</h1>
+</div>
+<div class="row form_space">
+  <%= form_with model: @self_analysis do |f| %>
+    <div class="row part_form">
+      <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]} %>
+    </div>
+    <div class="row step_form">
+      <%= f.select :step, [['STEP1',1],['STEP2',2],['STEP3',3],['STEP4',4],['STEP5',5],['STEP6',6]]%>
+    </div>
+    <!-- 公開範囲設定 -->
+    <!-- <div class="row range_form">
+      <%= f.select :range, [['すべての人に公開',0],['フォロワーだけに公開',1],['自分だけに公開',2]]%>
+    </div> -->
+    <div class="row contents_form">
+      <div class="col-sm-6 answer_form">
+        <h4>回答</h4>
+        <%= f.text_area :answer %>
+      </div>
+      <div class="col-sm-6 analysis_form">
+        <h4>回答の分析(必須ではありません)</h4>
+        <%= f.text_area :analysis %>
+      </div>
+    </div>
+    <%= f.submit "保存", class="btn btn-success" %>
+  <% end %>
+</div>
