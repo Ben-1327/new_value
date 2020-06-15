@@ -36,9 +36,9 @@
       <div class="col-sm-2 follow_btn">
         <% unless current_user == user %>
           <% if current_user.following?(user) %>
-            <%= link_to "unfollow", user_relationships_path(user.id),method: :delete,class: "btn btn-primary" %>
+            <%= link_to "unfollow", public_user_unfollow_path(user.id),method: :delete,class: "btn btn-primary" %>
           <% else %>
-            <%= link_to "follow",user_relationships_path(user.id),method: :post,class: "btn btn-success" %>
+            <%= link_to "follow",public_user_follow_path(user.id),method: :post,class: "btn btn-success" %>
           <% end %>
         <% end %>
       </div>

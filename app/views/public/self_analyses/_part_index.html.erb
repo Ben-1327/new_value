@@ -6,7 +6,7 @@
     <% i = 0 %>
     <% self_analyses.each do |self_analysis| %>
       <% i += 1 %>
-      <h2>STEP.<%= i %><%= link_to self_analysis.question, path, class:"link_text" %></h2>
+      <h2>STEP.<%= i %><%= link_to self_analysis.user_question.question, path, class:"link_text" %></h2>
       <div class="row self_analysis_text">
         <div class="col-sm-6">
           <%= self_analysis.answer %>

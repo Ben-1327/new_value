@@ -2,7 +2,7 @@
   <h1><%= link_to @analysis_part.part"編" %></h1>
 </div>
 <div class="step_no">
-  <h2>STEP.<%= i %><%= link_to @self_analysis.question, path, class:"link_text" %></h2>
+  <h2>STEP.<%= @user_question.step %><%= link_to @user_question.question, path, class:"link_text" %></h2>
 </div>
 <div class="row self_analysis_text">
   <div class="col-sm-6">
