@@ -18,10 +18,16 @@ namespace :public do
   get 'about' => 'homes#about'
   get 'rule' => 'homes#rule'
 
+
   resources :users, only: [:show, :edit, :update, :index] do
-  	resource :relationships, only: [:create, :destroy]
-  	get 'follows' => 'relationships#followed', as: 'follows'
-  	get 'followers' => 'relationships#follower', as: 'followers'
+  	resource :follows, only: [:create, :destroy, :follow_list, :follower_list]
+    # フォローとアンフォロー機能
+    put 'follow' => 'follows#follow'
+    put 'unfollow' => 'follows#unfollow'
+
+    # フォロー・フォロワーの一覧ページ
+    get 'follow_list' => 'follows#follow_list'
+    get 'follower_list' => 'follows#follower_list'
   end
 
 end

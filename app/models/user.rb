@@ -16,17 +16,6 @@ class User < ApplicationRecord
   acts_as_followable # フォロワー機能
   acts_as_follower   # フォロー機能
 
-  def follow
-    @user = User.find(params[:id])
-    # ログイン中のユーザーが対象のユーザー(@user)をフォローする
-    current_user.follow(@user)
-  end
-
-  def unfollow
-    @user = User.find(params[:id])
-    # ログイン中のユーザーが対象のユーザー(@user)のフォローを外す
-    current_user.stop_following(@user)
-  end
 
   def following?
     @user = User.find(params[:id])
