@@ -2,8 +2,9 @@ class CreateCompanyAnalyses < ActiveRecord::Migration[5.2]
   def change
     create_table :company_analyses do |t|
 
-      t.string "question", null:false
-      t.text "answer"
+      t.integer "company_id", null:false
+      t.integer "company_question_id", null:false
+      t.text "answer", null:false
 
       t.timestamps
     end

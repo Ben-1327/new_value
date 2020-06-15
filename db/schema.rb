@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_083154) do
+ActiveRecord::Schema.define(version: 2020_06_15_153320) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_083154) do
     t.text "introduction"
     t.string "icon_img"
     t.string "header_img"
+    t.integer "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_companies_on_email", unique: true
@@ -62,11 +63,17 @@ ActiveRecord::Schema.define(version: 2020_06_14_083154) do
   end
 
   create_table "company_analyses", force: :cascade do |t|
-    t.string "question", null: false
-    t.text "answer"
+    t.integer "company_id", null: false
+    t.integer "company_question_id", null: false
+    t.text "answer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "company_id"
+  end
+
+  create_table "company_questions", force: :cascade do |t|
+    t.string "question", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "follows", force: :cascade do |t|
@@ -84,13 +91,27 @@ ActiveRecord::Schema.define(version: 2020_06_14_083154) do
   end
 
   create_table "self_analyses", force: :cascade do |t|
-    t.text "answer"
+    t.integer "user_id", null: false
+    t.integer "user_question_id", null: false
+    t.text "answer", null: false
     t.text "analysis"
-    t.integer "range", default: 0, null: false
+    t.integer "range", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "analysis_part_id"
+  end
+
+  create_table "self_analysis_comments", force: :cascade do |t|
+    t.text "comment", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_questions", force: :cascade do |t|
+    t.integer "analysis_part_id", null: false
+    t.integer "step", default: 1, null: false
+    t.string "question", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

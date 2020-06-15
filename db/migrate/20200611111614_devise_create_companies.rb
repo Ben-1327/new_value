@@ -37,7 +37,7 @@ class DeviseCreateCompanies < ActiveRecord::Migration[5.2]
       t.text "introduction"
       t.string "icon_img"
       t.string "header_img"
-
+      t.integer "tag"
 
 
       t.timestamps null: false
