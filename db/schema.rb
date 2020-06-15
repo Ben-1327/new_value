@@ -83,16 +83,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_083154) do
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
   end
 
-  create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "self_analyses", force: :cascade do |t|
-    t.integer "step", default: 0, null: false
-    t.string "question", null: false
     t.text "answer"
     t.text "analysis"
     t.integer "range", default: 0, null: false
