@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="comment_form">
-  <%= form_with model: @self_analysis, @self_analysis_comment,local:false do |f| %>
+  <%= form_with model: @self_analysis, @self_analysis_comment,local:true do |f| %>
     <div class="row">
       <div class="col-sm-10">
         <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントを追加..." %>
