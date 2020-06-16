@@ -40,21 +40,7 @@
             <div class="row tool_space">
               <div class="col-sm-4"></div>
               <div class="col-sm-4 favorite_btn">
-                <% if self_analysis.favorited_by?(current_user) %>
-    							<li>
-        					<%= link_to path, method: :delete do %>
-    							<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-        					<%= self_analysis.favorites.count %> いいね
-      						<% end %>
-    							</li>
-    						<% else %>
-    							<li>
-        						<%= link_to path, method: :post do %>
-        						<i class="fa fa-heart-o" aria-hidden="true"></i>
-        						<%= self_analysis.favorites.count %> いいね
-        						<% end %>
-    							</li>
-    						<% end %>
+                <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
               </div>
               <div class="col-sm-4">
                 <%= link_to "コメント数：#{self_analysis.comments.count}", path %>
