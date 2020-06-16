@@ -30,6 +30,10 @@ namespace :public do
     get 'follower_list' => 'follows#follower_list'
   end
 
+  resources :self_analyses, only: [:show, :edit, :update, :new, :destroy] do
+    resources :self_analysis_comments, only: [:create, :destroy]
+  end
+
 end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

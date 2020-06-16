@@ -32,7 +32,7 @@
     <% end %>
   </div>
   <div class="col-sm-4">
-    <%= link_to "コメント数：#{@self_analysis.comments.count}", path %>
+    <%= link_to "#{@self_analysis.self_analysis_comments.count}コメント", path %>
   </div>
 </div>
 <div class="row btn_space">
@@ -45,7 +45,7 @@
   </div>
 </div>
 <div class="comment_form">
-  <%= form_with model: @self_analysis, @comment,local:false do |f| %>
+  <%= form_with model: @self_analysis, @self_analysis_comment,local:false do |f| %>
     <div class="row">
       <div class="col-sm-10">
         <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントを追加..." %>
@@ -57,16 +57,21 @@
   <% end %>
 </div>
 <div class="row comments">
-  <% @self_analysis.self_analysis_comment.each do |self_analysis_comment| %>
-    <div class="col-sm-2 icon_img">
-      <%= image_tag self_analysis_comment.user.icon_img.to_s %>
+  <% @self_analysis.self_analysis_comments.each do |self_analysis_comment| %>
+    <div class="col-2 icon_img">
+      <%= image_tag self_analysis_comment.self_analysis.user.icon_img.to_s %>
     </div>
-    <div class="col-sm-10">
+    <div class="col-8">
       <div class="row name_space">
-        <%= link_to self_analysis_comment.user.name, path, class:"link_text"%>
+        <%= link_to self_analysis_comment.self_analysis.user.name, path, class:"link_text"%>
       </div>
       <div class="row comment_space">
         <%= self_analysis_comment.comment %>
+      </div>
+      <div class="col-2destroy_btn">
+        <% if post_comment.user == current_user%>
+          <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+        <% end %>
       </div>
     </div>
   <% end %>

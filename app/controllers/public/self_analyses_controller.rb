@@ -25,8 +25,8 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def show
-    @comment = SelfAnalysisComment.new
     @self_analysis = SelfAnalysis.find(params[:id])
+    @self_analysis_comment = SelfAnalysisComment.new
     @analysis_part = @self_analysis.analysis_part
   end
 

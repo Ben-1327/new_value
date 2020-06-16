@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :self_analyses,dependent: :destroy
+  has_many :self_analysis_comments,dependent: :destroy
 
   # relationshipsによるフォローではなくGemを使ったフォローに変更しました
 
