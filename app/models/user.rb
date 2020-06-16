@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :self_analyses,dependent: :destroy
   has_many :self_analysis_comments,dependent: :destroy
   has_many :favorites,dependent: :destroy
+  has_many :entries,dependent: :destroy
+  has_many :messages,dependent: :destroy
 
   # relationshipsによるフォローではなくGemを使ったフォローに変更しました
 

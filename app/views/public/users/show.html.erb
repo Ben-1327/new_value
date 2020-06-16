@@ -43,7 +43,20 @@
         <% end %>
       </div>
       <div class="col-sm-2 dm_btn">
-
+        <% unless @user.id == current_user.id %>
+          <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
+            <% if @isRoom == true %>
+              <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">DM</a>
+            <% else %>
+              <%= form_with model:@room do |f| %>
+                <%= f.fields_for model:@entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="row introduction">
