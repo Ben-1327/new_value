@@ -10,6 +10,42 @@
   </head>
 
   <body>
+
+    <!--ヘッダーの記述-->
+     <header class="navbar">
+        <div class="container">
+        <nav>
+          <%= link_to root_path do %>
+            <img src="/assets/New_Value_logo2.png" width="250" height="65">
+          <% end %>
+        </nav>
+        <nav>
+          <% if user_signed_in? %>
+            <ul class="nav p-4">
+              <li class="nav-item mr-3"><%= link_to "TL", public_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "新規投稿", public_items_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "マイページ", public_user_path(current_user), class: "btn btn-nav" %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
+            </ul>
+            <div class="form-inline mt-3 justify-content-end">
+              <%= form_with url: search_path, method: :get, local: true do |f| %>
+                  <%= f.text_field :search,placeholder: 'Search' %>
+                  <%= f.select :option, [["user", "1"],["book","2"]]%>
+                  <%= f.select :choice, [["完全一致", "1" ],["前方一致", "2" ],["後方一致", "3" ],["部分一致", "4" ]] %>
+                  <%= f.submit 'Search' %>
+              <% end %>
+            </div>
+          <% else %>
+            <ul class="nav p-4">
+              <li class="nav-item mr-3"><%= link_to "Top", root_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "About", public_about_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "Login", new_user_session_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-nav" %></li>
+            </ul>
+          <% end %>
+        </nav>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>

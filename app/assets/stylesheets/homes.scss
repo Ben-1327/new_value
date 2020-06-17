@@ -10,18 +10,22 @@
   text-align: center;
 }
 
-.text_contents{
+.BGC{
+  margin-bottom: 50px;
+}
+
+.text_contents_white{
   color: white;
 }
 
 .app_name{
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   font-family: 'Luminari'
 }
 
 .app_name ul,li{
   list-style: none;
-  font-size: 50px;
+  font-size: 80px;
   display: inline-block;
   font-weight: bold;
 }
@@ -30,7 +34,7 @@
   color: black;
 }
 
-.text_contents, .login{
+.text_contents_white, .login{
   margin-top: 200px;
 }
 
@@ -42,10 +46,27 @@
   margin:0 350px;
 }
 
-.BGC{
-  background-color: white;
-}
 
 .main_text_contents{
+  text-align: center;
+}
+
+.about_page .BGC{
+  background-color: #ffd8b2;
+  text-align: center;
+}
+
+.about_page, .top_page{
+  background-color: #ffd8b2;
+}
+
+.BGC h3{
+  margin-top: 20px;
+}
+.BGC h1{
+  margin-bottom: 20px;
+}
+.about_page h2{
+  margin: 20px 0;
   text-align: center;
 }

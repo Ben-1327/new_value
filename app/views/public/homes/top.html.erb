@@ -1,21 +1,20 @@
 <%= stylesheet_link_tag 'homes' %>
-
-<div class="row BG_img">
-  <div class="col text_contents">
-    <div class="app_name">
-      <ul>
-        <li>New</li> <li>Value</li>
-      </ul>
+<div class="top_page">
+  <div class="row BG_img">
+    <div class="col text_contents_white">
+      <div class="app_name">
+        <ul>
+          <li>New</li> <li>Value</li>
+        </ul>
+      </div>
+      <h3>新しい価値観に触れてみませんか？</h3>
+      <p>他人の自己分析から価値観の変化が生まれるかもしれません</p>
     </div>
-    <h3>新しい価値観に触れてみませんか？</h3>
-    <p>他人の自己分析から価値観の変化が生まれるかもしれません</p>
-  </div>
-  <div class="col login">
-    <h5>一般ユーザーの方はこちら</h5>
-    <%= link_to "ログイン", new_user_session_path, class:"btn btn-success btn-lg" %>
-    <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary btn-lg" %>
-    <h5 class="company_head">企業の方はこちら</h5>
-    <div class="row for_company">
+    <div class="col login">
+      <h5>一般ユーザーの方はこちら</h5>
+      <%= link_to "ログイン", new_user_session_path, class:"btn btn-success btn-lg" %>
+      <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary btn-lg" %>
+      <h5 class="company_head">企業の方はこちら</h5>
       <div class="col">
         <%= link_to "ログイン", new_company_session_path, class:"btn btn-success" %>
       </div>
@@ -24,22 +23,25 @@
       </div>
     </div>
   </div>
-</div>
-<div class="BGC">
-  <div class="main_text_contents">
-    <h2>ーあなたを知ればわたしが変わるー</h2>
-    <p>このサービスは</p>
-    <h4>"新しい価値観を知ることで自分自身が成長できるのではないか"</h4>
-    <p>という問いから生まれました。</p>
+  <div class="BGC">
+    <div class="main_text_contents">
+      <h3>New Vlue は自己分析を共有できるサービスです。</h3>
+      <br>
+      <p>受信者・発信者のどちらであってもみなさんが成長できる一つの場所になることを目指してサービスを開始しました。</p>
+      <p>価値観というものを通して、何か見方の変化や成長を楽しんでください。</p>
+      <br>
+      <br>
+      <p>また、就活生のみなさんが自己分析をする時にも、自分の価値観を見つめる機会として使っていただけたら嬉しいです。<br>そこで、企業の方にも参加していただけるようなサービスとなっております。</p>
+    </div>
   </div>
-</div>
-<div class="row BGC">
-  <div class="col img_contents">
-    <img src="assets/" alt="">
-    <img src="assets/" alt="">
-    <img src="assets/" alt="">
-  </div>
-  <div class="col text_contents">
+  <div class="row BGC">
+    <div class="col img_contents">
+      <img src="assets/" alt="">
+      <img src="assets/" alt="">
+      <img src="assets/" alt="">
+    </div>
+    <div class="col text_contents">
 
+    </div>
   </div>
 </div>
