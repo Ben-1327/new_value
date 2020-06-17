@@ -23,4 +23,8 @@ class Public::UsersController < ApplicationController
 
   end
 
+  def all_index
+    
+  end
+
 end
