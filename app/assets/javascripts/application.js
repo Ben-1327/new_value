@@ -14,3 +14,49 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $(".part_select").on("change", function() {
+    let input = $(".part_select").val();
+     $.ajax({
+      type: 'POST',
+      url: 'public/self_analyses/part_select',
+      data: { step_select: input },
+      dataType: 'json'
+    });
+    .done(function(data){
+      $('.part_select option').remove();
+
+      $(function(){
+        $(".step_select").on("change", function() {
+          let input = $(".step_select").val();
+          $.ajax({
+            type: 'POST',
+            url: 'public/self_analyses/step_select',
+            data: { question_put: input },
+            dataType: 'json'
+          });
+          .done(function(data){
+          })
+        })
+      });
+    })
+    .fail(function(){
+            console.log("失敗");
+    });
+  });
+});
+
+// $(function() {
+//   $(".step_select").on("change", function() {
+//     let input = $(".step_select").val();
+//      $.ajax({
+//       type: 'POST',
+//       url: 'public/self_analyses/step_select',
+//       data: { question_put: input },
+//       dataType: 'json'
+//   });
+//   .done(function(data){
+//     })
+//
+// });

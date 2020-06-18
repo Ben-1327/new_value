@@ -56,6 +56,17 @@ class Public::SelfAnalysesController < ApplicationController
   	end
   end
 
+  def part_select
+    analysis_part = AnalysisPart.find(params[:part_select])
+    user_questions = UserQuestion.where(analysis_part_id: analysis_part)
+    @steps = user_questions.all
+  end
+
+  def step_select
+    analysis_part = AnalysisPart.find(params[:part_select])
+    @user_question = UserQuestion.find_by(step: (params[:step_select]), analysis_part_id: analysis_part)
+  end
+
   private
 
   def self_analysis_params

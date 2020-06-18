@@ -4,10 +4,14 @@
 <div class="row form_space">
   <%= form_with model: @self_analysis,local:true do |f| %>
     <div class="row part_form">
-      <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]} %>
+      <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]}, class:"part_select" %>
     </div>
     <div class="row step_form">
-      <%= f.select :step, [['STEP1',1],['STEP2',2],['STEP3',3],['STEP4',4],['STEP5',5],['STEP6',6]]%>
+      <!-- <%= f.select :step, [['STEP1',1],['STEP2',2],['STEP3',3],['STEP4',4],['STEP5',5],['STEP6',6]], class:"step_select"%> -->
+      <%= f.select :step, @steps.map{|user_question| ['STEP#{user_question.step}', user_question.step]}, class:"step_select" %>
+    </div>
+    <div class="row question_space">
+      <%= @user_question.question %>
     </div>
     <!-- 公開範囲設定 -->
     <!-- <div class="row range_form">
