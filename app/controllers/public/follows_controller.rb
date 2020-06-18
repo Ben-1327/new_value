@@ -26,17 +26,20 @@ class Public::FollowsController < ApplicationController
 
 
   def follow_list
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
+    @users = @user.all_following
   end
 
 
   def company_follow_list
-    @user = User.find(params[:user_id])
+    @company = Company.find(params[:id])
+    @users = @company.all_following
   end
 
 
   def follower_list
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
+    @users = @user.followers
   end
 
 
