@@ -24,7 +24,13 @@ class Public::UsersController < ApplicationController
   end
 
   def all_index
-    
+
+  end
+
+  private
+
+  def user_params
+  	params.require(:user).permit(:name,:prefectures,:age,:user_batch,:email,:introduction,:values,:icon_img,:header_img,:twitter_link,:tag)
   end
 
 end

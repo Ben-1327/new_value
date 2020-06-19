@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer "prefectures",null:false
       t.integer "age", null:false
       t.integer "user_batch", null:false,default:0
-      t.text "introduction", null:false
+      t.text "introduction"
       t.string "values"
       t.string "icon_img"
       t.string "header_img"

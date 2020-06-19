@@ -32,7 +32,7 @@ namespace :public do
 
     get 'user_part_index/:analysis_part_id' => 'self_analyses#follow_index'
 
-    resources :self_analyses, only: [:show, :edit, :update, :new, :destroy] do
+    resources :self_analyses, only: [:show, :edit, :new, :update, :destroy] do
       resources :self_analysis_comments, only: [:create, :destroy]
       resource :favorites, only: [:create,:destroy]
     end

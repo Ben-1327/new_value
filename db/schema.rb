@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_083112) do
   end
 
   create_table "analysis_parts", force: :cascade do |t|
-    t.string "part_name", null: false
+    t.string "part", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_083112) do
     t.integer "prefectures", null: false
     t.integer "age", null: false
     t.integer "user_batch", default: 0, null: false
-    t.text "introduction", null: false
+    t.text "introduction"
     t.string "values"
     t.string "icon_img"
     t.string "header_img"

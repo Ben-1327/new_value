@@ -22,8 +22,8 @@
         <nav>
           <% if user_signed_in? %>
             <ul class="nav p-4">
-              <li class="nav-item mr-3"><%= link_to "TL", public_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "新規投稿", public_items_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "新規投稿", new_public_user_self_analysis_path, class: "btn btn-nav" %></li>
               <li class="nav-item mr-3"><%= link_to "マイページ", public_user_path(current_user), class: "btn btn-nav" %></li>
               <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
             </ul>
