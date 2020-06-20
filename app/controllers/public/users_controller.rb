@@ -23,8 +23,16 @@ class Public::UsersController < ApplicationController
 
   end
 
-  def all_index
+  def index
+    @users = User.page(params[:page]).reverse_order.per(12)
+  end
 
+  def jhs_users
+    @users = User.where(user_batch: 0).page(params[:page]).reverse_order.per(12)
+  end
+
+  def normal_users
+    @users = User.where(user_batch: 1).page(params[:page]).reverse_order.per(12)
   end
 
   private

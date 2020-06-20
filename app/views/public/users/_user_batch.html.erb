@@ -1,11 +1,11 @@
 <% if user.user_batch == 0 %>
-  <%= link_to path do %>
+  <%= link_to public_jhs_users_path do %>
     <!-- Job Hunting Student Batch -->
-    <%= fa_icon 'user-graduate' %>
+    <%= icon("fas", "user-graduate") %>
   <% end %>
 <% elsif user.user_batch == 1 %>
-  <%= link_to path do %>
+  <%= link_to public_normal_users_path do %>
     <!-- Normal User Batch -->
-    <%= fa_icon 'user-friends' %>
+    <%= icon("fas", "user-friends") %>
   <% end %>
 <% end %>

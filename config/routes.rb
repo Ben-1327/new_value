@@ -17,9 +17,12 @@ root 'public/homes#top'
 namespace :public do
   get 'about' => 'homes#about'
   get 'rule' => 'homes#rule'
+  get 'jhs_users' => 'users#jhs_users'
+  get 'normal_users' => 'users#normal_users'
   get 'all_index' => 'self_analyses#all_index'
   get 'follow_index' => 'self_analyses#follow_index'
   get 'search' => 'searches#search'
+  get 'self_analyses/new' => 'self_analyses#new'
 
 
   resources :users, only: [:index, :show, :edit, :update, :index] do
@@ -30,9 +33,9 @@ namespace :public do
     get 'follow_list' => 'follows#follow_list'
     get 'follower_list' => 'follows#follower_list'
 
-    get 'user_part_index/:analysis_part_id' => 'self_analyses#follow_index'
+    get 'analysis_part_id/user_part_index' => 'self_analyses#follow_index', as:'part_index'
 
-    resources :self_analyses, only: [:show, :edit, :new, :update, :destroy] do
+    resources :self_analyses, only: [:show, :edit, :update, :destroy] do
       resources :self_analysis_comments, only: [:create, :destroy]
       resource :favorites, only: [:create,:destroy]
     end

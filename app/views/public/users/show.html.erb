@@ -20,7 +20,7 @@
         <div class="row sns_link">
           <div class="twitter_link">
             <%= link_to @user.twitter_link do %>
-              <%= fa_icon 'twitter' %>
+              <%= icon("fas", "twitter") %>
             <% end %>
           </div>
         </div>
@@ -80,7 +80,7 @@
       <div class="self_analyses_card">
         <% @analysis_parts.each do |analysis_part| %>
           <div class="card border-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header"> <%= link_to analysis_part.part, path %> </div>
+            <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path %> </div>
             <div class="card-body text-dark">
               <ul class="step_list card_text">
                 <% i = 0 %>
@@ -98,7 +98,7 @@
   <div class="col-sm-3">
     <div id="list-example" class="row list-group">
       <% @analysis_parts.each do |analysis_part| %>
-        <h4 class="list-group-item "> <%= link_to analysis_part.part, path, class: "link_text" %></h4>
+        <h4 class="list-group-item "> <%= link_to analysis_part.part, public_user_part_index_path, class: "link_text" %></h4>
       <% end %>
     </div>
   </div>
