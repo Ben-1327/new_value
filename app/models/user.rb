@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :entries,dependent: :destroy
   has_many :messages,dependent: :destroy
 
+  mount_uploader :icon_img, ImagesUploader
+
   # relationshipsによるフォローではなくGemを使ったフォローに変更しました
 
   # has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id"
@@ -21,11 +23,11 @@ class User < ApplicationRecord
   acts_as_follower   # フォロー機能
 
 
-  def following?
-    @user = User.find(params[:id])
-    # ログイン中のユーザーが対象のユーザー(@user)をフォローしているか確認する
-    current_user.following?(@user)
-  end
+  # def following?
+  #   @user = User.find(params[:id])
+  #   # ログイン中のユーザーが対象のユーザー(@user)をフォローしているか確認する
+  #   current_user.following?(@user)
+  # end
 
   enum prefectures:{
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4">
+    <!-- <div class="col mb-4">
       <div class="card">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
@@ -8,7 +8,7 @@
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <% self_analyses.each do |self_analysis| %>
       <%= link_to path do %>
         <div class="card border-dark col mb-6" style="max-width: 18rem;">
@@ -23,10 +23,10 @@
           <div class="card-body text-dark">
             <div class="row card-title">
               <div class="col-sm-6">
-                <%= link_to self_analysis.user_question.analysis_part.part"編", path %>
+                <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(@analysis_part) %>
               </div>
               <div class="col-sm-6">
-                <%= link_to "STEP"self_analysis.user_question.step, path %>
+                <%= link_to "STEP#{self_analysis.user_question.step}", public_user_self_analysis_path(self_analysis) %>
               </div>
             </div>
             <div class="row card_text">

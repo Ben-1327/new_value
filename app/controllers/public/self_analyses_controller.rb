@@ -2,7 +2,7 @@ class Public::SelfAnalysesController < ApplicationController
 
   # フォロー中のユーザーの投稿
   def follow_index
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
     @follow_users = @user.all_following
     @self_analyses = SelfAnalysis.where(user_id: @follow_users).page(params[:page]).reverse_order.per(12)
   end

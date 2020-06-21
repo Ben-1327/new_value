@@ -70,6 +70,9 @@ gem 'kaminari','~> 1.1.1'
 gem 'font-awesome-sass', '~> 5.4.1'
 gem "acts_as_follower", github: "tcocca/acts_as_follower"
 gem 'activeadmin'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'pry-rails'
 
 gem 'dotenv-rails'
 group :production do

@@ -1,52 +1,59 @@
-<div class="row">
-  <div class="col-sm-9">
+<%= stylesheet_link_tag 'users' %>
+
+<div class="user_show_page">
+  <div class="main">
     <div class="row user_header">
       <div class="col-sm-1"></div>
       <div class="col-sm-2 icon_img">
-        <%= image_tag @user.icon_img.to_s %>
+        <% if @user.icon_img.nil? %>
+          <%= image_tag @user.icon_img.to_s, class:"user_icon" %>
+        <% else %>
+          <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+        <% end %>
       </div>
-      <div class="col-sm-6">
-        <div class="row name_space">
-          <%= @user.name %>
+      <div class="col-sm-6 header_center">
+        <div class="name_space">
+          <h2><%= @user.name %></h2>
         </div>
-        <div class="row value_space">
+        <div class="value_space">
           <%= @user.values %>
         </div>
       </div>
-      <div class="col-sm-2">
-        <div class="row user_batch">
+      <div class="col-sm-2 batch_space">
+        <div class="user_batch">
           <%= render 'public/users/user_batch', user: @user %>
         </div>
-        <div class="row sns_link">
+        <div class="sns_link">
           <div class="twitter_link">
             <%= link_to @user.twitter_link do %>
-              <%= icon("fas", "twitter") %>
+              <%= icon("fab", "twitter") %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
     <div class="row btn_space">
-      <div class="col-sm-4">
-        <%= link_to public_user_follow_list_path do %>
+      <div class="col-8"></div>
+      <div class="col-1">
+        <%= link_to public_user_follow_list_path(@user) do %>
           <%= @user.follow_count %>フォロー
         <% end %>
       </div>
-      <div class="col-sm-4">
-        <%= link_to public_user_follower_list_path do %>
+      <div class="col-1">
+        <%= link_to public_user_follower_list_path(@user) do %>
           <%= @user.followers_count %>フォロワー
         <% end %>
       </div>
-      <div class="col-sm-2 follow_btn">
-        <% unless current_user == user %>
-          <% if current_user.following?(user) %>
-            <%= link_to "unfollow", public_user_unfollow_path(user.id),method: :delete,class: "btn btn-primary" %>
+      <div class="col-1 follow_btn">
+        <% unless current_user == @user %>
+          <% if current_user.following? @user %>
+            <%= link_to "unfollow", {controller: :follows,action: :unfollow,user_id: @user.id}, method: :put,class: "btn btn-primary" %>
           <% else %>
-            <%= link_to "follow",public_user_follow_path(user.id),method: :post,class: "btn btn-success" %>
+            <%= link_to "follow",{controller: :follows,action: :follow,user_id: @user.id}, method: :put,class: "btn btn-success" %>
           <% end %>
         <% end %>
       </div>
-      <div class="col-sm-2 dm_btn">
+      <div class="col-1 dm_btn">
         <% unless @user.id == current_user.id %>
           <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
             <% if @isRoom == true %>
@@ -72,10 +79,10 @@
     <div class="row edit_space">
       <div class="col-sm-10"></div>
       <div class="col-sm-2 edit_btn">
-        <%= link_to "edit", edit_user_path(user), class: "btn btn-primary" %>
+        <%= link_to "edit", edit_public_user_path(@user), class: "btn btn-primary" %>
       </div>
     </div>
-    <div class="row self_analyses_space">
+    <div class="self_analyses_space">
       <h2><%= @user.name %>の自己分析</h2>
       <div class="self_analyses_card">
         <% @analysis_parts.each do |analysis_part| %>
@@ -95,11 +102,11 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
+  <!-- <div class="col-sm-3">
     <div id="list-example" class="row list-group">
       <% @analysis_parts.each do |analysis_part| %>
         <h4 class="list-group-item "> <%= link_to analysis_part.part, public_user_part_index_path, class: "link_text" %></h4>
       <% end %>
     </div>
-  </div>
+  </div> -->
 </div>

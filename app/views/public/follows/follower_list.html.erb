@@ -1,3 +1,8 @@
-<h2>フォロワー</h2>
+<%= stylesheet_link_tag 'follows' %>
 
-<%= render 'public/relationships/index', users: @users %>
+<div class="follower_list">
+
+  <h2>フォロワー</h2>
+
+  <%= render 'public/follows/index', users: @users %>
+</div>

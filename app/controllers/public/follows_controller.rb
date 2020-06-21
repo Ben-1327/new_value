@@ -3,13 +3,13 @@ class Public::FollowsController < ApplicationController
   def follow
     @user = User.find(params[:user_id])
     current_user.follow(@user)
-    redirect_to user_path(@user)
+    redirect_to public_user_path(@user)
   end
 
   def unfollow
     @user = User.find(params[:user_id])
     current_user.stop_following(@user)
-    redirect_to user_path(@user)
+    redirect_to public_user_path(@user)
   end
 
   def company_follow
@@ -26,19 +26,19 @@ class Public::FollowsController < ApplicationController
 
 
   def follow_list
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @users = @user.all_following
   end
 
 
   def company_follow_list
-    @company = Company.find(params[:id])
+    @company = Company.find(params[:company_id])
     @users = @company.all_following
   end
 
 
   def follower_list
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @users = @user.followers
   end
 
