@@ -5,7 +5,7 @@
     <div class="row user_header">
       <div class="col-sm-1"></div>
       <div class="col-sm-2 icon_img">
-        <% if @user.icon_img.nil? %>
+        <% if @user.icon_img.present? %>
           <%= image_tag @user.icon_img.to_s, class:"user_icon" %>
         <% else %>
           <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
@@ -59,8 +59,8 @@
             <% if @isRoom == true %>
               <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">DM</a>
             <% else %>
-              <%= form_with model:@room, local: true do |f| %>
-                <%= f.fields_for model:@entry do |e| %>
+              <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                <%= f.fields_for :entry do |e| %>
                   <%= e.hidden_field :user_id, value: @user.id %>
                 <% end %>
                 <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>

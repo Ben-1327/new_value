@@ -28,11 +28,21 @@ class Public::UsersController < ApplicationController
   end
 
   def jhs_users
-    @users = User.where(user_batch: 0).page(params[:page]).reverse_order.per(12)
+    @users = User.where(user_batch: 1).page(params[:page]).reverse_order.per(12)
   end
 
   def normal_users
-    @users = User.where(user_batch: 1).page(params[:page]).reverse_order.per(12)
+    @users = User.where(user_batch: 2).page(params[:page]).reverse_order.per(12)
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+		@user.update(user_params)
+		redirect_to public_user_path, notice: "会員情報の編集に成功しました。"
   end
 
   private

@@ -41,8 +41,8 @@ class Public::SelfAnalysesController < ApplicationController
 
   def create
     @self_analysis = SelfAnalysis.new(self_analysis_params)
-    if @item.save
-  		redirect_to path, notice: "商品の作成に成功しました!"#保存された場合の移動先を指定.
+    if @self_analysis.save
+  		redirect_to path, notice: "投稿に成功しました!"#保存された場合の移動先を指定.
     else
   		render :new
     end

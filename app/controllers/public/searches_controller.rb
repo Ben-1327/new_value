@@ -6,7 +6,7 @@ class Public::SearchesController < ApplicationController
     @self_analyses = SelfAnalysis.page(params[:page]).reverse_order.per(12)
     if @user_or_analysis == "1"
       @users = search_contents(params[:search], @user_or_analysis, @how_search)
-      render template: 'public/users/all_index'
+      render template: 'public/users/index'
     else
       @self_analyses = search_contents(params[:search], @user_or_analysis, @how_search)
       render template: 'public/self_analyses/all_index'

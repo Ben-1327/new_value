@@ -50,3 +50,9 @@
    height: 100px;
    background-color: #ff9e3d;
  }
+
+ .default_icon, .user_icon{
+   height: 70px;
+   width: 70px;
+   object-fit: cover; object-position:0% 0%;
+ }

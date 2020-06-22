@@ -1,7 +1,11 @@
 <div class="row user_space">
   <% users.each do |user| %>
     <div class="col-sm-2 icon_img">
-      <%= image_tag user.icon_img.to_s %>
+      <% if user.icon_img.present? %>
+        <%= image_tag user.icon_img.to_s, class:"user_icon" %>
+      <% else %>
+        <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+      <% end %>
     </div>
     <div class="col-sm-6">
       <div class="row name_space">
