@@ -14,7 +14,11 @@
         <div class="card border-dark col mb-6" style="max-width: 18rem;">
           <div class="row card-header">
             <div class="col-sm-3 icon_img">
-              <%= image_tag self_analysis.user.icon_img.to_s %>
+              <% if user.icon_img.present? %>
+                <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon" %>
+              <% else %>
+                <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+              <% end %>
             </div>
             <div class="col-sm-9 name_space">
               <%= link_to self_analysis.user.name, path, class:"link_text"%>

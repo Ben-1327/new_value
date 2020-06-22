@@ -16,35 +16,42 @@
 //= require_tree .
 
 $(function() {
-  $(".part_select").on("change", function() {
-    let input = $(".part_select").val();
+  $("#self_analysis_analysis_part_id").on("change", function() {
+    let input = $("#self_analysis_analysis_part_id").val();
      $.ajax({
-      type: 'POST',
-      url: 'public/self_analyses/part_select',
+      type: 'GET',
+      url: '/public/self_analyses/part_select',
       data: { step_select: input },
       dataType: 'json'
-    });
+    })
     .done(function(data){
-      $('.part_select option').remove();
-
-      $(function(){
-        $(".step_select").on("change", function() {
-          let input = $(".step_select").val();
-          $.ajax({
-            type: 'POST',
-            url: 'public/self_analyses/step_select',
-            data: { question_put: input },
-            dataType: 'json'
-          });
-          .done(function(data){
-          })
-        })
-      });
+      console.log(data)
+      $('#self_analysis_step option').remove();
+      for (var i = 0; i < data.length; i++) {
+        $('#self_analysis_step').append(`<option value='${data[i].step}'>step${data[i].step}</option>`)
+        $('#user_question').text(data[0].question);
+      }
     })
     .fail(function(){
             console.log("失敗");
     });
   });
+});
+
+$(function(){
+  $("#self_analysis_step").on("change", function() {
+    let input = $("#self_analysis_step").val();
+    $.ajax({
+      type: 'GET',
+      url: '/public/self_analyses/step_select',
+      data: { question_put: input },
+      dataType: 'json'
+    })
+    .done(function(data){
+      console.log(data)
+      $('#user_question').text(data.question);
+    })
+  })
 });
 
 // $(function() {

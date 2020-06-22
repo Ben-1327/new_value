@@ -33,6 +33,7 @@ class Public::SelfAnalysesController < ApplicationController
 
   def new
     @self_analysis = SelfAnalysis.new
+    @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
   end
 
   def edit
@@ -58,14 +59,14 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def part_select
-    analysis_part = AnalysisPart.find(params[:part_select])
-    user_questions = UserQuestion.where(analysis_part_id: analysis_part)
-    @steps = user_questions.all
+    analysis_part = AnalysisPart.find(params[:step_select])
+    @steps = UserQuestion.where(analysis_part_id: analysis_part)
+    render json: @steps
   end
 
   def step_select
-    analysis_part = AnalysisPart.find(params[:part_select])
-    @user_question = UserQuestion.find_by(step: (params[:step_select]), analysis_part_id: analysis_part)
+    @user_question = UserQuestion.find_by(step: (params[:question_put]))
+    render json: @user_question
   end
 
   private
