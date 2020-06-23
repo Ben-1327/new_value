@@ -1,0 +1,7 @@
+<div class="col-sm-3">
+  <div id="list-example" class="row list-group">
+    <% @analysis_parts.each do |analysis_part| %>
+      <h4 class="list-group-item "> <%= link_to analysis_part.part, public_user_part_index_path, class: "link_text" %></h4>
+    <% end %>
+  </div>
+</div>

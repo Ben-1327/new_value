@@ -3,9 +3,11 @@ class Public::RoomsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @room = Room.new
+    @room = Room.create
     @entry1 = Entry.create(room_id: @room.id, user_id: current_user.id)
-    @entry1 = Entry.create(params.requier(:entry).permit(:user_id, :room_id).merge(room_id: @room.id))
+    @entry2 = Entry.new(entry_params)
+    @entry2.room_id = @room.id
+    @entry2.save
     redirect_to "/public/rooms/#{@room.id}"
   end
 
@@ -18,6 +20,12 @@ class Public::RoomsController < ApplicationController
     else
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  private
+
+  def entry_params
+    params.require(:entry).permit(:user_id)
   end
 
 end

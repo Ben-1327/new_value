@@ -26,9 +26,9 @@ $(function() {
     })
     .done(function(data){
       console.log(data)
-      $('#self_analysis_step option').remove();
+      $('#self_analysis_user_question_id option').remove();
       for (var i = 0; i < data.length; i++) {
-        $('#self_analysis_step').append(`<option value='${data[i].step}'>step${data[i].step}</option>`)
+        $('#self_analysis_user_question_id').append(`<option value='${data[i].step}'>step${data[i].step}</option>`)
         $('#user_question').text(data[0].question);
       }
     })
@@ -39,8 +39,8 @@ $(function() {
 });
 
 $(function(){
-  $("#self_analysis_step").on("change", function() {
-    let input = $("#self_analysis_step").val();
+  $("#self_analysis_user_question_id").on("change", function() {
+    let input = $("#self_analysis_user_question_id").val();
     $.ajax({
       type: 'GET',
       url: '/public/self_analyses/step_select',

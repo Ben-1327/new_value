@@ -1,38 +1,43 @@
-<div class="title_part">
-  <h1>新規投稿</h1>
-</div>
-<div class="container">
-  <div class="row form_space">
-    <%= form_with model: @self_analysis,url: public_user_self_analyses_path(current_user)  do |f| %>
-      <div class="container">
+<%= stylesheet_link_tag 'self_analyses' %>
+
+<div class="self_analysis_new page">
+  <div class="title_part">
+    <h1>新規投稿</h1>
+  </div>
+  <div class="container">
+    <div class="form_space">
+      <%= form_with model: @self_analysis,url: public_user_self_analyses_path(current_user)  do |f| %>
         <div class="row part_form">
-          <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]}, class:"part_select" %>
+          <label class="col-sm-2"><%= f.label "編" %></label>
+          <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]}, class:"part_select col-sm-5" %>
         </div>
         <div class="row step_form">
-          <!-- <%= f.select :step, [['STEP1',1],['STEP2',2],['STEP3',3],['STEP4',4],['STEP5',5],['STEP6',6]], class:"step_select"%> -->
-          <%= f.select :step, @user_questions.map{|user_question| ["step#{user_question.step}", user_question.step]}, class:"step_select" %>
+          <label class="col-sm-2"><%= f.label "step" %></label>
+          <%= f.select :user_question_id, @user_questions.map{|user_question| ["step#{user_question.step}", user_question.step]}, class:"step_select col-sm-5" %>
         </div>
-        <div class="row question_space" id="user_question">
-          <!-- <%#= @user_questions.question %> -->
+        <div class="row">
+          <label class="col-sm-2"><%= f.label "質問" %></label>
+          <div class="question col-sm-6", id="user_question"></div>
         </div>
         <!-- 公開範囲設定 -->
         <div class="row range_form">
-          <%= f.select :range, [['すべての人に公開',0],['フォロワーだけに公開',1],['自分だけに公開',2]]%>
+          <label class="col-sm-2"><%= f.label "公開範囲" %></label>
+          <%= f.select :range, [['すべての人に公開',0],['フォロワーだけに公開',1],['自分だけに公開',2]], class:"col-sm-5"%>
         </div>
         <div class="row contents_form">
-          <div class="col-sm-6 answer_form">
-            <h4>回答</h4>
+          <label class="col-sm-2"><%= f.label "内容" %></label>
+          <div class="col-5 answer_form">
+            <h4>回答<br></h4>
             <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。" %>
           </div>
-          <div class="col-sm-6 analysis_form">
-            <h4>回答の分析(必須ではありません)</h4>
+          <div class="col-5 analysis_form">
+            <h4>回答の分析<br>(必須ではありません)</h4>
             <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。" %>
           </div>
         </div>
-      </div>
 
-      <%= f.submit "投稿", class:"btn btn-success" %>
-    <% end %>
+        <%= f.submit "投稿", class:"btn btn-success" %>
+      <% end %>
+    </div>
   </div>
-
 </div>

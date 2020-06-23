@@ -41,9 +41,22 @@
   font-style: normal;
 }
 
+.link_text{
+  color: #322D00;
+  text-decoration: none;
+}
+
+.link_text:hover{
+  text-decoration: none;
+}
+
+.page{
+  background-color: #ffd8b2;
+}
+
+
  .container{
    text-align: center;
-   margin-top: -30px;
  }
 
  .navbar{

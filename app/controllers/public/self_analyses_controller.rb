@@ -28,7 +28,10 @@ class Public::SelfAnalysesController < ApplicationController
   def show
     @self_analysis = SelfAnalysis.find(params[:id])
     @self_analysis_comment = SelfAnalysisComment.new
-    @analysis_part = @self_analysis.analysis_part
+    @user = @self_analysis.user
+    @user_question = @self_analysis.user_question
+    @analysis_part = @user_question.analysis_part
+    @self_analysis_comments = @self_analysis.self_analysis_comments
   end
 
   def new
@@ -42,8 +45,9 @@ class Public::SelfAnalysesController < ApplicationController
 
   def create
     @self_analysis = SelfAnalysis.new(self_analysis_params)
+    @self_analysis.user_id = current_user.id
     if @self_analysis.save
-  		redirect_to path, notice: "投稿に成功しました!"#保存された場合の移動先を指定.
+  		redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
     else
   		render :new
     end
@@ -52,7 +56,7 @@ class Public::SelfAnalysesController < ApplicationController
   def update
     @self_analysis = SelfAnalysis.find(params[:id])
   	if @self_analysis.update(self_analysis_params)
-  		redirect_to path, notice: "商品の更新に成功しました!"
+  		redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "商品の更新に成功しました!"
   	else
   		render :edit
   	end
@@ -72,7 +76,7 @@ class Public::SelfAnalysesController < ApplicationController
   private
 
   def self_analysis_params
-    params.require(:self_analysis).permit(:genre_id,:name,:non_taxed_price,:introduction,:item_image,:is_valid)
+    params.require(:self_analysis).permit(:user_id, :user_question_id, :answer, :analysis, :range)
   end
 
 end

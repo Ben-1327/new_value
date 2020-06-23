@@ -1,9 +1,9 @@
 class Public::SelfAnalysisCommentsController < ApplicationController
 
   def create
-    self_analysis = SelfAnalysis.find(params[:id])
+    @self_analysis = SelfAnalysis.find(params[:id])
     comment = current_user.self_analysis_comments.new(self_analysis_comment_params)
-    comment.self_analysis_id = self_analysis.id
+    comment.self_analysis_id = @self_analysis.id
     comment.save
     redirect_to path
   end
