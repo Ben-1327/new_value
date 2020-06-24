@@ -1,27 +1,35 @@
 <div class="row">
-  <div class="title_part">
-    <h1><%= link_to analysis_part.part"編" %></h1>
+  <div class="container">
+    <div class="row title_part">
+      <h1><%= "#{analysis_part.part}編" %></h1>
+    </div>
   </div>
-  <div class="step_list">
+  <div class="row step_list">
     <% i = 0 %>
     <% self_analyses.each do |self_analysis| %>
       <% i += 1 %>
-      <h2>STEP.<%= i %><%= link_to self_analysis.user_question.question, path, class:"link_text" %></h2>
-      <div class="row self_analysis_text">
-        <div class="col-sm-6">
-          <%= self_analysis.answer %>
+      <h2>STEP.<%= i %><%= link_to self_analysis[0].question, public_user_self_analysis_path(user, self_analysis[1]),class:"link_text" %></h2>
+      <% if self_analysis[1].present? %>
+        <div class="row self_analysis_text">
+          <div class="col-sm-6">
+            <%= self_analysis[1].answer %>
+          </div>
+          <div class="col-sm-6">
+            <%= self_analysis[1].analysis %>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <%= self_analysis.analysis %>
+      <% else %>
+        <div class="row self_analysis_text">
+          まだ回答していません
         </div>
-      </div>
+      <% end %>
       <div class="row tool_space">
         <div class="col-sm-4"></div>
         <div class="col-sm-4 favorite_btn">
-          <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
+          <%#= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
         </div>
         <div class="col-sm-4">
-          <%= link_to "コメント数：#{self_analysis.comments.count}", path %>
+          <%#= link_to "コメント数：#{self_analysis.comments.count}", path %>
         </div>
       </div>
     <% end %>

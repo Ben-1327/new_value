@@ -13,7 +13,8 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @user = @room.entries.find_by.not(user_id: current_user.id).user
+    user = @room.entries.where.not(user_id: current_user.id).first
+    @user = User.find(user.user_id)
     if Entry.where(user_id:current_user.id, room_id:@room.id).present?
       @messages = @room.messages
       @message = Message.new

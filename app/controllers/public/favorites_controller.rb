@@ -4,14 +4,14 @@ class Public::FavoritesController < ApplicationController
     self_analysis = SelfAnalysis.find(params[:self_analysis_id])
     favorite = current_user.favorites.new(self_analysis_id: self_analysis.id)
     favorite.save
-    redirect_to path
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
     self_analysis = SelfAnalysis.find(params[:self_analysis_id])
     favorite = current_user.favorites.find_by(self_analysis_id: self_analysis.id)
     favorite.destroy
-    redirect_to path
+    redirect_back(fallback_location: root_path)
   end
 
 end

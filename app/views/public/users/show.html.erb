@@ -86,7 +86,7 @@
         <div class="card-deck">
           <% @analysis_parts.each do |analysis_part| %>
             <div class="card border-dark mb-6" style="max-width: 30rem;">
-              <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user), class:"link_text" %> </div>
+              <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user, analysis_part), class:"link_text" %> </div>
               <div class="card-body text-dark">
                 <ul class="step_list card_text">
                   <% i = 0 %>

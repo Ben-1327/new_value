@@ -35,7 +35,7 @@ namespace :public do
     get 'follow_list' => 'follows#follow_list'
     get 'follower_list' => 'follows#follower_list'
 
-    get 'analysis_part_id/user_part_index' => 'self_analyses#follow_index', as:'part_index'
+    get ':analysis_part_id/user_part_index' => 'self_analyses#user_part_index', as:'part_index'
 
     resources :self_analyses, only: [:show, :edit, :update, :destroy, :create] do
       resources :self_analysis_comments, only: [:create, :destroy]

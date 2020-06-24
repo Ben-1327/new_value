@@ -20,9 +20,15 @@ class Public::SelfAnalysesController < ApplicationController
 
   # 各編の投稿
   def user_part_index
-    @user = User.fond(params[:id])
-    @analysis_part = AnalysisPart.find(params[:id])
-    @self_analyses = @analysis_part.self_analyses.all
+    @user = User.find(params[:user_id])
+    @analysis_part = AnalysisPart.find(params[:analysis_part_id])
+    @user_questions = @analysis_part.user_questions
+    @self_analyses = []
+
+    @user_questions.each do |user_question|
+      array = [user_question, user_question.self_analyses.find_by(user_id: @user.id)]
+      @self_analyses.push(array)
+    end
   end
 
   def show
@@ -41,15 +47,21 @@ class Public::SelfAnalysesController < ApplicationController
 
   def edit
     @self_analysis = SelfAnalysis.find(params[:id])
+    @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
   end
 
   def create
     @self_analysis = SelfAnalysis.new(self_analysis_params)
     @self_analysis.user_id = current_user.id
-    if @self_analysis.save
-  		redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
+    present_answer = SelfAnalysis.find_by(user_id: current_user.id, user_question_id: @self_analysis.user_question.id)
+    if present_answer.present?
+      render :edit
     else
-  		render :new
+      if @self_analysis.save
+    		redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
+      else
+    		render :new
+      end
     end
   end
 
@@ -60,6 +72,12 @@ class Public::SelfAnalysesController < ApplicationController
   	else
   		render :edit
   	end
+  end
+
+  def destroy
+    @self_analysis = SelfAnalysis.find(params[:id])
+  	@self_analysis.destroy
+  	redirect_to public_user_path, notice: "投稿の削除に成功しました!"
   end
 
   def part_select

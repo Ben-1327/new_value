@@ -1,59 +1,62 @@
-<div class="row">
-  <div class="row row-cols-1 row-cols-md-3">
-    <!-- <div class="col mb-4">
-      <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-      </div>
-    </div> -->
-    <% self_analyses.each do |self_analysis| %>
-      <%= link_to path do %>
-        <div class="card border-dark col mb-6" style="max-width: 18rem;">
-          <div class="row card-header">
-            <div class="col-sm-3 icon_img">
-              <% if user.icon_img.present? %>
-                <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon" %>
-              <% else %>
-                <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-              <% end %>
-            </div>
-            <div class="col-sm-9 name_space">
-              <%= link_to self_analysis.user.name, path, class:"link_text"%>
+<div class="self_analysis_index page">
+  <div class="container">
+        <!-- <div class="col mb-4">
+          <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             </div>
           </div>
-          <div class="card-body text-dark">
-            <div class="row card-title">
-              <div class="col-sm-6">
-                <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(@analysis_part) %>
+        </div> -->
+    <div class="row row-cols-1 row-cols-md-3">
+      <% self_analyses.each do |self_analysis| %>
+        <div class="col mb-4">
+          <%= link_to public_user_self_analysis_path(self_analysis, self_analysis.user) do %>
+            <div class="card border-dar" style="max-width: 30rem;">
+              <div class="row card-header">
+                <div class="col-sm-3 icon_img">
+                  <% if self_analysis.user.icon_img.present? %>
+                    <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon" %>
+                  <% else %>
+                    <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+                  <% end %>
+                </div>
+                <div class="col-sm-9 name_space">
+                  <%= link_to self_analysis.user.name, public_user_path(self_analysis.user), class:"link_text"%>
+                </div>
               </div>
-              <div class="col-sm-6">
-                <%= link_to "STEP#{self_analysis.user_question.step}", public_user_self_analysis_path(self_analysis) %>
+              <div class="card-body text-dark">
+                <div class="row card-title">
+                  <div class="col-sm-6">
+                    <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(self_analysis.user_question.analysis_part) %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= link_to "STEP#{self_analysis.user_question.step}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
+                  </div>
+                </div>
+                <div class="row card_text">
+                  <div class="col-sm-6">
+                    <%= self_analysis.answer %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= self_analysis.analysis %>
+                  </div>
+                </div>
+                <div class="row tool_space">
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4 favorite_btn">
+                    <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis, user: @user %>
+                  </div>
+                  <div class="col-sm-4">
+                    <%= link_to "コメント数：#{self_analysis.self_analysis_comments.count}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="row card_text">
-              <div class="col-sm-6">
-                <%= self_analysis.answer %>
-              </div>
-              <div class="col-sm-6">
-                <%= self_analysis.analysis %>
-              </div>
-            </div>
-            <div class="row tool_space">
-              <div class="col-sm-4"></div>
-              <div class="col-sm-4 favorite_btn">
-                <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
-              </div>
-              <div class="col-sm-4">
-                <%= link_to "コメント数：#{self_analysis.comments.count}", path %>
-              </div>
-            </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
-    <% end %>
+    </div>
   </div>
-
 </div>
