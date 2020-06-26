@@ -5,7 +5,7 @@ ActiveAdmin.register Company do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :name, :HP, :introduction, :icon_img, :header_img
+  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :name, :HP, :introduction, :icon_img, :header_img
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register Company do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end

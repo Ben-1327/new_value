@@ -27,7 +27,7 @@ namespace :public do
   get 'self_analyses/step_select' => 'self_analyses#step_select'
 
 
-  resources :users, only: [:index, :show, :edit, :update, :index] do
+  resources :users, only: [:index, :show, :edit, :update] do
     # フォローとアンフォロー機能
     put 'follow' => 'follows#follow'
     put 'unfollow' => 'follows#unfollow'
@@ -47,7 +47,7 @@ namespace :public do
 
 
 
-  resources :companies, only: [:show] do
+  resources :companies, only: [:index, :show, :edit, :update] do
     # フォローとアンフォロー機能
     put 'follow' => 'follows#follow'
     put 'unfollow' => 'follows#unfollow'

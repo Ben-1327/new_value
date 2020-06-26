@@ -91,9 +91,14 @@
                 <ul class="step_list card_text">
                   <% i = 0 %>
                   <% analysis_part.user_questions.each do |user_question| %>
-                    <% i += 1 %>
-                    <%= link_to public_user_self_analysis_path(user_question), class:"link_text" do %>
-                      <li>Step.<%= i %><%= user_question.question %></li>
+                    <% if user_question.self_analyses.find_by(user_id: @user).present? %>
+                      <% i += 1 %>
+                      <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
+                        <li>Step.<%= i %><%= link_to user_question.question, public_user_self_analysis_path(@user), class:"link_text" %></li>
+                      <%# end %>
+                    <% else %>
+                      <% i += 1 %>
+                      <li>Step.<%= i %>まだ回答がありません。</li>
                     <% end %>
                   <% end %>
                 </ul>

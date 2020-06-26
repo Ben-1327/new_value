@@ -1,0 +1,29 @@
+<div class="company_index page">
+  <h2>企業一覧</h2>
+  <div class="container">
+    <div class="row user_space">
+      <% @companies.each do |company| %>
+        <div class="col-sm-2 icon_img">
+          <% if company.icon_img.present? %>
+            <%= image_tag company.icon_img.to_s, class:"user_icon" %>
+          <% else %>
+            <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+          <div class="row name_space">
+            <%= company.name %>
+          </div>
+          <div class="row intro_space">
+            <%= company.introduction %>
+          </div>
+        </div>
+        <div class="col-sm-2 user_batch">
+          <%= link_to public_companies_path, class:"link_text" do %>
+            <%= icon("fas", "building") %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

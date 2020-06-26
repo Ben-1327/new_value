@@ -3,8 +3,17 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @analysis_parts = AnalysisPart.all
+    @self_analyses = SelfAnalysis.where(user_id: current_user.id)
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @user.id)
+    @user_questions = []
+
+    # @analysis_parts.each do |analysis_part|
+    #   @self_analyses.each do |self_analysis|
+    #     array = [self_analysis, self_analysis.user_question.find_by(analysis_part_id: analysis_part.id)]
+    #     @user_questions.push(array)
+    #   end
+    # end
 
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|

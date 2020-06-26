@@ -1,96 +1,77 @@
-<div class="row">
-  <div class="col-sm-9">
-    <div class="row user_header">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-2 icon_img">
-        <%= image_tag @company.icon_img.to_s %>
-      </div>
-      <div class="col-sm-6">
-        <div class="row name_space">
-          <%= @company.name %>
-        </div>
-        <div class="row value_space">
-          <%= @company.HP %>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <div class="row company_batch">
-          <%= link_to path do %>
-            <%= fa_icon 'building' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="row btn_space">
-      <div class="col-sm-4">
-        <%= @user.follow_count %>フォロー
-      </div>
-      <div class="col-sm-4">
-        <%= @user.followers_count %>フォロワー
-      </div>
-      <div class="col-sm-2 follow_btn">
-        <% unless current_user == user %>
-          <% if current_user.following?(user) %>
-            <%= link_to "unfollow", public_user_unfollow_path(user.id),method: :delete,class: "btn btn-primary" %>
+<%= stylesheet_link_tag 'users' %>
+
+<div class="company_show page">
+  <div class="main">
+    <div class="container">
+      <div class="row user_header">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2 icon_img">
+          <% if @company.icon_img.present? %>
+            <%= image_tag @company.icon_img.to_s, class:"user_icon" %>
           <% else %>
-            <%= link_to "follow",public_user_follow_path(user.id),method: :post,class: "btn btn-success" %>
+            <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
           <% end %>
-        <% end %>
+        </div>
+        <div class="col-sm-6 header_center">
+          <div class="name_space">
+            <h2><%= @company.name %></h2>
+          </div>
+          <div class="value_space">
+            <%= link_to @company.HP, target: :_blank, class:"link_text" do %>
+              "<%= @company.HP %>"
+            <% end %>
+          </div>
+        </div>
+        <div class="col-sm-2 batch_space">
+          <div class="user_batch">
+            <%= link_to public_companies_path, class:"link_text" do %>
+              <%= icon("fas", "building") %>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-2 dm_btn">
-        <% unless @user.id == current_user.id %>
-          <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
-            <% if @isRoom == true %>
-              <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">DM</a>
-            <% else %>
-              <%= form_with model:@room, local: true do |f| %>
-                <%= f.fields_for model:@entry do |e| %>
-                  <%= e.hidden_field :user_id, value: @user.id %>
+      <div class="row btn_space">
+        <div class="col-11"></div>
+        <div class="col-1 dm_btn">
+          <% if user_signed_in? %>
+            <% unless @user.id == current_user.id  %>
+              <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
+                <% if @isRoom == true %>
+                  <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+                <% else %>
+                  <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                    <%= hidden_field_tag 'entry[user_id]', @user.id %>
+                    <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                  <% end %>
                 <% end %>
-                <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+              <% end %>
+            <% end %>
+          <% elsif company_signed_in? %>
+            <% if (current_user.followed_by? @company)  %>
+              <% if @isRoom == true %>
+                <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+              <% else %>
+                <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                  <%= hidden_field_tag 'entry[user_id]', @user.id %>
+                  <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
-    <div class="row introduction">
-      <%= @user.introduction %>
-    </div>
-    <div class="row info">
+      <div class="row introduction">
+        <%= @company.introduction %>
+      </div>
+      <div class="row info">
 
-    </div>
-    <div class="row edit_space">
-      <div class="col-sm-10"></div>
-      <div class="col-sm-2 edit_btn">
-        <%= link_to "edit", edit_user_path(user), class: "btn btn-primary" %>
       </div>
-    </div>
-    <div class="row self_analyses_space">
-      <h2><%= @user.name %>の自己分析</h2>
-      <div class="self_analyses_card">
-        <% @analysis_parts.each do |analysis_part| %>
-          <div class="card border-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header"> <%= link_to analysis_part.part, path %> </div>
-            <div class="card-body text-dark">
-              <ul class="step_list card_text">
-                <% i = 0 %>
-                <% analysis_part.self_analyses.each do |self_analysis| %>
-                  <% i += 1 %>
-                  <li>Step.<%= i %><%= self_analysis.question %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
+      <div class="row edit_space">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2 edit_btn">
+          <%= link_to "edit", edit_public_company_path(@company), class: "btn btn-primary" %>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div id="list-example" class="row list-group">
-      <% @analysis_parts.each do |analysis_part| %>
-        <h4 class="list-group-item "> <%= link_to analysis_part.part, path, class: "link_text" %></h4>
-      <% end %>
     </div>
   </div>
 </div>
