@@ -96,7 +96,7 @@
                     <% if user_question.self_analyses.find_by(user_id: @user).present? %>
                       <% i += 1 %>
                       <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
-                        <li>Step.<%= i %><%= link_to user_question.question, public_user_self_analysis_path(@user), class:"link_text" %></li>
+                        <li>Step.<%= i %><%= link_to user_question.question, public_user_self_analysis_path(@user.id, user_question.self_analyses.find_by(user_id: @user.id, user_question_id: user_question.id)), class:"link_text" %></li>
                       <%# end %>
                     <% else %>
                       <% i += 1 %>
