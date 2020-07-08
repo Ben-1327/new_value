@@ -46,11 +46,13 @@
           <% end %>
         </div>
         <div class="col-1 follow_btn">
-          <% unless current_user == @user %>
-            <% if current_user.following? @user %>
-              <%= link_to "unfollow", {controller: :follows,action: :unfollow,user_id: @user.id}, method: :put,class: "btn btn-primary" %>
-            <% else %>
-              <%= link_to "follow",{controller: :follows,action: :follow,user_id: @user.id}, method: :put,class: "btn btn-success" %>
+          <% if user_signed_in? %>
+            <% unless current_user == @user %>
+              <% if current_user.following? @user %>
+                <%= link_to "unfollow", {controller: :follows,action: :unfollow,user_id: @user.id}, method: :put,class: "btn btn-primary" %>
+              <% else %>
+                <%= link_to "follow",{controller: :follows,action: :follow,user_id: @user.id}, method: :put,class: "btn btn-success" %>
+              <% end %>
             <% end %>
           <% end %>
         </div>
