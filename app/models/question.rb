@@ -1,4 +1,4 @@
-class UserQuestion < ApplicationRecord
+class Question < ApplicationRecord
 
   has_many :self_analyses,dependent: :destroy
 

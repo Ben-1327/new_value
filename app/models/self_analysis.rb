@@ -4,7 +4,7 @@ class SelfAnalysis < ApplicationRecord
   has_many :favorites,dependent: :destroy
 
   belongs_to :user
-  belongs_to :user_question
+  belongs_to :question
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
