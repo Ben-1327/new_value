@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_092712) do
+ActiveRecord::Schema.define(version: 2020_07_10_093925) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -112,6 +112,14 @@ ActiveRecord::Schema.define(version: 2020_07_10_092712) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer "analysis_part_id", null: false
+    t.integer "step", default: 1, null: false
+    t.string "question", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -135,14 +143,6 @@ ActiveRecord::Schema.define(version: 2020_07_10_092712) do
     t.integer "user_id"
   end
 
-  create_table "user_questions", force: :cascade do |t|
-    t.integer "analysis_part_id", null: false
-    t.integer "step", default: 1, null: false
-    t.string "question", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_092712) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hp"
-    t.integer "type", default: 0, null: false
+    t.integer "user_type", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

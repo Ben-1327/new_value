@@ -27,11 +27,11 @@ class Public::SelfAnalysesController < ApplicationController
   def user_part_index
     @user = User.find(params[:user_id])
     @analysis_part = AnalysisPart.find(params[:analysis_part_id])
-    @user_questions = @analysis_part.user_questions
+    @questions = @analysis_part.questions
     @self_analyses = []
 
-    @user_questions.each do |user_question|
-      array = [user_question, user_question.self_analyses.find_by(user_id: @user.id)]
+    @questions.each do |question|
+      array = [question, question.self_analyses.find_by(user_id: @user.id)]
       @self_analyses.push(array)
     end
   end
@@ -40,25 +40,25 @@ class Public::SelfAnalysesController < ApplicationController
     @self_analysis = SelfAnalysis.find(params[:id])
     @self_analysis_comment = SelfAnalysisComment.new
     @user = @self_analysis.user
-    @user_question = @self_analysis.user_question
-    @analysis_part = @user_question.analysis_part
+    @question = @self_analysis.question
+    @analysis_part = @question.analysis_part
     @self_analysis_comments = @self_analysis.self_analysis_comments
   end
 
   def new
     @self_analysis = SelfAnalysis.new
-    @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
+    @questions = Question.where(analysis_part_id: AnalysisPart.first.id)
   end
 
   def edit
     @self_analysis = SelfAnalysis.find(params[:id])
-    @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
+    @questions = Question.where(analysis_part_id: AnalysisPart.first.id)
   end
 
   def create
     @self_analysis = SelfAnalysis.new(self_analysis_params)
     @self_analysis.user_id = current_user.id
-    present_answer = SelfAnalysis.find_by(user_id: current_user.id, user_question_id: @self_analysis.user_question.id)
+    present_answer = SelfAnalysis.find_by(user_id: current_user.id, question_id: @self_analysis.question.id)
     if present_answer.present?
       render :edit
     else
@@ -87,19 +87,19 @@ class Public::SelfAnalysesController < ApplicationController
 
   def part_select
     analysis_part = AnalysisPart.find(params[:step_select])
-    @steps = UserQuestion.where(analysis_part_id: analysis_part)
+    @steps = Question.where(analysis_part_id: analysis_part)
     render json: @steps
   end
 
   def step_select
-    @user_question = UserQuestion.find_by(step: (params[:question_put]))
-    render json: @user_question
+    @question = Question.find_by(step: (params[:question_put]))
+    render json: @question
   end
 
   private
 
   def self_analysis_params
-    params.require(:self_analysis).permit(:user_id, :user_question_id, :answer, :analysis, :range)
+    params.require(:self_analysis).permit(:user_id, :question_id, :answer, :analysis, :range)
   end
 
 end

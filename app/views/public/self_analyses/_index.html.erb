@@ -29,10 +29,10 @@
               <div class="card-body text-dark">
                 <div class="row card-title">
                   <div class="col-sm-6">
-                    <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(self_analysis.user_question) %>
+                    <%= link_to "#{self_analysis.question.analysis_part.part}編", public_user_part_index_path(self_analysis.question) %>
                   </div>
                   <div class="col-sm-6">
-                    <%= link_to "STEP#{self_analysis.user_question.step}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
+                    <%= link_to "STEP#{self_analysis.question.step}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
                   </div>
                 </div>
                 <div class="row card_text">

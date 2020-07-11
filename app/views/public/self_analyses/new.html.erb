@@ -13,11 +13,11 @@
         </div>
         <div class="row step_form">
           <label class="col-sm-2"><%= f.label "step" %></label>
-          <%= f.select :user_question_id, @user_questions.map{|user_question| ["step#{user_question.step}", user_question.step]}, class:"step_select col-sm-5" %>
+          <%= f.select :question_id, @questions.map{|question| ["step#{question.step}", question.step]}, class:"step_select col-sm-5" %>
         </div>
         <div class="row">
           <label class="col-sm-2"><%= f.label "質問" %></label>
-          <div class="question col-sm-6", id="user_question"></div>
+          <div class="question col-sm-6", id="question"></div>
         </div>
         <!-- 公開範囲設定 -->
         <div class="row range_form">

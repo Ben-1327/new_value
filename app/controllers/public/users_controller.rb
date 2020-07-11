@@ -6,12 +6,12 @@ class Public::UsersController < ApplicationController
     @self_analyses = SelfAnalysis.where(user_id: current_user.id)
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @user.id)
-    @user_questions = []
+    @questions = []
 
     # @analysis_parts.each do |analysis_part|
     #   @self_analyses.each do |self_analysis|
-    #     array = [self_analysis, self_analysis.user_question.find_by(analysis_part_id: analysis_part.id)]
-    #     @user_questions.push(array)
+    #     array = [self_analysis, self_analysis.question.find_by(analysis_part_id: analysis_part.id)]
+    #     @questions.push(array)
     #   end
     # end
 
