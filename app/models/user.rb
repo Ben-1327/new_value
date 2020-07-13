@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :entries,dependent: :destroy
   has_many :messages,dependent: :destroy
 
+  belongs_to :company, optional: true
+
   mount_uploader :icon_img, ImagesUploader
 
   # relationshipsによるフォローではなくGemを使ったフォローに変更しました

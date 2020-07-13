@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_101339) do
+ActiveRecord::Schema.define(version: 2020_07_13_064005) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -45,21 +45,13 @@ ActiveRecord::Schema.define(version: 2020_06_23_101339) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.string "name", null: false
-    t.string "HP"
     t.text "introduction"
     t.string "icon_img"
-    t.string "header_img"
     t.integer "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_companies_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
+    t.string "hp"
   end
 
   create_table "company_analyses", force: :cascade do |t|
@@ -112,6 +104,14 @@ ActiveRecord::Schema.define(version: 2020_06_23_101339) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer "analysis_part_id", null: false
+    t.integer "step", default: 1, null: false
+    t.string "question", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -135,14 +135,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_101339) do
     t.integer "user_id"
   end
 
-  create_table "user_questions", force: :cascade do |t|
-    t.integer "analysis_part_id", null: false
-    t.integer "step", default: 1, null: false
-    t.string "question", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -161,6 +153,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_101339) do
     t.integer "tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hp"
+    t.integer "user_type", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
