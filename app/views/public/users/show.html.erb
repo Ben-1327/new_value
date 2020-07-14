@@ -1,64 +1,77 @@
 <%= stylesheet_link_tag 'users' %>
 
-<div class="user_show page">
-  <div class="main">
-    <div class="container">
-      <div class="row user_header">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2 icon_img">
-          <% if @user.icon_img.present? %>
-            <%= image_tag @user.icon_img.to_s, class:"user_icon" %>
-          <% else %>
-            <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-          <% end %>
-        </div>
-        <div class="col-sm-6 header_center">
-          <div class="name_space">
-            <h2><%= @user.name %></h2>
+<%= if @user.user_type == 0 %>
+  <div class="user_show page">
+    <div class="main">
+      <div class="container">
+        <div class="row user_header">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-2 icon_img">
+            <% if @user.icon_img.present? %>
+              <%= image_tag @user.icon_img.to_s, class:"user_icon" %>
+            <% else %>
+              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+            <% end %>
           </div>
-          <div class="value_space">
-            "<%= @user.values %>"
+          <div class="col-sm-6 header_center">
+            <div class="name_space">
+              <h2><%= @user.name %></h2>
+            </div>
+            <div class="value_space">
+              "<%= @user.values %>"
+            </div>
           </div>
-        </div>
-        <div class="col-sm-2 batch_space">
-          <div class="user_batch">
-            <%= render 'public/users/user_batch', user: @user %>
-          </div>
-          <div class="sns_link">
-            <div class="twitter_link">
-              <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
-                <%= icon("fab", "twitter") %>
-              <% end %>
+          <div class="col-sm-2 batch_space">
+            <div class="user_batch">
+              <%= render 'public/users/user_batch', user: @user %>
+            </div>
+            <div class="sns_link">
+              <div class="twitter_link">
+                <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
+                  <%= icon("fab", "twitter") %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="row btn_space">
-        <div class="col-8"></div>
-        <div class="col-1">
-          <%= link_to public_user_follow_list_path(@user), class:"link_text" do %>
-            <%= @user.follow_count %>フォロー
-          <% end %>
-        </div>
-        <div class="col-1">
-          <%= link_to public_user_follower_list_path(@user), class:"link_text" do %>
-            <%= @user.followers_count %>フォロワー
-          <% end %>
-        </div>
-        <div class="col-1 follow_btn">
-          <% if user_signed_in? %>
-            <% unless current_user == @user %>
-              <% if current_user.following? @user %>
-                <%= link_to "unfollow", {controller: :follows,action: :unfollow,user_id: @user.id}, method: :put,class: "btn btn-primary" %>
-              <% else %>
-                <%= link_to "follow",{controller: :follows,action: :follow,user_id: @user.id}, method: :put,class: "btn btn-success" %>
+        <div class="row btn_space">
+          <div class="col-8"></div>
+          <div class="col-1">
+            <%= link_to public_user_follow_list_path(@user), class:"link_text" do %>
+              <%= @user.follow_count %>フォロー
+            <% end %>
+          </div>
+          <div class="col-1">
+            <%= link_to public_user_follower_list_path(@user), class:"link_text" do %>
+              <%= @user.followers_count %>フォロワー
+            <% end %>
+          </div>
+          <div class="col-1 follow_btn">
+            <% if user_signed_in? %>
+              <% unless current_user == @user %>
+                <% if current_user.following? @user %>
+                  <%= link_to "unfollow", {controller: :follows,action: :unfollow,user_id: @user.id}, method: :put,class: "btn btn-primary" %>
+                <% else %>
+                  <%= link_to "follow",{controller: :follows,action: :follow,user_id: @user.id}, method: :put,class: "btn btn-success" %>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-        </div>
-        <div class="col-1 dm_btn">
-          <% unless @user.id == current_user.id %>
-            <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
+          </div>
+          <div class="col-1 dm_btn">
+            <% if user_signed_in? %>
+              <% unless @user.id == current_user.id %>
+                <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
+                  <% if @isRoom == true %>
+                    <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+                  <% else %>
+                    <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                      <%= hidden_field_tag 'entry[user_id]', @user.id %>
+                      <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% elsif company_signed_in? %>
               <% if @isRoom == true %>
                 <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
               <% else %>
@@ -68,47 +81,103 @@
                 <% end %>
               <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
-      </div>
-      <div class="row introduction">
-        <%= @user.introduction %>
-      </div>
-      <div class="row info">
+        <div class="row introduction">
+          <%= @user.introduction %>
+        </div>
+        <div class="row info">
 
-      </div>
-      <div class="row edit_space">
-        <div class="col-sm-10"></div>
-        <div class="col-sm-2 edit_btn">
-          <%= link_to "edit", edit_public_user_path(@user), class: "btn btn-primary" %>
         </div>
-      </div>
-      <div class="self_analyses_space">
-        <h2><%= @user.name %>の自己分析</h2>
-        <div class="card-deck">
-          <% @analysis_parts.each do |analysis_part| %>
-            <div class="card border-dark mb-6" style="max-width: 30rem;">
-              <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user, analysis_part), class:"link_text" %> </div>
-              <div class="card-body text-dark">
-                <ul class="step_list card_text">
-                  <% i = 0 %>
-                  <% analysis_part.user_questions.each do |user_question| %>
-                    <% if user_question.self_analyses.find_by(user_id: @user).present? %>
-                      <% i += 1 %>
-                      <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
-                        <li>Step.<%= i %><%= link_to user_question.question, public_user_self_analysis_path(@user), class:"link_text" %></li>
-                      <%# end %>
-                    <% else %>
-                      <% i += 1 %>
-                      <li>Step.<%= i %>まだ回答がありません。</li>
+        <div class="row edit_space">
+          <div class="col-sm-10"></div>
+          <div class="col-sm-2 edit_btn">
+            <%= link_to "edit", edit_public_user_path(@user), class: "btn btn-primary" %>
+          </div>
+        </div>
+        <div class="self_analyses_space">
+          <h2><%= @user.name %>の自己分析</h2>
+          <div class="card-deck">
+            <% @analysis_parts.each do |analysis_part| %>
+              <div class="card border-dark mb-6" style="max-width: 30rem;">
+                <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user, analysis_part), class:"link_text" %> </div>
+                <div class="card-body text-dark">
+                  <ul class="step_list card_text">
+                    <% i = 0 %>
+                    <% analysis_part.user_questions.each do |user_question| %>
+                      <% if user_question.self_analyses.find_by(user_id: @user).present? %>
+                        <% i += 1 %>
+                        <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
+                          <li>Step.<%= i %><%= link_to user_question.question, public_user_self_analysis_path(@user), class:"link_text" %></li>
+                        <%# end %>
+                      <% else %>
+                        <% i += 1 %>
+                        <li>Step.<%= i %>まだ回答がありません。</li>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                </ul>
+                  </ul>
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% elsif @user.user_type == 1 %>
+  <div class="company_show page">
+    <div class="main">
+      <div class="container">
+        <div class="row user_header">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-2 icon_img">
+            <% if @company.icon_img.present? %>
+              <%= image_tag @company.icon_img.to_s, class:"user_icon" %>
+            <% else %>
+              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+            <% end %>
+          </div>
+          <div class="col-sm-6 header_center">
+            <div class="name_space">
+              <h2><%= @company.name %></h2>
+            </div>
+            <div class="value_space">
+              <%= link_to @company.hp, target: :_blank, class:"link_text" do %>
+                "<%= @company.hp %>"
+              <% end %>
+            </div>
+          </div>
+          <div class="col-sm-2 batch_space">
+            <div class="user_batch">
+              <%= link_to public_companies_path, class:"link_text" do %>
+                <%= icon("fas", "building") %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="row btn_space">
+          <div class="col-11"></div>
+          <div class="col-1 dm_btn">
+            <% if user_signed_in? %>
+              <% if @isRoom == true %>
+                <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row introduction">
+          <%= @company.introduction %>
+        </div>
+        <div class="row info">
+
+        </div>
+        <div class="row edit_space">
+          <div class="col-sm-10"></div>
+          <div class="col-sm-2 edit_btn">
+            <%= link_to "edit", edit_public_company_path(@company), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

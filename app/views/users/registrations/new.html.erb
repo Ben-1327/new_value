@@ -5,6 +5,15 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class = "form-row">
+      <label class = "col-sm-2"><%= f.label "どのアカウントを作成しますか？" %></label>
+      <%= f.select :user_type, [['個人アカウント',0],['ビジネスアカウント',1]], class:"col-sm-2"%>
+    </div><br>
+    <p>
+      ビジネスアカウントでは業務用に向けられたアカウントで、主に企業に属する方や人事部の方に最適です。<br>
+       ※ビジネスアカウントでの自己分析は想定されていません。
+    </p>
+
+    <div class = "form-row">
       <label class="col-sm-2"><%= f.label "登録名" %></label>
       <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-sm-3" %>
     </div><br>

@@ -8,6 +8,9 @@ class Public::UsersController < ApplicationController
     @userEntry=Entry.where(user_id: @user.id)
     @user_questions = []
 
+    if @user.user_type == 1
+      @company = @user.company
+    end
     # @analysis_parts.each do |analysis_part|
     #   @self_analyses.each do |self_analysis|
     #     array = [self_analysis, self_analysis.user_question.find_by(analysis_part_id: analysis_part.id)]
@@ -57,7 +60,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-  	params.require(:user).permit(:name,:prefectures,:age,:user_batch,:email,:introduction,:values,:icon_img,:header_img,:twitter_link,:tag)
+  	params.require(:user).permit(:name,:prefectures,:age,:user_batch,:email,:introduction,:values,:icon_img,:header_img,:twitter_link,:tag,:user_type)
   end
 
 end

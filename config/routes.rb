@@ -47,12 +47,7 @@ namespace :public do
 
 
 
-  resources :companies, only: [:index, :show, :edit, :update] do
-    # フォローとアンフォロー機能
-    put 'follow' => 'follows#follow'
-    put 'unfollow' => 'follows#unfollow'
-    # フォローの一覧ページ
-    get 'follow_list' => 'follows#follow_list'
+  resources :companies, only: [:index, :show, :edit, :update, :new, :create] do
   end
 
 
