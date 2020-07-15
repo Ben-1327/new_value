@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_065109) do
+ActiveRecord::Schema.define(version: 2020_07_15_084306) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -104,14 +104,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_065109) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.integer "analysis_part_id", null: false
-    t.integer "step", default: 1, null: false
-    t.string "question", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -133,6 +125,14 @@ ActiveRecord::Schema.define(version: 2020_07_13_065109) do
     t.datetime "updated_at", null: false
     t.integer "self_analysis_id"
     t.integer "user_id"
+  end
+
+  create_table "user_questions", force: :cascade do |t|
+    t.integer "analysis_part_id", null: false
+    t.integer "step", default: 1, null: false
+    t.string "question", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

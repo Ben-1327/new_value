@@ -5,20 +5,30 @@ class Public::CompaniesController < ApplicationController
   end
 
   def new
-    @company = Comapny.new(current_user)
+    if user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
+      @company = Company.new
+    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
+      render :edit
+    elsif user_signed_in? && current_user.user_type == 0
+      redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
+    else
+      render 'home/top'
+    end
   end
 
   def create
-    if user_sign_in? && current_user.user_type == 1 && current_user.campany_id.nil?
+    if user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       @company = Company.new(company_params)
       if @company.save
+        current_user.company_id = @company.id
+        current_user.save
     		redirect_to public_user_path(current_user), notice: "アカウント連携に成功しました!"#保存された場合の移動先を指定.
       else
     		render :new
       end
-    elsif user_sign_in? && current_user.user_type == 1 && current_user.campany_id.present?
+    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
       render :edit
-    elsif user_sign_in? && current_user.user_type == 0
+    elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
     else
       render 'home/top'
@@ -27,20 +37,28 @@ class Public::CompaniesController < ApplicationController
   end
 
   def edit
-    @company = Company.find(params[:id])
+    if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
+      @company = Company.find(params[:id])
+    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nill?
+      render :new
+    elsif user_signed_in? && current_user.user_type == 0
+      redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
+    else
+      render 'home/top'
+    end
   end
 
   def update
-    if user_sign_in? && current_user.user_type == 1 && current_user.campany_id.present?
+    if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
       @company = Company.find(params[:id])
       if @company.update
     		redirect_to public_user_path(current_user), notice: "アカウント連携に成功しました!"#保存された場合の移動先を指定.
       else
     		render :edit
       end
-    elsif user_sign_in? && current_user.user_type == 1 && current_user.campany_id.nill?
+    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nill?
       render :new
-    elsif user_sign_in? && current_user.user_type == 0
+    elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
     else
       render 'home/top'

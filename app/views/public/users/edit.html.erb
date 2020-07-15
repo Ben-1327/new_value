@@ -4,12 +4,21 @@
   <div class="container">
     <%= form_with model: @user, url: {controller: 'public/users', action: 'update' },lacal: true do |f| %>
       <div class = "form-row">
-        <label class="col-sm-2"><%= f.label "登録名" %></label>
+        <label class = "col-sm-2"><%= f.label "どのアカウントを作成しますか？(※必須)" %></label>
+        <%= f.select :user_type, [['個人アカウント',0],['ビジネスアカウント',1]], class:"col-sm-2"%>
+      </div><br>
+      <p>
+        ビジネスアカウントでは業務用に向けられたアカウントで、主に企業に属する方や人事部の方に最適です。<br>
+         ※ビジネスアカウントでの自己分析は想定されていません。
+      </p>
+
+      <div class = "form-row">
+        <label class="col-sm-2"><%= f.label "登録名(※必須)" %></label>
         <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-sm-3" %>
       </div><br>
 
       <div class = "form-row">
-        <label class = "col-sm-2"><%= f.label "email" %></label>
+        <label class = "col-sm-2"><%= f.label "email(※必須)" %></label>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-sm-3" %>
       </div><br>
 
@@ -24,7 +33,7 @@
       </div><br>
 
       <div class = "form-row">
-        <label class = "col-sm-2"><%= f.label "あなたは就活生ですか？" %></label>
+        <label class = "col-sm-2"><%= f.label "あなたは就活生ですか？(※必須)" %></label>
         <%= f.select :user_batch, [['はい',1],['いいえ',2]], class:"col-sm-2"%>
       </div><br>
 
