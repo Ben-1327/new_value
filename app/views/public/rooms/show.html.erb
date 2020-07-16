@@ -18,13 +18,23 @@
     <% if @messages.present? %>
       <% @messages.each do |m| %>
         <div class="chat-box">
-          <div class="chat-face">
-            <% if m.user.icon_img.present? %>
-              <%= image_tag m.user.icon_img.to_s, class:"user_icon" %>
-            <% else %>
-              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-            <% end %>
-          </div>
+          <% if m.user.user_type == 0 %>
+            <div class="chat-face">
+              <% if m.user.icon_img.present? %>
+                <%= image_tag m.user.icon_img.to_s, class:"user_icon" %>
+              <% else %>
+                <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+              <% end %>
+            </div>
+          <% elsif m.user.user_type == 1 && m.user.company_id.present?%>
+            <div class="chat-face">
+              <% if m.user.company.icon_img.present? %>
+                <%= image_tag m.user.company.icon_img.to_s, class:"user_icon" %>
+              <% else %>
+                <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+              <% end %>
+            </div>
+          <% end %>
           <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>
             <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
           </div>

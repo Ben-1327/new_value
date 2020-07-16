@@ -39,7 +39,7 @@ class Public::CompaniesController < ApplicationController
   def edit
     if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
       @company = Company.find(params[:id])
-    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nill?
+    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       render :new
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
@@ -51,12 +51,12 @@ class Public::CompaniesController < ApplicationController
   def update
     if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
       @company = Company.find(params[:id])
-      if @company.update
+      if @company.update(company_params)
     		redirect_to public_user_path(current_user), notice: "アカウント連携に成功しました!"#保存された場合の移動先を指定.
       else
     		render :edit
       end
-    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nill?
+    elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       render :new
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.

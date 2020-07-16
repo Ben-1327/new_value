@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'users' %>
 
-<% if @user.user_type == 0 %>
+<% if @user.user_type == 0 || @user.user_type == 1 && @user.company_id.nil? && @user != current_user %>
   <div class="user_show page">
     <div class="main">
       <div class="container">
@@ -180,4 +180,8 @@
       </div>
     </div>
   </div>
+<% elsif @user.user_type == 1 && @user.company_id.nil? %>
+  <% if @user == current_user %>
+    <%= render 'public/users/before_company_registration'%>
+  <% end %>
 <% end %>

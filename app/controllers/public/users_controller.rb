@@ -8,7 +8,7 @@ class Public::UsersController < ApplicationController
     @userEntry=Entry.where(user_id: @user.id)
     @user_questions = []
 
-    if @user.user_type == 1
+    if @user.user_type == 1 && @user.company_id.present?
       @company = @user.company
     end
     # @analysis_parts.each do |analysis_part|

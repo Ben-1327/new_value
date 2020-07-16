@@ -47,7 +47,7 @@ namespace :public do
 
 
 
-  resources :companies, only: [:index, :show, :edit, :update, :new, :create] do
+  resources :companies, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
   end
 
 
