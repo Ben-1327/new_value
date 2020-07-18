@@ -14,11 +14,11 @@ class Public::RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     user = @room.entries.where.not(user_id: current_user.id).first
-    normal_user = User.find(user.user_id)
-    company = normal_user.company
-    if normal_user.user_type == 0
+    @normal_user = User.find(user.user_id)
+    company = @normal_user.company
+    if @normal_user.user_type == 0
       @user = normal_user
-    elsif normal_user.user_type == 1 && normal_user.company_id.present?
+    elsif @normal_user.user_type == 1 && @normal_user.company_id.present?
       @user = company
     end
     if Entry.where(user_id:current_user.id, room_id:@room.id).present?

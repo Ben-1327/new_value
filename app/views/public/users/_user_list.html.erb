@@ -9,7 +9,7 @@
     </div>
     <div class="col-sm-6">
       <div class="row name_space">
-        <%= user.name %>
+        <%= link_to user.name, public_user_path(user), class:"link_text" %>
       </div>
       <div class="row intro_space">
         <%= user.introduction %>

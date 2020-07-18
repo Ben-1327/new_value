@@ -9,7 +9,7 @@
   <% else %>
     <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
   <% end %>
-  <%= link_to "#{@user.name}さん", public_user_path(@user) %>
+  <%= link_to "#{@user.name}さん", public_user_path(@normal_user) %>
 </strong>
 </div>
 <hr>
