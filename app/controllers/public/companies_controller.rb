@@ -12,7 +12,7 @@ class Public::CompaniesController < ApplicationController
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
     else
-      render 'home/top'
+      render 'public/homes/top'
     end
   end
 
@@ -31,7 +31,7 @@ class Public::CompaniesController < ApplicationController
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
     else
-      render 'home/top'
+      render 'public/homes/top'
     end
 
   end
@@ -44,7 +44,7 @@ class Public::CompaniesController < ApplicationController
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社編集はできません"#保存された場合の移動先を指定.
     else
-      render 'home/top'
+      render 'public/homes/top'
     end
   end
 
@@ -61,7 +61,7 @@ class Public::CompaniesController < ApplicationController
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社編集はできません"#保存された場合の移動先を指定.
     else
-      render 'home/top'
+      render 'public/homes/top'
     end
   end
 
@@ -79,7 +79,7 @@ class Public::CompaniesController < ApplicationController
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社削除はできません"#保存された場合の移動先を指定.
     else
-      render 'home/top'
+      render 'public/homes/top'
     end
   end
 

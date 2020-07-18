@@ -17,7 +17,7 @@ class Public::RoomsController < ApplicationController
     @normal_user = User.find(user.user_id)
     company = @normal_user.company
     if @normal_user.user_type == 0
-      @user = normal_user
+      @user = @normal_user
     elsif @normal_user.user_type == 1 && @normal_user.company_id.present?
       @user = company
     end

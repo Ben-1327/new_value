@@ -58,9 +58,9 @@
             <% end %>
           </div>
           <div class="col-1 dm_btn">
-            <% if user_signed_in? %>
+            <% if user_signed_in? && @user.user_type == 0 %>
               <% unless @user.id == current_user.id %>
-                <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
+                <% if (current_user.followed_by? @user) && (@user.followed_by? current_user) %>
                   <% if @isRoom == true %>
                     <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
                   <% else %>
@@ -71,13 +71,15 @@
                   <% end %>
                 <% end %>
               <% end %>
-            <% elsif company_signed_in? %>
-              <% if @isRoom == true %>
-                <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
-              <% else %>
-                <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
-                  <%= hidden_field_tag 'entry[user_id]', @user.id %>
-                  <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+            <% elsif user_signed_in? && @user.user_type == 1 && @user.company_id.present? %>
+              <% if (current_user.followed_by? @user) %>
+                <% if @isRoom == true %>
+                  <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+                <% else %>
+                  <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                    <%= hidden_field_tag 'entry[user_id]', @user.id %>
+                    <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>
@@ -158,7 +160,7 @@
         <div class="row btn_space">
           <div class="col-11"></div>
           <div class="col-1 dm_btn">
-            <% if user_signed_in? %>
+            <% if user_signed_in? && current_user.user_type == 0 %>
               <% if @isRoom == true %>
                 <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
               <% end %>
