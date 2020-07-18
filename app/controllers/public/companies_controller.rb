@@ -1,7 +1,7 @@
 class Public::CompaniesController < ApplicationController
 
   def index
-    @companies = Company.page(params[:page]).reverse_order.per(12)
+    @users = User.where(user_type: 1).page(params[:page]).reverse_order.per(12)
   end
 
   def new

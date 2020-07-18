@@ -1,33 +1,35 @@
-<div class="row user_space">
+<div class=" user_space">
   <% users.each do |user| %>
-    <div class="col-sm-2 icon_img">
-      <% if user.icon_img.present? %>
-        <%= image_tag user.icon_img.to_s, class:"user_icon" %>
-      <% else %>
-        <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-      <% end %>
-    </div>
-    <div class="col-sm-6">
-      <div class="row name_space">
-        <%= link_to user.name, public_user_path(user), class:"link_text" %>
+    <div class="row each_user">
+      <div class="col-sm-2 icon_img">
+        <% if user.icon_img.present? %>
+          <%= image_tag user.icon_img.to_s, class:"user_icon" %>
+        <% else %>
+          <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+        <% end %>
       </div>
-      <div class="row intro_space">
-        <%= user.introduction %>
+      <div class="col-sm-6">
+        <div class="row name_space">
+          <%= link_to user.name, public_user_path(user), class:"link_text" %>
+        </div>
+        <div class="row intro_space">
+          <%= user.introduction %>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-2 user_batch">
-      <%= render 'public/users/user_batch', user: user %>
-    </div>
-    <div class="col-sm-2 follow_btn">
-      <% if user_signed_in? %>
-        <% unless current_user == user %>
-          <% if current_user.following?(user) %>
-            <%= link_to "unfollow", public_user_unfollow_path(user),method: :delete,class: "btn btn-primary" %>
-          <% else %>
-            <%= link_to "follow",public_user_follow_path(user),method: :post,class: "btn btn-success" %>
+      <div class="col-sm-2 user_batch">
+        <%= render 'public/users/user_batch', user: user %>
+      </div>
+      <div class="col-sm-2 follow_btn">
+        <% if user_signed_in? %>
+          <% unless current_user == user %>
+            <% if current_user.following?(user) %>
+              <%= link_to "unfollow", public_user_unfollow_path(user),method: :delete,class: "btn btn-primary" %>
+            <% else %>
+              <%= link_to "follow",public_user_follow_path(user),method: :post,class: "btn btn-success" %>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
   <% end %>
 </div>

@@ -36,7 +36,7 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).reverse_order.per(12)
+    @users = User.where(user_type: 0).page(params[:page]).reverse_order.per(12)
   end
 
   def jhs_users
