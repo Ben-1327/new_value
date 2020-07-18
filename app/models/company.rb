@@ -7,8 +7,6 @@ class Company < ApplicationRecord
   has_one :user
   has_many :company_analyses, dependent: :destroy
 
-  acts_as_followable # フォロワー機能
-  acts_as_follower   # フォロー機能
 
 
 end

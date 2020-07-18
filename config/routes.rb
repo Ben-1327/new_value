@@ -29,6 +29,8 @@ namespace :public do
 
   resources :users, only: [:index, :show, :edit, :update] do
     # フォローとアンフォロー機能
+    post 'follow' => 'follows#follow'
+    delete 'unfollow' => 'follows#unfollow'
     put 'follow' => 'follows#follow'
     put 'unfollow' => 'follows#unfollow'
     # フォロー・フォロワーの一覧ページ

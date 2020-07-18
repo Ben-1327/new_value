@@ -64,15 +64,6 @@
         <div class="col-sm-2 user_batch">
           <%= render 'public/users/user_batch', user: user %>
         </div>
-        <div class="col-sm-2 follow_btn">
-          <% unless current_user == user %>
-            <% if current_user.following? user %>
-              <%= link_to "unfollow", {controller: :follows,action: :unfollow,user_id: user.id}, method: :put,class: "btn btn-primary" %>
-            <% else %>
-              <%= link_to "follow",{controller: :follows,action: :follow,user_id: user.id}, method: :put,class: "btn btn-success" %>
-            <% end %>
-          <% end %>
-        </div>
       <% end %>
     <% end %>
   </div>

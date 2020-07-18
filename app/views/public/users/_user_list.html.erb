@@ -22,16 +22,10 @@
       <% if user_signed_in? %>
         <% unless current_user == user %>
           <% if current_user.following?(user) %>
-            <%= link_to "unfollow", public_user_unfollow_path(user.id),method: :delete,class: "btn btn-primary" %>
+            <%= link_to "unfollow", public_user_unfollow_path(user),method: :delete,class: "btn btn-primary" %>
           <% else %>
-            <%= link_to "follow",public_user_follow_path(user.id),method: :post,class: "btn btn-success" %>
+            <%= link_to "follow",public_user_follow_path(user),method: :post,class: "btn btn-success" %>
           <% end %>
-        <% end %>
-      <% elsif company_signed_in? %>
-        <% if current_company.following?(user)%>
-          <%= link_to "unfollow", public_company_unfollow_path(user.id),method: :delete,class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "follow",public_company_follow_path(user.id),method: :post,class: "btn btn-success" %>
         <% end %>
       <% end %>
     </div>
