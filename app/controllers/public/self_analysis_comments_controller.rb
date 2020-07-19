@@ -1,5 +1,7 @@
 class Public::SelfAnalysisCommentsController < ApplicationController
 
+  before_action :login_company?
+
   def create
     @self_analysis = SelfAnalysis.find(params[:id])
     comment = current_user.self_analysis_comments.new(self_analysis_comment_params)
@@ -14,6 +16,13 @@ class Public::SelfAnalysisCommentsController < ApplicationController
   end
 
   private
+
+  def login_company?
+    unless current_user.user_type == 0
+      flash[:notice] = "あなたのアカウントは個人アカウントではないのでこの機能は利用できません。"
+      redirect_to public_user_path(current_user)
+    end
+  end
 
   def self_analysis_comment_params
     params.require(:self_analysis_comment).permit(:comment)

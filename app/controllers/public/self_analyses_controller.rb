@@ -1,5 +1,8 @@
 class Public::SelfAnalysesController < ApplicationController
 
+  before_action :login_company?, except: [:show, :follow_index, :user_index, :all_index, :user_part_index]
+
+
   # フォロー中のユーザーの投稿
   def follow_index
     if user_signed_in?
@@ -97,6 +100,13 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   private
+
+  def login_company?
+    unless current_user.user_type == 0
+      flash[:notice] = "あなたのアカウントは個人アカウントではないのでこの機能は利用できません。"
+      redirect_to public_user_path(current_user)
+    end
+  end
 
   def self_analysis_params
     params.require(:self_analysis).permit(:user_id, :user_question_id, :answer, :analysis, :range)

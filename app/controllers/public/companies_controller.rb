@@ -1,5 +1,8 @@
 class Public::CompaniesController < ApplicationController
 
+  before_action :authenticate_user!, except: [:index]
+  before_action :signed_in_company?, only: [:edit, :update, :destroy]
+
   def index
     @users = User.where(user_type: 1).page(params[:page]).reverse_order.per(12)
   end
@@ -84,6 +87,13 @@ class Public::CompaniesController < ApplicationController
   end
 
   private
+
+  def signed_in_company?
+    unless current_user.user_type == 1 && current_user.company_id.present?
+      flash[:notice] = "あなたのアカウントは個人アカウントなのでこの機能は利用できません。"
+      redirect_to public_user_path(current_user)
+    end
+  end
 
   def company_params
     params.require(:company).permit(:name,:hp,:introduction,:icon_img,:tag)
