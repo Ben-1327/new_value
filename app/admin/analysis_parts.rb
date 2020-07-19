@@ -5,7 +5,7 @@ ActiveAdmin.register AnalysisPart do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :part_name
+  permit_params :part
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register AnalysisPart do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end

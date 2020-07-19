@@ -5,7 +5,7 @@ ActiveAdmin.register SelfAnalysis do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :step, :question, :answer, :analysis, :range, :user_id, :analysis_part_id
+  permit_params :answer, :analysis, :range, :user_id, :analysis_part_id
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register SelfAnalysis do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end
