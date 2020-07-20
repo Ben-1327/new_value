@@ -1,6 +1,8 @@
 <div class="user_index page">
   <h2>ユーザー一覧</h2>
   <div class="container">
-    <%= render 'public/users/user_list', users: @users %>
+    <% if @users.present? %>
+      <%= render 'public/users/user_list', users: @users %>
+    <% end %>
   </div>
 </div>
