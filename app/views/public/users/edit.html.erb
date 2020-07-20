@@ -2,7 +2,7 @@
 <div class="edit_user page">
   <h2>ユーザー情報編集</h2>
   <div class="container">
-    <%= form_with model: @user, url: {controller: 'public/users', action: 'update' },lacal: true do |f| %>
+    <%= form_with model: @user, url: {controller: 'public/users', action: 'update' },local: true do |f| %>
       <div class = "form-row">
         <label class = "col-sm-2"><%= f.label "どのアカウントを作成しますか？(※必須)" %></label>
         <%= f.select :user_type, [['個人アカウント',0],['ビジネスアカウント',1]], class:"col-sm-2"%>

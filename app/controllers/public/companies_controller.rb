@@ -11,7 +11,7 @@ class Public::CompaniesController < ApplicationController
     if user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       @company = Company.new
     elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
-      render :edit
+      redirect_to edit_public_user_path(current_user)
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
     else
@@ -30,7 +30,7 @@ class Public::CompaniesController < ApplicationController
     		render :new
       end
     elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
-      render :edit
+      redirect_to edit_public_user_path(current_user)
     elsif user_signed_in? && current_user.user_type == 0
       redirect_to public_user_path(current_user), notice: "あなたはビジネスアカウントでないので会社登録はできません"#保存された場合の移動先を指定.
     else
@@ -57,7 +57,7 @@ class Public::CompaniesController < ApplicationController
       if @company.update(company_params)
     		redirect_to public_user_path(current_user), notice: "会社編集に成功しました!"#保存された場合の移動先を指定.
       else
-    		render :edit
+    		redirect_to edit_public_user_path(current_user)
       end
     elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       render :new
@@ -75,7 +75,7 @@ class Public::CompaniesController < ApplicationController
         current_user.update(company_id: nil)
     		redirect_to public_user_path(current_user), notice: "会社削除に成功しました!"#保存された場合の移動先を指定.
       else
-    		render :edit
+    		redirect_to edit_public_user_path(current_user)
       end
     elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       render :new
