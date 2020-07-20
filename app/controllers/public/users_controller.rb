@@ -63,6 +63,15 @@ class Public::UsersController < ApplicationController
     current_user.update(company_id: nil)
   end
 
+  def comfirm
+
+  end
+
+  def update_company
+    current_user.update(company_id: (params[:user][:company_id]))
+    redirect_to public_user_path(current_user), notice: "会社削除に成功しました!"#保存された場合の移動先を指定.
+  end
+
   private
 
   def user_params

@@ -86,6 +86,11 @@ class Public::CompaniesController < ApplicationController
     end
   end
 
+  def connect
+    @companies = Company.page(params[:page]).reverse_order.per(12)
+    @hide_searchbar = true
+  end
+
   private
 
   def signed_in_company?

@@ -43,10 +43,12 @@
             </ul>
           <% end %>
         </nav>
-        <% if user_signed_in? || company_signed_in? %>
-          <div class="row form-inline mt-3 justify-content-end">
-            <%= render 'public/searches/search_box' %>
-          </div>
+        <% unless @hide_searchbar == true %>
+          <% if user_signed_in? || company_signed_in? %>
+            <div class="row form-inline mt-3 justify-content-end">
+              <%= render 'public/searches/search_box' %>
+            </div>
+          <% end %>
         <% end %>
       </div>
       <nav class="row">

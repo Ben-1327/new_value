@@ -28,15 +28,15 @@ class Public::SearchesController < ApplicationController
         User.where(['name LIKE ?', "%#{search}%"]).where(user_type: 0)
       end
     elsif select_target == "2"
-      company = User.where(user_type: 1)
       if how_search == "1"
-        company.where(['name LIKE ?', "#{search}"])
+        Company.where(['name LIKE ?', "#{search}"]).joins(:users)
+                                                   .where(user_type: 1)
       elsif how_search == "2"
-        company.where(['name LIKE ?', "#{search}%"])
+        Company.where(['name LIKE ?', "#{search}%"])
       elsif how_search == "3"
-        company.where(['name LIKE ?', "%#{search}"])
+        Company.where(['name LIKE ?', "%#{search}"])
       elsif how_search == "4"
-        company.where(['name LIKE ?', "%#{search}%"])
+        Company.where(['name LIKE ?', "%#{search}%"])
       end
     else
       if how_search == "1"

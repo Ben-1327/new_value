@@ -1,0 +1,9 @@
+<div class="col-sm-2 select_btn">
+  <%= link_to "戻る", public_user_path, class:"link_text" %>
+</div>
+<div class="col-sm-2 select_btn">
+  <%= form_with model: current_user, url: update_company_public_user_path, local: true do |f| %>
+    <% f.hidden_field :company_id.value:company.id %>
+    <%= f.submit "確定" %>
+  <% end %>
+</div>
