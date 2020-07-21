@@ -37,7 +37,7 @@ namespace :public do
     get 'follow_list' => 'follows#follow_list'
     get 'follower_list' => 'follows#follower_list'
 
-    get 'comfirm' => 'users#comfirm'
+    get 'confirm/:company_id' => 'users#confirm', as: 'confirm'
     get 'connect' => 'companies#connect'
     put 'update_company' => 'users#update_company'
     put 'remove_company' => 'users#remove_company'

@@ -30,7 +30,7 @@
             <% end %>
           </div>
           <div class="col-sm-2 select_btn">
-            <%= link_to "連携する", public_user_comfirm_path(company.id), class:"btn btn-primary link_text" %>
+            <%= link_to "連携する", public_user_confirm_path(current_user,company), class:"btn btn-primary link_text" %>
           </div>
         </div>
       <% end %>
