@@ -1,8 +1,8 @@
 <div class="company_index page">
   <h2>企業一覧</h2>
   <div class="container">
-    <% if @users.present? %>
-      <%= render 'public/companies/company_list', users: @users %>
+    <% if @companies.present? %>
+      <%= render 'public/companies/company_list', user: @user, companies: @companies %>
     <% end %>
   </div>
 </div>

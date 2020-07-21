@@ -59,9 +59,6 @@ class Public::UsersController < ApplicationController
 		redirect_to public_user_path, notice: "会員情報の編集に成功しました。"
   end
 
-  def select_company
-    current_user.update(company_id: nil)
-  end
 
   def comfirm
 
@@ -70,6 +67,11 @@ class Public::UsersController < ApplicationController
   def update_company
     current_user.update(company_id: (params[:user][:company_id]))
     redirect_to public_user_path(current_user), notice: "会社削除に成功しました!"#保存された場合の移動先を指定.
+  end
+
+  def remove_company
+    current_user.update(company_id: nil)
+    redirect_to public_user_path(current_user), notice: "会社連携解除に成功しました!"#保存された場合の移動先を指定.
   end
 
   private

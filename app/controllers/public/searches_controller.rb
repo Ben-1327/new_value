@@ -3,7 +3,6 @@ class Public::SearchesController < ApplicationController
   def search
     @select_target = params[:option]
     @how_search = params[:choice]
-    @self_analyses = SelfAnalysis.page(params[:page]).reverse_order.per(12)
     if @select_target == "1"
       @users = search_contents(params[:search], @select_target, @how_search)
       render template: 'public/users/index'

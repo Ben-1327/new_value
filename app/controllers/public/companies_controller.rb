@@ -4,8 +4,9 @@ class Public::CompaniesController < ApplicationController
   before_action :signed_in_company?, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.where(user_type: 1).page(params[:page]).reverse_order.per(12)
+    @companies = Company.page(params[:page]).reverse_order.per(12)
   end
+
 
   def new
     if user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
@@ -84,10 +85,6 @@ class Public::CompaniesController < ApplicationController
     else
       render 'public/homes/top'
     end
-  end
-
-  def remove_company
-    
   end
 
   def connect

@@ -1,10 +1,10 @@
 <div class="company_index page">
-  <% if user_signed_in? || company_signed_in? %>
+  <h2>所属企業選択</h2>
+  <% if user_signed_in? %>
     <div class="row form-inline mt-3 justify-content-end">
       <%= render 'public/searches/search_box' %>
     </div>
   <% end %>
-  <h2>所属企業選択</h2>
   <div class="container">
     <div class="user_space">
       <% @companies.each do |company| %>
@@ -18,7 +18,7 @@
           </div>
           <div class="col-sm-6">
             <div class="row name_space">
-              <%= link_to company.name, public_user_path(user), class:"link_text" %>
+              <%= company.name %>
             </div>
             <div class="row intro_space">
               <%= company.introduction %>
@@ -30,7 +30,7 @@
             <% end %>
           </div>
           <div class="col-sm-2 select_btn">
-            <%= link_to "連携する", confirm_public_user_path(company.id), class:"link_text" %>
+            <%= link_to "連携する", public_user_comfirm_path(company.id), class:"btn btn-primary link_text" %>
           </div>
         </div>
       <% end %>

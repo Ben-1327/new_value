@@ -188,6 +188,12 @@
   </div>
 <% elsif @user.user_type == 1 && @user.company_id.nil? %>
   <% if @user == current_user %>
-    <%= render 'public/users/before_company_registration'%>
+    <div class="user_show page">
+      <div class="main">
+        <div class="container">
+          <%= render 'public/users/before_company_registration'%>
+        </div>
+      </div>
+    </div>
   <% end %>
 <% end %>

@@ -44,7 +44,7 @@
           <% end %>
         </nav>
         <% unless @hide_searchbar == true %>
-          <% if user_signed_in? || company_signed_in? %>
+          <% if user_signed_in? %>
             <div class="row form-inline mt-3 justify-content-end">
               <%= render 'public/searches/search_box' %>
             </div>

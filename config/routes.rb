@@ -38,8 +38,10 @@ namespace :public do
     get 'follower_list' => 'follows#follower_list'
 
     get 'comfirm' => 'users#comfirm'
-
+    get 'connect' => 'companies#connect'
     put 'update_company' => 'users#update_company'
+    put 'remove_company' => 'users#remove_company'
+    delete 'remove_company' => 'users#remove_company'
 
     get ':analysis_part_id/user_part_index' => 'self_analyses#user_part_index', as:'part_index'
 
@@ -54,8 +56,6 @@ namespace :public do
 
 
   resources :companies, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
-    put 'remove_company' => 'companies#remove_company'
-    get 'connect' => 'companies#connect'
   end
 
 

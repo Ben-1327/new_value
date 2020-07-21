@@ -1,19 +1,24 @@
 <div class="user_space">
-  <% users.each do |user| %>
+  <% companies.each do |company| %>
     <div class="row each_user">
       <div class="col-sm-2 icon_img">
-        <% if user.company.icon_img.present? %>
-          <%= image_tag user.company.icon_img.to_s, class:"user_icon" %>
+        <% if company.icon_img.present? %>
+          <%= image_tag company.icon_img.to_s, class:"user_icon" %>
         <% else %>
           <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
         <% end %>
       </div>
       <div class="col-sm-6">
         <div class="row name_space">
-          <%= link_to user.company.name, public_user_path(user), class:"link_text" %>
+          <% if company.user.present? %>
+            <% user = company.user %>
+            <%= link_to company.name, public_user_path(user), class:"link_text" %>
+          <% else %>
+            <%= company.name %>
+          <% end %>
         </div>
         <div class="row intro_space">
-          <%= user.company.introduction %>
+          <%= company.introduction %>
         </div>
       </div>
       <div class="col-sm-2 user_batch">

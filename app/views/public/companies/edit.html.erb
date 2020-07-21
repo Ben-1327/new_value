@@ -32,7 +32,7 @@
         <%= link_to "削除", public_company_path(@company),class:"btn btn-danger btn-company-destroy", method: :delete,data: { confirm: '本当に削除しますか？'} %>
       </div>
       <div class="col">
-        <%= link_to "紐付け解除", public_company_path(@company),class:"btn btn-danger btn-company-destroy", method: :delete,data: { confirm: '本当に削除しますか？'} %>
+        <%= link_to "連携解除", public_user_remove_company_path(@company),class:"btn btn-danger btn-company-remove", method: :delete,data: { confirm: '本当に連携解除しますか？'} %>
       </div>
     </div>
   </div>
