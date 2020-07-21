@@ -86,6 +86,10 @@ class Public::CompaniesController < ApplicationController
     end
   end
 
+  def remove_company
+    
+  end
+
   def connect
     @companies = Company.page(params[:page]).reverse_order.per(12)
     @hide_searchbar = true

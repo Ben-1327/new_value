@@ -37,6 +37,10 @@ namespace :public do
     get 'follow_list' => 'follows#follow_list'
     get 'follower_list' => 'follows#follower_list'
 
+    get 'comfirm' => 'users#comfirm'
+
+    put 'update_company' => 'users#update_company'
+
     get ':analysis_part_id/user_part_index' => 'self_analyses#user_part_index', as:'part_index'
 
     resources :self_analyses, only: [:show, :edit, :update, :destroy, :create] do
@@ -50,6 +54,8 @@ namespace :public do
 
 
   resources :companies, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
+    put 'remove_company' => 'companies#remove_company'
+    get 'connect' => 'companies#connect'
   end
 
 

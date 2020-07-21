@@ -27,6 +27,13 @@
         <%= f.submit "保存", class: "btn btn-success btn-lg" %>
       </div><br>
     <% end %>
-    <%= link_to "Destroy", public_company_path(@company),class:"btn-company-destroy", method: :delete,data: { confirm: '本当に削除しますか？'} %>
+    <div class="row btn_section">
+      <div class="col">
+        <%= link_to "削除", public_company_path(@company),class:"btn btn-danger btn-company-destroy", method: :delete,data: { confirm: '本当に削除しますか？'} %>
+      </div>
+      <div class="col">
+        <%= link_to "紐付け解除", public_company_path(@company),class:"btn btn-danger btn-company-destroy", method: :delete,data: { confirm: '本当に削除しますか？'} %>
+      </div>
+    </div>
   </div>
 </div>
