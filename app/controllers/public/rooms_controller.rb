@@ -8,7 +8,7 @@ class Public::RoomsController < ApplicationController
     @entry2 = Entry.new(entry_params)
     @entry2.room_id = @room.id
     @entry2.save
-    redirect_to "/public/rooms/#{@room.id}"
+    redirect_to public_room_path(@room)
   end
 
   def show
