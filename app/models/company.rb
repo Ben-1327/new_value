@@ -4,7 +4,7 @@ class Company < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-  has_many :users
+  has_many :users,dependent: :nullify
   has_many :company_analyses, dependent: :destroy
 
 

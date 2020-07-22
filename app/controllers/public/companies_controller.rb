@@ -73,10 +73,11 @@ class Public::CompaniesController < ApplicationController
   def destroy
     if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
       @company = Company.find(params[:id])
-      @company.users.each do |user|
-        user.update(company_id: nil)
-      end
-      if @company.destroy(company_params)
+
+      user = @company.users.find_by(representative: true)
+      user.update(representative: false)
+
+      if @company.destroy
     		redirect_to public_user_path(current_user), notice: "会社削除に成功しました!"#保存された場合の移動先を指定.
       else
     		redirect_to edit_public_user_path(current_user)

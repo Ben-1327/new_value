@@ -65,6 +65,10 @@ class Public::UsersController < ApplicationController
   end
 
   def update_company
+    @company = Company.find_by(id: (params[:company_id]))
+    if @company.users.nil?
+      current_user.update(representative: false)
+    end
     current_user.update(company_id: (params[:user][:company_id]))
     redirect_to public_user_path(current_user), notice: "会社連携に成功しました!"#保存された場合の移動先を指定.
   end
