@@ -42,7 +42,7 @@ class Public::CompaniesController < ApplicationController
   end
 
   def edit
-    if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
+    if user_signed_in? && current_user.representative == true
       @company = Company.find(params[:id])
     elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       render :new
@@ -71,7 +71,7 @@ class Public::CompaniesController < ApplicationController
   end
 
   def destroy
-    if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
+    if user_signed_in? && current_user.representative == true
       @company = Company.find(params[:id])
 
       user = @company.users.find_by(representative: true)

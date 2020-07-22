@@ -12,6 +12,7 @@ class Public::UsersController < ApplicationController
 
     if @user.user_type == 1 && @user.company_id.present?
       @company = @user.company
+      @representative_user = @company.users.find_by(representative: true)
     end
     # @analysis_parts.each do |analysis_part|
     #   @self_analyses.each do |self_analysis|
@@ -66,9 +67,9 @@ class Public::UsersController < ApplicationController
 
   def update_company
     @company = Company.find_by(id: (params[:company_id]))
-    if @company.users.nil?
-      current_user.update(representative: false)
-    end
+    # if @company.users.nil?
+    #   current_user.update(representative: ture)
+    # end
     current_user.update(company_id: (params[:user][:company_id]))
     redirect_to public_user_path(current_user), notice: "会社連携に成功しました!"#保存された場合の移動先を指定.
   end

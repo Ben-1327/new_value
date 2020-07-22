@@ -20,7 +20,7 @@
           <% end %>
         </nav>
         <nav>
-          <% if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present? %>
+          <% if user_signed_in? && current_user.representative == true && current_user.company_id.present? %>
             <ul class="nav p-4">
               <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
               <li class="nav-item mr-3"><%= link_to "未定", public_self_analyses_new_path, class: "btn btn-nav" %></li>

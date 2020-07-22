@@ -2,7 +2,7 @@ class Public::FollowsController < ApplicationController
 
   def follow
     @user = User.find(params[:user_id])
-    if @user.user_type == 0
+    unless @user.user_type == 1 && @user.representative == true
       current_user.follow(@user)
       redirect_to public_user_path(@user)
     end
@@ -10,7 +10,7 @@ class Public::FollowsController < ApplicationController
 
   def unfollow
     @user = User.find(params[:user_id])
-    if @user.user_type == 0
+    unless @user.user_type == 1 && @user.representative == true
       current_user.stop_following(@user)
       redirect_to public_user_path(@user)
     end

@@ -5,7 +5,7 @@ class Public::AnalysisPartsController < ApplicationController
   private
 
   def login_company?
-    unless current_user.user_type == 0
+    unless current_user.representative == false
       flash[:notice] = "あなたのアカウントは個人アカウントではないのでこの機能は利用できません。"
       redirect_to public_user_path(current_user)
     end
