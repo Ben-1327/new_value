@@ -10,8 +10,8 @@
       </div>
       <div class="col-sm-6">
         <div class="row name_space">
-          <% if company.user.present? %>
-            <% user = company.user %>
+          <% if company.users.where(representative: true).first.present? %>
+            <% user = company.users.where(representative: true).first %>
             <%= link_to company.name, public_user_path(user), class:"link_text" %>
           <% else %>
             <%= company.name %>

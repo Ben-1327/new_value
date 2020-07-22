@@ -25,6 +25,7 @@ class Public::CompaniesController < ApplicationController
       @company = Company.new(company_params)
       if @company.save
         current_user.company_id = @company.id
+        current_user.representative = true
         current_user.save
     		redirect_to public_user_path(current_user), notice: "会社登録に成功しました!"#保存された場合の移動先を指定.
       else
@@ -72,8 +73,10 @@ class Public::CompaniesController < ApplicationController
   def destroy
     if user_signed_in? && current_user.user_type == 1 && current_user.company_id.present?
       @company = Company.find(params[:id])
+      @company.users.each do |user|
+        user.update(company_id: nil)
+      end
       if @company.destroy(company_params)
-        current_user.update(company_id: nil)
     		redirect_to public_user_path(current_user), notice: "会社削除に成功しました!"#保存された場合の移動先を指定.
       else
     		redirect_to edit_public_user_path(current_user)
