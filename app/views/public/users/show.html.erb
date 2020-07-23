@@ -138,16 +138,14 @@
                 <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user, analysis_part), class:"link_text" %> </div>
                 <div class="card-body text-dark">
                   <ul class="step_list card_text">
-                    <% i = 0 %>
                     <% analysis_part.user_questions.each do |user_question| %>
+                      <% @self_analysis = user_question.self_analyses.where(user_id: @user.id, user_question_id: user_question.id).first %>
                       <% if user_question.self_analyses.find_by(user_id: @user).present? %>
-                        <% i += 1 %>
                         <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
-                          <li>Step.<%= i %><%= link_to user_question.question, public_user_self_analysis_path(@user), class:"link_text" %></li>
+                          <li>Step.<%= user_question.step %><%= link_to user_question.question, public_user_self_analysis_path(@user, @self_analysis), class:"link_text" %></li>
                         <%# end %>
                       <% else %>
-                        <% i += 1 %>
-                        <li>Step.<%= i %>まだ回答がありません。</li>
+                        <li>Step.<%= user_question.step %>まだ回答がありません。</li>
                       <% end %>
                     <% end %>
                   </ul>
