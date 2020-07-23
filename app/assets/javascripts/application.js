@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(function() {
+$(document).on('turbolinks:load', function() {
   $("#self_analysis_analysis_part_id").on("change", function() {
     let input = $("#self_analysis_analysis_part_id").val();
      $.ajax({
@@ -36,23 +36,26 @@ $(function() {
             console.log("失敗");
     });
   });
+
+
+  $('#self_analysis_user_question_id').on('change', function() {
+		hoge();
+	});
+	hoge();
+	function hoge() {
+		let input = $('#self_analysis_user_question_id').val();
+		$.ajax({
+			type: 'GET',
+			url: '/public/self_analyses/step_select',
+			data: { question_put: input },
+			dataType: 'json'
+		}).done(function(data) {
+			console.log(data);
+			$('#user_question').text(data.question);
+		});
+	}
 });
 
-$(function(){
-  $("#self_analysis_user_question_id").on("change", function() {
-    let input = $("#self_analysis_user_question_id").val();
-    $.ajax({
-      type: 'GET',
-      url: '/public/self_analyses/step_select',
-      data: { question_put: input },
-      dataType: 'json'
-    })
-    .done(function(data){
-      console.log(data)
-      $('#user_question').text(data.question);
-    })
-  })
-});
 
 // $(function() {
 //   $(".step_select").on("change", function() {
