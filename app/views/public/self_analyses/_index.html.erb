@@ -29,7 +29,7 @@
               <div class="card-body text-dark">
                 <div class="row card-title">
                   <div class="col-sm-6">
-                    <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(self_analysis.user_question) %>
+                    <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(self_analysis.user.id,  self_analysis.user_question.analysis_part.id) %>
                   </div>
                   <div class="col-sm-6">
                     <%= link_to "STEP#{self_analysis.user_question.step}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
@@ -46,7 +46,7 @@
                 <div class="row tool_space">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-4 favorite_btn">
-                    <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis, user: @user %>
+                    <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
                   </div>
                   <div class="col-sm-4">
                     <%= link_to "コメント数：#{self_analysis.self_analysis_comments.count}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
