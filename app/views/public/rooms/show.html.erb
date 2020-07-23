@@ -18,7 +18,7 @@
     <% if @messages.present? %>
       <% @messages.each do |m| %>
         <div class="chat-box">
-          <% if m.user.user_type == 0 %>
+          <% unless m.user.representative == true %>
             <div class="chat-face">
               <% if m.user.icon_img.present? %>
                 <%= image_tag m.user.icon_img.to_s, class:"user_icon" %>
@@ -26,13 +26,19 @@
                 <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
               <% end %>
             </div>
-          <% elsif m.user.user_type == 1 && m.user.company_id.present?%>
+            <div class="chat-name">
+              <%= link_to m.user.name, public_user_path(m.user) %>
+            </div>
+          <% else %>
             <div class="chat-face">
               <% if m.user.company.icon_img.present? %>
                 <%= image_tag m.user.company.icon_img.to_s, class:"user_icon" %>
               <% else %>
                 <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
               <% end %>
+            </div>
+            <div class="chat-name">
+              <%= link_to m.user.company.name, public_user_path(m.user) %>
             </div>
           <% end %>
           <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>

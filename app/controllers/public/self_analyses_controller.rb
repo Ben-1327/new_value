@@ -53,18 +53,19 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def create
-    @self_analysis = SelfAnalysis.new(self_analysis_params)
-    user_question = UserQuestion.find(params[:user_question_id])
-    @self_analysis.user_id = current_user.id
-    present_answer = SelfAnalysis.find_by(user_id: current_user.id, user_question_id: user_question.id)
-    if present_answer.present?
-      render :edit
-    else
+    present_answer = current_user.self_analyses.where(user_question_id: (params[:user_question_id]))
+    @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
+    if present_answer.count == 0
+      @self_analysis = SelfAnalysis.new(self_analysis_params)
       if @self_analysis.save
-    		redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
+        redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
       else
-    		render :new
+        @self_analysis = SelfAnalysis.new
+        render :new, notice: "投稿に成功しました!"
       end
+    else
+      @self_analysis = SelfAnalysis.find(params[:id])
+      render :edit
     end
   end
 

@@ -66,7 +66,7 @@
           <% end %>
         </div>
         <div class="row btn_space">
-          <div class="col-8"></div>
+          <div class="col-6"></div>
           <div class="col-1">
             <%= link_to public_user_follow_list_path(@user), class:"link_text" do %>
               <%= @user.follow_count %>フォロー
@@ -77,7 +77,7 @@
               <%= @user.followers_count %>フォロワー
             <% end %>
           </div>
-          <div class="col-1 follow_btn">
+          <div class="col-2 follow_btn">
             <% if user_signed_in? %>
               <% unless current_user == @user %>
                 <% if current_user.following? @user %>
@@ -88,16 +88,29 @@
               <% end %>
             <% end %>
           </div>
-          <div class="col-1 dm_btn">
+          <div class="col-2 dm_btn">
             <% if user_signed_in? && @user.user_type == 0 %>
               <% unless @user.id == current_user.id %>
-                <% if (current_user.followed_by? @user) && (@user.followed_by? current_user) %>
-                  <% if @isRoom == true %>
-                    <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
-                  <% else %>
-                    <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
-                      <%= hidden_field_tag 'entry[user_id]', @user.id %>
-                      <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                <% if current_user.representative == true %>
+                  <% if @user.followed_by? current_user %>
+                    <% if @isRoom == true %>
+                      <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+                    <% else %>
+                      <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                        <%= hidden_field_tag 'entry[user_id]', @user.id %>
+                        <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <% if (current_user.followed_by? @user) && (@user.followed_by? current_user) %>
+                    <% if @isRoom == true %>
+                      <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
+                    <% else %>
+                      <%= form_with model: @room, url: {controller: 'public/rooms', action: 'create' },local: true do |f| %>
+                        <%= hidden_field_tag 'entry[user_id]', @user.id %>
+                        <%= f.submit "DM", class:"btn btn-primary btn-lg user-show-chat"%>
+                      <% end %>
                     <% end %>
                   <% end %>
                 <% end %>
@@ -189,8 +202,15 @@
           </div>
         </div>
         <div class="row btn_space">
-          <div class="col-11"></div>
-          <div class="col-1 dm_btn">
+          <div class="col-9"></div>
+          <div class="col-1">
+            <% if @user == current_user %>
+              <%= link_to public_user_follow_list_path(@user), class:"link_text" do %>
+                <%= @user.follow_count %>フォロー
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-2 dm_btn">
             <% if user_signed_in? && current_user.user_type == 0 %>
               <% if @isRoom == true %>
                 <%= link_to "DM", public_room_path(@roomId), class:"btn btn-primary btn-lg" %>
