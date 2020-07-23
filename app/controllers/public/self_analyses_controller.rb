@@ -55,8 +55,9 @@ class Public::SelfAnalysesController < ApplicationController
 
   def create
     @self_analysis = SelfAnalysis.new(self_analysis_params)
+    user_question = UserQuestion.find(params[:user_question_id])
     @self_analysis.user_id = current_user.id
-    present_answer = SelfAnalysis.find_by(user_id: current_user.id, user_question_id: @self_analysis.user_question.id)
+    present_answer = SelfAnalysis.find_by(user_id: current_user.id, user_question_id: user_question.id)
     if present_answer.present?
       render :edit
     else
