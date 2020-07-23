@@ -4,18 +4,16 @@
       <h1><%= "#{analysis_part.part}編" %></h1>
     </div>
   </div>
-  <div class="row step_list">
-    <% i = 0 %>
+  <div class="step_list">
     <% self_analyses.each do |self_analysis| %>
-      <% i += 1 %>
-      <h2>STEP.<%= i %><%= link_to self_analysis[0].question, public_user_self_analysis_path(user, self_analysis[1]),class:"link_text" %></h2>
-      <% if self_analysis[1].present? %>
+      <h2>STEP. <%= self_analysis.user_question.step %><%= link_to self_analysis.user_question.question, public_user_self_analysis_path(self_analysis.user.id, self_analysis.id),class:"link_text"%> </h2>
+      <% if self_analysis.present? %>
         <div class="row self_analysis_text">
           <div class="col-sm-6">
-            <%= self_analysis[1].answer %>
+            <%= self_analysis.answer %>
           </div>
           <div class="col-sm-6">
-            <%= self_analysis[1].analysis %>
+            <%= self_analysis.analysis %>
           </div>
         </div>
       <% else %>
@@ -26,7 +24,7 @@
       <div class="row tool_space">
         <div class="col-sm-4"></div>
         <div class="col-sm-4 favorite_btn">
-          <%#= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
+          <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
         </div>
         <div class="col-sm-4">
           <%#= link_to "コメント数：#{self_analysis.comments.count}", path %>

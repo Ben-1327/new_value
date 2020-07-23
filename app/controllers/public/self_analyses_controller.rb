@@ -28,15 +28,10 @@ class Public::SelfAnalysesController < ApplicationController
 
   # 各編の投稿
   def user_part_index
-    @user = User.find(params[:user_id])
+    user = User.find(params[:user_id])
     @analysis_part = AnalysisPart.find(params[:analysis_part_id])
     @user_questions = @analysis_part.user_questions
-    @self_analyses = []
-
-    @user_questions.each do |user_question|
-      array = [user_question, user_question.self_analyses.find_by(user_id: @user.id)]
-      @self_analyses.push(array)
-    end
+    @self_analyses = SelfAnalysis.where(user_id: user.id)
   end
 
   def show
