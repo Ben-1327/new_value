@@ -14,7 +14,30 @@
   <div class="user_space">
     <% users.each do |user| %>
       <div class="row">
-        <% if user.user_type == 0 %>
+        <% if user.representative == true && user.company_id.present? %>
+          <div class="col-sm-2 icon_img">
+            <% if user.company.icon_img.present? %>
+              <%= image_tag user.company.icon_img.to_s, class:"user_icon" %>
+            <% else %>
+              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+            <% end %>
+          </div>
+          <div class="col-sm-6">
+            <%= link_to public_user_path(user), class:"link_text" do %>
+              <div class="row name_space">
+                <%= user.company.name %>
+              </div>
+            <% end %>
+            <div class="row intro_space">
+              <%= user.company.introduction %>
+            </div>
+          </div>
+          <div class="col-sm-2 user_batch">
+            <%= link_to public_companies_path, class:"link_text" do %>
+              <%= icon("fas", "building") %>
+            <% end %>
+          </div>
+        <% else %>
           <div class="col-sm-2 icon_img">
             <% if user.icon_img.present? %>
               <%= image_tag user.icon_img.to_s, class:"user_icon" %>
@@ -43,27 +66,6 @@
                 <%= link_to "follow",{controller: :follows,action: :follow,user_id: user.id}, method: :put,class: "btn btn-success" %>
               <% end %>
             <% end %>
-          </div>
-        <% elsif user.user_type == 1 && user.company_id.present? %>
-          <div class="col-sm-2 icon_img">
-            <% if user.company.icon_img.present? %>
-              <%= image_tag user.company.icon_img.to_s, class:"user_icon" %>
-            <% else %>
-              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-            <% end %>
-          </div>
-          <div class="col-sm-6">
-            <%= link_to public_user_path(user), class:"link_text" do %>
-              <div class="row name_space">
-                <%= user.company.name %>
-              </div>
-            <% end %>
-            <div class="row intro_space">
-              <%= user.company.introduction %>
-            </div>
-          </div>
-          <div class="col-sm-2 user_batch">
-            <%= render 'public/users/user_batch', user: user %>
           </div>
         <% end %>
       </div>

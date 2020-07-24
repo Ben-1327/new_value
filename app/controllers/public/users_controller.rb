@@ -39,15 +39,15 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @users = User.where(user_type: 0).page(params[:page]).reverse_order.per(12)
+    @users = User.where(representative: false).page(params[:page]).reverse_order.per(12)
   end
 
   def jhs_users
-    @users = User.where(user_batch: 1).page(params[:page]).reverse_order.per(12)
+    @users = User.where(user_batch: 1, representative: false).page(params[:page]).reverse_order.per(12)
   end
 
   def normal_users
-    @users = User.where(user_batch: 2).page(params[:page]).reverse_order.per(12)
+    @users = User.where(user_batch: 2, representative: false).page(params[:page]).reverse_order.per(12)
   end
 
   def edit
