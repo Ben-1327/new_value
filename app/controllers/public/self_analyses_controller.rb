@@ -12,18 +12,22 @@ class Public::SelfAnalysesController < ApplicationController
       @company = Company.find(current_company.id)
       @follow_users = @company.all_following
     end
-    @self_analyses = SelfAnalysis.where(user_id: @follow_users).page(params[:page]).reverse_order.per(12)
+    @self_analyses = SelfAnalysis.where(user_id: @follow_users).where(range: 0..1).page(params[:page]).reverse_order.per(12)
   end
 
   # 各ユーザーの投稿
   def user_index
     @user = User.find(params[:id])
-    @self_analyses = @user.self_analyses.page(params[:page]).reverse_order.per(12)
+    if current_user.following?(@user)
+      @self_analyses = @user.self_analyses.where(range: 0..1).page(params[:page]).reverse_order.per(12)
+    else
+      @self_analyses = @user.self_analyses.where(range: 0).page(params[:page]).reverse_order.per(12)
+    end
   end
 
   # すべてのユーザーの投稿
   def all_index
-    @self_analyses = SelfAnalysis.page(params[:page]).reverse_order.per(12)
+    @self_analyses = SelfAnalysis.where(range: 0..1).page(params[:page]).reverse_order.per(12)
   end
 
   # 各編の投稿

@@ -5,7 +5,6 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @analysis_parts = AnalysisPart.all
-    @self_analyses = SelfAnalysis.where(user_id: current_user.id)
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @user.id)
     @user_questions = []
