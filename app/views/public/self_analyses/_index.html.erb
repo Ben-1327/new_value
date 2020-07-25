@@ -9,22 +9,24 @@
             </div>
           </div>
         </div> -->
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-md-2">
       <% self_analyses.each do |self_analysis| %>
         <% if self_analysis.range == 0 || current_user.following?(self_analysis.user) && self_analysis.range == 1 %>
-          <div class="col mb-4">
+          <div class="col mb-6", style="height:300px;">
             <%= link_to public_user_self_analysis_path(self_analysis.user, self_analysis) do %>
               <div class="card border-dar" style="max-width: 30rem;">
-                <div class="row card-header">
-                  <div class="col-sm-3 icon_img">
-                    <% if self_analysis.user.icon_img.present? %>
-                      <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon" %>
-                    <% else %>
-                      <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-                    <% end %>
-                  </div>
-                  <div class="col-sm-9 name_space">
-                    <%= link_to self_analysis.user.name, public_user_path(self_analysis.user), class:"link_text"%>
+                <div class="card-header">
+                  <div class="row">
+                    <div class="icon_img">
+                      <% if self_analysis.user.icon_img.present? %>
+                        <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon", style:"width:70px; height:70px;"%>
+                      <% else %>
+                        <%= image_tag '/assets/default_icon.jpg', class:"default_icon", style:"width:70px; height:70px;"%>
+                      <% end %>
+                    </div>
+                    <div class="col-8 name_space">
+                      <%= link_to self_analysis.user.name, public_user_path(self_analysis.user), class:"link_text", style:"font-size:23px;" %>
+                    </div>
                   </div>
                 </div>
                 <div class="card-body text-dark">
@@ -38,19 +40,10 @@
                   </div>
                   <div class="row card_text">
                     <div class="col-sm-6">
-                      <%= self_analysis.answer %>
+                      <%= self_analysis.answer.truncate(50) %>
                     </div>
                     <div class="col-sm-6">
-                      <%= self_analysis.analysis %>
-                    </div>
-                  </div>
-                  <div class="row tool_space">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4 favorite_btn">
-                      <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
-                    </div>
-                    <div class="col-sm-4">
-                      <%= link_to "コメント数：#{self_analysis.self_analysis_comments.count}", public_user_self_analysis_path(self_analysis.user,self_analysis) %>
+                      <%= self_analysis.analysis.truncate(50) %>
                     </div>
                   </div>
                 </div>

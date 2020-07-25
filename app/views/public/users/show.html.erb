@@ -36,7 +36,7 @@
               <% if @user.twitter_link.present? %>
                 <div class="twitter_link">
                   <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
-                  <%= icon("fab", "twitter") %>
+                  <%= fa_icon 'twitter' %>
                   <% end %>
                 </div>
               <% end %>
@@ -58,7 +58,7 @@
               <div class="sns_link">
                 <div class="twitter_link">
                   <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
-                    <%= icon("fab", "twitter") %>
+                    <%= fa_icon 'twitter' %>
                   <% end %>
                 </div>
               </div>
@@ -198,7 +198,7 @@
           <div class="col-sm-2 batch_space">
             <div class="user_batch">
               <%= link_to public_companies_path, class:"link_text" do %>
-                <%= icon("fas", "building") %>
+                <%= fa_icon 'building' %>
               <% end %>
             </div>
           </div>

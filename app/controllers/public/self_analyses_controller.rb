@@ -1,5 +1,6 @@
 class Public::SelfAnalysesController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :login_company?, except: [:show, :follow_index, :user_index, :all_index, :user_part_index]
 
 
@@ -57,19 +58,26 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def create
-    present_answer = current_user.self_analyses.where(user_question_id: (params[:user_question_id]))
-    @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
-    if present_answer.count == 0
-      @self_analysis = SelfAnalysis.new(self_analysis_params)
-      if @self_analysis.save
-        redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
-      else
-        @self_analysis = SelfAnalysis.new
-        render :new, notice: "投稿に成功しました!"
-      end
+    # present_answer = current_user.self_analyses.where(user_question_id: (params[:user_question_id]))
+    # @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
+    # if present_answer.count == 0
+    #   @self_analysis = SelfAnalysis.new(self_analysis_params)
+    #   if @self_analysis.save
+    #     redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
+    #   else
+    #     @self_analysis = SelfAnalysis.new
+    #     render :new, notice: "投稿に成功しました!"
+    #   end
+    # else
+    #   @self_analysis = SelfAnalysis.find(params[:id])
+    #   render :edit
+    # end
+    @self_analysis = SelfAnalysis.new(self_analysis_params)
+    @self_analysis.user_id = current_user.id
+    if @self_analysis.save
+    	redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
     else
-      @self_analysis = SelfAnalysis.find(params[:id])
-      render :edit
+    	render :new
     end
   end
 

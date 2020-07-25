@@ -28,7 +28,7 @@
           <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis %>
         </div>
         <div class="col-sm-4">
-          <%#= link_to "コメント数：#{self_analysis.comments.count}", path %>
+          <%= link_to "コメント数：#{self_analysis.self_analysis_comments.count}", public_user_self_analysis_path(self_analysis.user,self_analysis) %>
         </div>
       </div>
     <% end %>
