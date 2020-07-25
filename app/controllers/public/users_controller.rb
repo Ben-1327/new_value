@@ -66,22 +66,22 @@ class Public::UsersController < ApplicationController
 
   def update_company
     @company = Company.find_by(id: (params[:user][:company_id]))
-    # if @company.users.nil?
-    #   current_user.update(representative: ture)
-    # end
+    if @company.users.count == 0
+      current_user.update(representative: ture)
+    end
     current_user.update(company_id: (params[:user][:company_id]))
     redirect_to public_user_path(current_user), notice: "会社連携に成功しました!"#保存された場合の移動先を指定.
   end
 
   def remove_company
     @company = Company.find_by(id: current_user.company.id)
-    @company_users = @comapny.users.where.not(id: current_user.id)
-    # if current_user.representative == true && @comapny_users.present?
-    #   redirect_to public_user_path(current_user), notice: "あなたは代表者なのでメンバー全てが解除するまで解除できません!"#保存された場合の移動先を指定.
-    # else
+    @company_users = @company.users.where.not(id: current_user.id)
+    if current_user.representative == true && @company_users.count >= 1
+      redirect_to public_user_path(current_user), notice: "あなたは代表者なのでメンバー全てが解除するまで解除できません!"#保存された場合の移動先を指定.
+    else
       current_user.update(company_id: nil)
       redirect_to public_user_path(current_user), notice: "会社連携解除に成功しました!"#保存された場合の移動先を指定.
-    # end
+    end
   end
 
   private
