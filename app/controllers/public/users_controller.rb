@@ -13,12 +13,6 @@ class Public::UsersController < ApplicationController
       @company = @user.company
       @representative_user = @company.users.find_by(representative: true)
     end
-    # @analysis_parts.each do |analysis_part|
-    #   @self_analyses.each do |self_analysis|
-    #     array = [self_analysis, self_analysis.user_question.find_by(analysis_part_id: analysis_part.id)]
-    #     @user_questions.push(array)
-    #   end
-    # end
 
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
