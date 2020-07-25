@@ -92,7 +92,7 @@ class Public::SelfAnalysesController < ApplicationController
   def destroy
     @self_analysis = SelfAnalysis.find(params[:id])
   	@self_analysis.destroy
-  	redirect_to public_user_path, notice: "投稿の削除に成功しました!"
+  	redirect_to public_user_path(current_user), notice: "投稿の削除に成功しました!"
   end
 
   def part_select
