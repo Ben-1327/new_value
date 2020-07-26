@@ -7,17 +7,13 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
     when User
-      root_path
-    when Company
-      root_path
+      public_user_path(current_user)
     end
   end
 
   def after_sign_out_path_for(resource)
     case resource
     when :user
-      root_path
-    when :company
       root_path
     end
   end

@@ -25,14 +25,15 @@
           <%= f.select :range, [['すべての人に公開',0],['フォロワーだけに公開',1],['自分だけに公開',2]], class:"col-sm-5"%>
         </div>
         <div class="row contents_form">
-          <label class="col-sm-2"><%= f.label "内容" %></label>
-          <div class="col-5 answer_form">
-            <h4>回答<br></h4>
-            <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。" %>
+          <label class="col-2"><%= f.label "回答" %></label>
+          <div class="answer_form">
+            <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。", class:"col-5" %>
           </div>
-          <div class="col-5 analysis_form">
-            <h4>回答の分析<br>(必須ではありません)</h4>
-            <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。" %>
+        </div>
+        <div class="row contents_form">
+          <label class="col-2"><%= f.label "回答の分析(必須ではありません)" %></label>
+          <div class="analysis_form">
+            <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。", class:"col-5" %>
           </div>
         </div>
 
