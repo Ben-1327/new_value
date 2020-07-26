@@ -23,7 +23,7 @@
           <% if user_signed_in? && current_user.representative == true && current_user.company_id.present? %>
             <ul class="nav p-4">
               <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "未定", public_self_analyses_new_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "新規投稿", public_self_analyses_new_path, class: "btn btn-nav" %></li>
               <li class="nav-item mr-3"><%= link_to "会社ページ", public_user_path(current_user), class: "btn btn-nav" %></li>
               <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
             </ul>
@@ -38,8 +38,8 @@
             <ul class="nav p-4">
               <li class="nav-item mr-3"><%= link_to "Top", root_path, class: "btn btn-nav" %></li>
               <li class="nav-item mr-3"><a href="#about" class="btn btn-nav">About</a></li>
-              <li class="nav-item mr-3"><%= link_to "Login", new_user_session_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "ログイン", new_user_session_path, class: "btn btn-nav" %></li>
+              <li class="nav-item mr-3"><%= link_to "新規登録", new_user_registration_path, class: "btn btn-nav" %></li>
             </ul>
           <% end %>
         </nav>
@@ -53,9 +53,9 @@
       </div>
       <nav class="row">
         <ul class="nav p-3">
-          <li class="nav-item mr-4"><%= link_to "Users", public_users_path, class: "btn btn-nav" %></li>
-          <li class="nav-item mr-4"><%= link_to "Companies", public_companies_path, class: "btn btn-nav" %></li>
-          <li class="nav-item mr-4"><%= link_to "Analyses", public_all_index_path, class: "btn btn-nav" %></li>
+          <li class="nav-item mr-4"><%= link_to "ユーザー", public_users_path, class: "btn btn-nav" %></li>
+          <li class="nav-item mr-4"><%= link_to "企業", public_companies_path, class: "btn btn-nav" %></li>
+          <li class="nav-item mr-4"><%= link_to "投稿", public_all_index_path, class: "btn btn-nav" %></li>
         </ul>
       </nav>
     </header>

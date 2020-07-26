@@ -27,12 +27,12 @@
       <div class="col-sm-8"></div>
       <div class="col-sm-2">
         <% if current_user == @user %>
-          <%= link_to "Edit",edit_public_user_self_analysis_path(current_user, @self_analysis), class: "btn-sm btn-success " %>
+          <%= link_to "編集",edit_public_user_self_analysis_path(current_user, @self_analysis), class: "btn-sm btn-success " %>
         <% end %>
       </div>
       <div class="col-sm-2">
         <% if current_user == @user %>
-          <%= link_to "Destroy",public_user_self_analysis_path(current_user, @self_analysis), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger " %>
+          <%= link_to "削除",public_user_self_analysis_path(current_user, @self_analysis), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger " %>
         <% end %>
       </div>
     </div>

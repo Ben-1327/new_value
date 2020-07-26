@@ -16,9 +16,10 @@
         <%= link_to "ログイン", new_user_session_path, class:"btn btn-success btn-lg" %>
         <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary btn-lg" %>
         <h5 class="company_head">企業登録はこちら</h5>
-        <div class="col">
-          <%= link_to "登録", new_public_company_path, class:"btn btn-success" %>
-        </div>
+        <% if user_signed_in? %>
+          <%= link_to "企業連携", public_user_connect_path(current_user), class:"btn btn-success btn-lg" %>
+        <% end %>
+        <%= link_to "登録", new_public_company_path, class:"btn btn-primary btn-lg" %>
       </div>
     </div>
   </div>
@@ -56,7 +57,7 @@
         </div>
       </div>
       <div class="BGC">
-        <h2>Producer</h2>
+        <h2>製作者</h2>
         <div class="container">
           <div class="row BGC producer">
             <div class="col-sm text_contents">

@@ -23,9 +23,9 @@
         <% if user_signed_in? %>
           <% unless current_user == user %>
             <% if current_user.following?(user) %>
-              <%= link_to "unfollow", public_user_unfollow_path(user),method: :delete,class: "btn btn-primary" %>
+              <%= link_to "フォロー中", public_user_unfollow_path(user),method: :delete,class: "btn btn-primary" %>
             <% else %>
-              <%= link_to "follow",public_user_follow_path(user),method: :post,class: "btn btn-success" %>
+              <%= link_to "フォロー",public_user_follow_path(user),method: :post,class: "btn btn-success" %>
             <% end %>
           <% end %>
         <% end %>
