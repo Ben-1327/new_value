@@ -17,7 +17,7 @@
     <div class="row tool_space">
       <div class="col-sm-4"></div>
       <div class="col-sm-4 favorite_btn">
-        <%#= render 'public/favorites/favorite_btn', self_analysis: @self_analysis, user: @user %>
+        <%= render 'public/favorites/favorite_btn', self_analysis: @self_analysis, user: @user %>
       </div>
       <div class="col-sm-4">
         <%= "#{@self_analysis_comments.count}コメント"%>
@@ -32,33 +32,37 @@
         <%= link_to "Destroy",public_user_self_analysis_path(current_user, @self_analysis), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger " %>
       </div>
     </div>
-    <!-- <div class="comment_form">
-      <%#= form_with model: [@self_analysis,@self_analysis_comment], url: {controller: 'public/self_analysis_comments', action: 'create'},local:true do |f| %>
+    <div class="comment_form">
+      <%= form_with url: public_user_self_analysis_self_analysis_comments_path(current_user,@self_analysis), method: :post,local:true do |f| %>
         <div class="row">
           <div class="col-sm-10">
-            <%#= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントを追加..." %>
+            <%= f.text_area :comment, rows:'5', class: "form-control small_comment_area",placeholder: "コメントを追加..." %>
           </div>
           <div class="col-sm-2">
-            <%#= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
           </div>
         </div>
-      <%# end %>
-    </div> -->
+      <% end %>
+    </div>
     <div class="row comments">
       <% @self_analysis.self_analysis_comments.each do |self_analysis_comment| %>
         <div class="col-2 icon_img">
-          <%= image_tag self_analysis_comment.self_analysis.user.icon_img.to_s %>
+          <% if self_analysis_comment.user.icon_img.present? %>
+            <%= image_tag self_analysis_comment.user.icon_img.to_s, class:"user_icon" %>
+          <% else %>
+            <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+          <% end %>
         </div>
         <div class="col-8">
           <div class="row name_space">
-            <%= link_to self_analysis_comment.self_analysis.user.name, path, class:"link_text"%>
+            <%= link_to self_analysis_comment.user.name, public_user_path(self_analysis_comment.user), class:"link_text"%>
           </div>
           <div class="row comment_space">
             <%= self_analysis_comment.comment %>
           </div>
           <div class="col-2destroy_btn">
-            <% if post_comment.user == current_user%>
-              <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+            <% if self_analysis_comment.user == current_user%>
+              <%= link_to "削除", public_user_self_analysis_self_analysis_comment_path(@self_analysis, self_analysis_comment), method: :delete, class: "btn btn-danger pull-right" %>
             <% end %>
           </div>
         </div>
