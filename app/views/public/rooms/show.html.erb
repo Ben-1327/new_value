@@ -52,10 +52,10 @@
       </div>
       <div class="posts">
         <%= form_with model: @message,url: public_messages_path, method: :post, local: true do |f| %>
-          <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %>
+          <%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 80, class:"form-text-field" %>
             <%= f.hidden_field :room_id, value: @room.id %>
             <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.submit "投稿",class: 'form-submit'%>
+          <%= f.submit "投稿",class: 'btn btn-success form-submit'%>
         <% end %>
       </div>
     </div>

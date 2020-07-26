@@ -15,29 +15,30 @@
           <label class="col-sm-2"><%= f.label "step" %></label>
           <%= f.select :user_question_id, @user_questions.map{|user_question| ["step#{user_question.step}", user_question.step]}, class:"step_select col-sm-5" %>
         </div>
-        <div class="row">
+        <div class="row question_form">
           <label class="col-sm-2"><%= f.label "質問" %></label>
           <div class="question col-sm-6", id="user_question"></div>
         </div>
+        <div class="row contents_form">
+          <label class="col-2"><%= f.label "回答" %></label>
+          <div class="col-8 answer_form">
+            <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。", class:"answer_box" %>
+          </div>
+        </div>
+        <div class="row contents_form">
+          <label class="col-2"><%= f.label "回答の分析(必須ではありません)" %></label>
+          <div class="col-8 answer_form">
+            <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。", class:"answer_box" %>
+          </div>
+        </div>
+
         <!-- 公開範囲設定 -->
         <div class="row range_form">
           <label class="col-sm-2"><%= f.label "公開範囲" %></label>
           <%= f.select :range, [['すべての人に公開',0],['フォロワーだけに公開',1],['自分だけに公開',2]], class:"col-sm-5"%>
         </div>
-        <div class="row contents_form">
-          <label class="col-2"><%= f.label "回答" %></label>
-          <div class="answer_form">
-            <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。", class:"col-5" %>
-          </div>
-        </div>
-        <div class="row contents_form">
-          <label class="col-2"><%= f.label "回答の分析(必須ではありません)" %></label>
-          <div class="analysis_form">
-            <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。", class:"col-5" %>
-          </div>
-        </div>
 
-        <%= f.submit "投稿", class:"btn btn-success" %>
+        <%= f.submit "投稿", class:"btn btn-success submit-btn" %>
       <% end %>
     </div>
   </div>

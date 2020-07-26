@@ -33,10 +33,10 @@
               <%= render 'public/users/user_batch', user: @user %>
             </div>
             <div class="sns_link">
-              <% if @user.twitter_link.present? %>
+              <% unless @user.twitter_link.nil? %>
                 <div class="twitter_link">
                   <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
-                  <%= fa_icon 'twitter' %>
+                    <%= fa_icon 'twitter' %>
                   <% end %>
                 </div>
               <% end %>
@@ -56,27 +56,32 @@
                 <%= render 'public/users/user_batch', user: @user %>
               </div>
               <div class="sns_link">
-                <div class="twitter_link">
-                  <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
-                    <%= fa_icon 'twitter' %>
-                  <% end %>
-                </div>
+                <% unless @user.twitter_link.nil? %>
+                  <div class="twitter_link">
+                    <%= link_to @user.twitter_link, target: :_blank, class:"link_text" do %>
+                      <%= fa_icon 'twitter' %>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
             </div>
           <% end %>
         </div>
-        <div class="row btn_space">
-          <div class="col-6"></div>
-          <div class="col-1">
+        <div class="row follow_list_btn">
+          <div class="col-8"></div>
+          <div class="col-2">
             <%= link_to public_user_follow_list_path(@user), class:"link_text" do %>
               <%= @user.follow_count %>フォロー
             <% end %>
           </div>
-          <div class="col-1">
+          <div class="col-2">
             <%= link_to public_user_follower_list_path(@user), class:"link_text" do %>
               <%= @user.followers_count %>フォロワー
             <% end %>
           </div>
+        </div>
+        <div class="row btn_space">
+          <div class="col-8"></div>
           <div class="col-2 follow_btn">
             <% if user_signed_in? %>
               <% unless current_user == @user %>
