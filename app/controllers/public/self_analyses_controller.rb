@@ -58,10 +58,16 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def create
-    present_answer = current_user.self_analyses.where(user_question_id: (params[:self_analysis][:user_question_id]))
+    user_question_id = UserQuestion.find_by(step: params[:self_analysis][:user_question_id], analysis_part_id: params[:self_analysis][:analysis_part_id]).id
+    present_answer = current_user.self_analyses.where(user_question_id: user_question_id)
     @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
-    if present_answer.count == 0
-      @self_analysis = SelfAnalysis.new(self_analysis_params)
+
+    #if present_answer.count == 0
+    #binding.pry
+    if present_answer.blank?
+      @self_analysis = current_user.self_analyses.build(self_analysis_params)
+      @self_analysis.user_question_id = user_question_id
+      #binding.pry
       if @self_analysis.save
         redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
       else
@@ -71,6 +77,7 @@ class Public::SelfAnalysesController < ApplicationController
     else
       redirect_to public_user_path(current_user), notice: "既に投稿があります!"
     end
+
     # @self_analysis = SelfAnalysis.new(self_analysis_params)
     # @self_analysis.user_id = current_user.id
     # if @self_analysis.save
@@ -102,7 +109,7 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def step_select
-    @user_question = UserQuestion.find_by(step: (params[:question_put]))
+    @user_question = UserQuestion.find_by(analysis_part_id: params[:analysis_part],step: params[:question_put])
     render json: @user_question
   end
 

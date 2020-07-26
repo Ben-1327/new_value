@@ -153,7 +153,7 @@
                   <ul class="step_list card_text">
                     <% analysis_part.user_questions.each do |user_question| %>
                       <% @self_analysis = user_question.self_analyses.where(user_id: @user.id, user_question_id: user_question.id).first %>
-                      <% if user_question.self_analyses.find_by(user_id: @user).present? %>
+                      <% if @self_analysis.present? %>
                         <% if current_user == @user || @self_analysis.range == 0 || current_user.following?(@self_analysis.user) && @self_analysis.range == 1 %>
                           <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
                             <li>Step.<%= user_question.step %><%= link_to user_question.question, public_user_self_analysis_path(@user, @self_analysis), class:"link_text" %></li>

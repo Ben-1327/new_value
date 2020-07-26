@@ -43,11 +43,12 @@ $(document).on('turbolinks:load', function() {
 	});
 	hoge();
 	function hoge() {
-		let input = $('#self_analysis_user_question_id').val();
+		const inputAnalysisUserQuestion = $('#self_analysis_user_question_id').val();
+    const inputAnalysisPart =  $('#self_analysis_analysis_part_id').val();
 		$.ajax({
 			type: 'GET',
 			url: '/public/self_analyses/step_select',
-			data: { question_put: input },
+			data: { question_put: inputAnalysisUserQuestion, analysis_part: inputAnalysisPart },
 			dataType: 'json'
 		}).done(function(data) {
 			console.log(data);
