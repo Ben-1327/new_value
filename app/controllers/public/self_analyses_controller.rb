@@ -62,8 +62,6 @@ class Public::SelfAnalysesController < ApplicationController
     present_answer = current_user.self_analyses.where(user_question_id: user_question_id)
     @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
 
-    #if present_answer.count == 0
-    #binding.pry
     if present_answer.blank?
       @self_analysis = current_user.self_analyses.build(self_analysis_params)
       @self_analysis.user_question_id = user_question_id
@@ -78,13 +76,6 @@ class Public::SelfAnalysesController < ApplicationController
       redirect_to public_user_path(current_user), notice: "既に投稿があります!"
     end
 
-    # @self_analysis = SelfAnalysis.new(self_analysis_params)
-    # @self_analysis.user_id = current_user.id
-    # if @self_analysis.save
-    # 	redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
-    # else
-    # 	render :new
-    # end
   end
 
   def update
