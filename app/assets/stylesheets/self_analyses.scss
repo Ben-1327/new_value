@@ -6,6 +6,8 @@
   margin: 0 auto;
 }
 
+
+
 .favorite_btn_li{
   list-style: none;
 }
@@ -28,4 +30,19 @@
 
 .range_form{
   margin-top: 20px;
+}
+
+.comment_form{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.comment_space{
+  position: relative;
+  height: 70px;
+}
+
+.comment_btn{
+  position: absolute;
+  bottom: 10px;
 }

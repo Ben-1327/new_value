@@ -49,7 +49,7 @@
 }
 
 .page, .flash{
-  background-color: #ffd8b2;
+  background-color: #FFF4E0;
 }
 
  .container{
@@ -58,7 +58,7 @@
 
  .navbar{
    height: 100px;
-   background-color: #ff9e3d;
+   background-color: #FFC679;
  }
 
  .default_icon, .user_icon{
@@ -66,3 +66,28 @@
    width: 70px;
    object-fit: cover; object-position:0% 0%;
  }
+
+ .bold-text{
+   font-weight: bold;
+ }
+
+ .wrapper{
+    min-height: 100vh;
+    position: relative;/*←相対位置*/
+    padding-bottom: 120px;/*←footerの高さ*/
+    box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+footer{
+    width: 100%;
+    background-color: #FFC679;
+    text-align: center;
+    padding: 30px 0;
+
+ position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+}
+
+.none-li-point{
+  list-style: none;
+}
