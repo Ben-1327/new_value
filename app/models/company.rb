@@ -9,6 +9,8 @@ class Company < ApplicationRecord
   has_many :users,dependent: :nullify
   has_many :company_analyses, dependent: :destroy
 
+  validates :name, presence: true
+
 
 
 end

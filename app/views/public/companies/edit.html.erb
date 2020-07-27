@@ -3,13 +3,14 @@
   <h2>企業情報編集</h2>
   <div class="container">
     <%= form_with model: @company, url: {controller: 'public/companies', action: 'update' },local: true do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
       <div class = "form-row">
         <label class="col-sm-2"><%= f.label "社名(※必須)" %></label>
         <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "col-sm-3" %>
       </div><br>
 
       <div class = "form-row">
-        <label class = "col-sm-2"><%= f.label "ホームページ(※必須)" %></label>
+        <label class = "col-sm-2"><%= f.label "ホームページ" %></label>
         <%= f.text_field :hp, autofocus: true, autocomplete: "hp", class: "col-sm-3" %>
       </div><br>
 

@@ -3,6 +3,7 @@
   <h2>ユーザー情報編集</h2>
   <div class="container">
     <%= form_with model: @user, url: {controller: 'public/users', action: 'update' },local: true do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
       <div class = "form-row">
         <label class = "col-sm-2"><%= f.label "どのアカウントを作成しますか？(※必須)" %></label>
         <%= f.select :user_type, [['個人アカウント',0],['ビジネスアカウント',1]], class:"col-sm-2"%>
@@ -23,12 +24,12 @@
       </div><br>
 
       <div class = "form-row">
-        <label class="col-sm-2"><%= f.label "都道府県" %></label>
+        <label class="col-sm-2"><%= f.label "都道府県(※必須)" %></label>
         <%= f.select :prefectures, User.prefectures.keys, {prompt: "選択してください"}, autofocus: true, autocomplete: "prefectures", class: "col-sm-2" %>
       </div><br>
 
       <div class = "form-row">
-        <label class = "col-sm-2"><%= f.label "年齢" %></label>
+        <label class = "col-sm-2"><%= f.label "年齢(※必須)" %></label>
         <%= f.number_field :age, autofocus: true, autocomplete: "age", class: "col-sm-2" %><span class = "col-sm-1">歳</span>
       </div><br>
 

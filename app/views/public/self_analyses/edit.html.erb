@@ -7,6 +7,7 @@
   <div class="container">
     <div class="row form_space">
       <%= form_with model: @self_analysis,url: {controller: 'public/self_analyses', action: 'update' },local:true do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <div class="row part_form">
           <label class="col-sm-2"><%= f.label "編" %></label>
           <%= @self_analysis.user_question.analysis_part.part %>編

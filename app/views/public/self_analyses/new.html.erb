@@ -7,6 +7,7 @@
   <div class="container">
     <div class="form_space">
       <%= form_with model: @self_analysis,url: public_user_self_analyses_path(current_user)  do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <div class="row part_form">
           <label class="col-sm-2"><%= f.label "編" %></label>
           <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]}, class:"part_select col-sm-5" %>

@@ -59,7 +59,7 @@ class Public::CompaniesController < ApplicationController
       if @company.update(company_params)
     		redirect_to public_user_path(current_user), notice: "会社編集に成功しました!"#保存された場合の移動先を指定.
       else
-    		redirect_to edit_public_user_path(current_user)
+    		render :edit
       end
     elsif user_signed_in? && current_user.user_type == 1 && current_user.company_id.nil?
       render :new

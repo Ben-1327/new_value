@@ -6,6 +6,9 @@ class SelfAnalysis < ApplicationRecord
   belongs_to :user
   belongs_to :user_question
 
+  validates :answer, presence: true
+  validates :range, presence: true
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

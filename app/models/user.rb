@@ -14,6 +14,15 @@ class User < ApplicationRecord
 
   mount_uploader :icon_img, ImagesUploader
 
+
+  validates :name, presence: true
+  validates :user_type, presence: true
+  validates :email, presence: true
+  validates :user_batch, presence: true
+  validates :encrypted_password, presence: true
+  validates :prefectures, presence: true
+  validates :ageencrypted_password, presence: true
+
   # relationshipsによるフォローではなくGemを使ったフォローに変更しました
 
   # has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id"
