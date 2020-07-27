@@ -1,5 +1,5 @@
 class AnalysisPart < ApplicationRecord
 
-  has_many :questions, dependent: :destroy
+  has_many :user_questions, dependent: :destroy
 
 end

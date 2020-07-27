@@ -10,15 +10,15 @@
         <%= render 'layouts/error_messages', model: f.object %>
         <div class="row part_form">
           <label class="col-sm-2"><%= f.label "編" %></label>
-          <%= @self_analysis.question.analysis_part.part %>編
+          <%= @self_analysis.user_question.analysis_part.part %>編
         </div>
         <div class="row step_form">
           <label class="col-sm-2"><%= f.label "step" %></label>
-          <%= @self_analysis.question.step %>
+          <%= @self_analysis.user_question.step %>
         </div>
         <div class="row question_form">
           <label class="col-sm-2"><%= f.label "質問" %></label>
-          <%= @self_analysis.question.question %>
+          <%= @self_analysis.user_question.question %>
         </div>
         <!-- 公開範囲設定 -->
         <div class="row contents_form">

@@ -4,7 +4,7 @@ class SelfAnalysis < ApplicationRecord
   has_many :favorites,dependent: :destroy
 
   belongs_to :user
-  belongs_to :question
+  belongs_to :user_question
 
   validates :answer, presence: true
   validates :range, presence: true
