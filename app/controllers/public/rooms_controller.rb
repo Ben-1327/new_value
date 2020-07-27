@@ -8,13 +8,19 @@ class Public::RoomsController < ApplicationController
     @entry2 = Entry.new(entry_params)
     @entry2.room_id = @room.id
     @entry2.save
-    redirect_to "/public/rooms/#{@room.id}"
+    redirect_to public_room_path(@room)
   end
 
   def show
     @room = Room.find(params[:id])
     user = @room.entries.where.not(user_id: current_user.id).first
-    @user = User.find(user.user_id)
+    @normal_user = User.find(user.user_id)
+    company = @normal_user.company
+    unless @normal_user.representative == true
+      @user = @normal_user
+    else
+      @user = company
+    end
     if Entry.where(user_id:current_user.id, room_id:@room.id).present?
       @messages = @room.messages
       @message = Message.new

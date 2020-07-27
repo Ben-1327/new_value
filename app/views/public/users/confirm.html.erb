@@ -1,0 +1,18 @@
+<%= stylesheet_link_tag 'users' %>
+
+<div class="confirm page">
+  <h2>会社連携確認</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <%= link_to "戻る", public_user_path(current_user), class:"btn btn-secondary btn-lg link_text" %>
+      </div>
+      <div class="col">
+        <%= form_with model: current_user, url: public_user_update_company_path, method: :put, local: true do |f| %>
+          <%= f.hidden_field :company_id, :value => @company.id %>
+          <%= f.submit "確定", class:"btn btn-primary btn-lg link_text" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

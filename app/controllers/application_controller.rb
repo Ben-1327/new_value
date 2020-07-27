@@ -7,9 +7,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
     when User
-      root_path
-    when Company
-      root_path
+      public_user_path(current_user)
     end
   end
 
@@ -17,15 +15,13 @@ class ApplicationController < ActionController::Base
     case resource
     when :user
       root_path
-    when :company
-      root_path
     end
   end
 
   def configure_permitted_parameters
-   devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:prefectures,:age,:user_batch,:email])
+   devise_parameter_sanitizer.permit(:sign_up, keys: [:user_type,:name,:prefectures,:age,:user_batch,:email])
    devise_parameter_sanitizer.permit(:sign_in,keys:[:email])
-   devise_parameter_sanitizer.permit(:account_update,keys:[:name,:prefectures,:age,:user_batch,:email,:introduction,:values,:icon_img,:header_img,:twitter_link,:tag])
+   devise_parameter_sanitizer.permit(:account_update,keys:[:user_type,:name,:prefectures,:age,:user_batch,:email,:introduction,:values,:icon_img,:header_img,:twitter_link,:tag])
     #sign_upの際にnameのデータ操作を許。追加したカラム。
   end
 

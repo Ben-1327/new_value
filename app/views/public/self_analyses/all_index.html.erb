@@ -1,5 +1,7 @@
 <div class="all_index page">
   <div class="container">
-  <%= render 'public/self_analyses/index', self_analyses: @self_analyses %>
+    <% if @self_analyses.present? %>
+      <%= render 'public/self_analyses/index', self_analyses: @self_analyses %>
+    <% end %>
   </div>
 </div>

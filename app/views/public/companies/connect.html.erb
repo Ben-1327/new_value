@@ -1,0 +1,39 @@
+<div class="company_index page">
+  <h2>所属企業選択</h2>
+  <% if user_signed_in? %>
+    <div class="row form-inline mt-3 justify-content-end">
+      <%= render 'public/searches/search_box' %>
+    </div>
+  <% end %>
+  <div class="container">
+    <div class="user_space">
+      <% @companies.each do |company| %>
+        <div class="row each_user">
+          <div class="col-sm-2 icon_img">
+            <% if company.icon_img.present? %>
+              <%= image_tag company.icon_img.to_s, class:"user_icon" %>
+            <% else %>
+              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+            <% end %>
+          </div>
+          <div class="col-sm-6">
+            <div class="row name_space">
+              <%= company.name %>
+            </div>
+            <div class="row intro_space">
+              <%= company.introduction %>
+            </div>
+          </div>
+          <div class="col-sm-2 user_batch">
+            <%= link_to public_companies_path, class:"link_text" do %>
+              <%= fa_icon 'building' %>
+            <% end %>
+          </div>
+          <div class="col-sm-2 select_btn">
+            <%= link_to "連携する", public_user_confirm_path(current_user,company), class:"btn btn-primary link_text" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

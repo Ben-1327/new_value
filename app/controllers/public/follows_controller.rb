@@ -2,38 +2,23 @@ class Public::FollowsController < ApplicationController
 
   def follow
     @user = User.find(params[:user_id])
-    current_user.follow(@user)
-    redirect_to public_user_path(@user)
+    unless @user.user_type == 1 && @user.representative == true
+      current_user.follow(@user)
+      redirect_to public_user_path(@user)
+    end
   end
 
   def unfollow
     @user = User.find(params[:user_id])
-    current_user.stop_following(@user)
-    redirect_to public_user_path(@user)
+    unless @user.user_type == 1 && @user.representative == true
+      current_user.stop_following(@user)
+      redirect_to public_user_path(@user)
+    end
   end
-
-  def company_follow
-    @user = User.find(params[:user_id])
-    current_company.follow(@user)
-    redirect_to user_path(@user)
-  end
-
-  def company_unfollow
-      @user = User.find(params[:user_id])
-      current_company.stop_following(@user)
-      redirect_to user_path(@user)
-  end
-
 
   def follow_list
     @user = User.find(params[:user_id])
     @users = @user.all_following
-  end
-
-
-  def company_follow_list
-    @company = Company.find(params[:company_id])
-    @users = @company.all_following
   end
 
 

@@ -1,22 +1,32 @@
 class Public::SelfAnalysisCommentsController < ApplicationController
 
+  before_action :login_company?
+
   def create
-    @self_analysis = SelfAnalysis.find(params[:id])
+    @self_analysis = SelfAnalysis.find(params[:self_analysis_id])
     comment = current_user.self_analysis_comments.new(self_analysis_comment_params)
     comment.self_analysis_id = @self_analysis.id
     comment.save
-    redirect_to path
+    redirect_to public_user_self_analysis_path(@self_analysis.user, @self_analysis)
   end
 
   def destroy
-    SelfAnalysisComment.find_by(id: params[:id], self_analysis_id: params[:id]).destroy
-    redirect_to path
+    @self_analysis = SelfAnalysis.find(params[:self_analysis_id])
+    SelfAnalysisComment.find_by(id: params[:id], self_analysis_id: params[:self_analysis_id]).destroy
+    redirect_to public_user_self_analysis_path(@self_analysis.user, @self_analysis)
   end
 
   private
 
+  def login_company?
+    unless current_user.representative == false
+      flash[:notice] = "あなたのアカウントは個人アカウントではないのでこの機能は利用できません。"
+      redirect_to public_user_path(current_user)
+    end
+  end
+
   def self_analysis_comment_params
-    params.require(:self_analysis_comment).permit(:comment)
+    params.permit(:comment)
   end
 
 end

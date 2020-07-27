@@ -29,11 +29,19 @@ namespace :public do
 
   resources :users, only: [:index, :show, :edit, :update] do
     # フォローとアンフォロー機能
+    post 'follow' => 'follows#follow'
+    delete 'unfollow' => 'follows#unfollow'
     put 'follow' => 'follows#follow'
     put 'unfollow' => 'follows#unfollow'
     # フォロー・フォロワーの一覧ページ
     get 'follow_list' => 'follows#follow_list'
     get 'follower_list' => 'follows#follower_list'
+
+    get 'confirm/:company_id' => 'users#confirm', as: 'confirm'
+    get 'connect' => 'companies#connect'
+    put 'update_company' => 'users#update_company'
+    put 'remove_company' => 'users#remove_company'
+    delete 'remove_company' => 'users#remove_company'
 
     get ':analysis_part_id/user_part_index' => 'self_analyses#user_part_index', as:'part_index'
 
@@ -47,12 +55,7 @@ namespace :public do
 
 
 
-  resources :companies, only: [:index, :show, :edit, :update] do
-    # フォローとアンフォロー機能
-    put 'follow' => 'follows#follow'
-    put 'unfollow' => 'follows#unfollow'
-    # フォローの一覧ページ
-    get 'follow_list' => 'follows#follow_list'
+  resources :companies, only: [:index, :show, :edit, :update, :new, :create, :destroy] do
   end
 
 

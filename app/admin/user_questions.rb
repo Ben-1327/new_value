@@ -5,7 +5,7 @@ ActiveAdmin.register Question do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :analysis_part_id, :step, :question
+  permit_params :analysis_part_id, :step, :question
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register Question do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end

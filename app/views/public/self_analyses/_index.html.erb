@@ -9,53 +9,50 @@
             </div>
           </div>
         </div> -->
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-md-2">
       <% self_analyses.each do |self_analysis| %>
-        <div class="col mb-4">
-          <%= link_to public_user_self_analysis_path(self_analysis, self_analysis.user) do %>
-            <div class="card border-dar" style="max-width: 30rem;">
-              <div class="row card-header">
-                <div class="col-sm-3 icon_img">
-                  <% if self_analysis.user.icon_img.present? %>
-                    <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon" %>
-                  <% else %>
-                    <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
-                  <% end %>
-                </div>
-                <div class="col-sm-9 name_space">
-                  <%= link_to self_analysis.user.name, public_user_path(self_analysis.user), class:"link_text"%>
-                </div>
-              </div>
-              <div class="card-body text-dark">
-                <div class="row card-title">
-                  <div class="col-sm-6">
-                    <%= link_to "#{self_analysis.question.analysis_part.part}編", public_user_part_index_path(self_analysis.question) %>
-                  </div>
-                  <div class="col-sm-6">
-                    <%= link_to "STEP#{self_analysis.question.step}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
+
+        <% if self_analysis.range == 0 || current_user.following?(self_analysis.user) && self_analysis.range == 1 %>
+          <div class="col mb-6", style="height:300px;">
+            <%= link_to public_user_self_analysis_path(self_analysis.user, self_analysis) do %>
+              <div class="card border-dar" style="max-width: 30rem;">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="icon_img">
+                      <% if self_analysis.user.icon_img.present? %>
+                        <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon", style:"width:70px; height:70px;"%>
+                      <% else %>
+                        <%= image_tag '/assets/default_icon.jpg', class:"default_icon", style:"width:70px; height:70px;"%>
+                      <% end %>
+                    </div>
+                    <div class="col-8 name_space">
+                      <%= link_to self_analysis.user.name, public_user_path(self_analysis.user), class:"link_text", style:"font-size:23px;" %>
+                    </div>
+
                   </div>
                 </div>
-                <div class="row card_text">
-                  <div class="col-sm-6">
-                    <%= self_analysis.answer %>
+                <div class="card-body text-dark">
+                  <div class="row card-title">
+                    <div class="col-sm-6">
+                      <%= link_to "#{self_analysis.user_question.analysis_part.part}編", public_user_part_index_path(self_analysis.user.id,  self_analysis.user_question.analysis_part.id) %>
+                    </div>
+                    <div class="col-sm-6">
+                      <%= link_to "STEP#{self_analysis.user_question.step}", public_user_self_analysis_path(self_analysis.user,self_analysis) %>
+                    </div>
                   </div>
-                  <div class="col-sm-6">
-                    <%= self_analysis.analysis %>
-                  </div>
-                </div>
-                <div class="row tool_space">
-                  <div class="col-sm-4"></div>
-                  <div class="col-sm-4 favorite_btn">
-                    <%= render 'public/favorites/favorite_btn', self_analysis: self_analysis, user: @user %>
-                  </div>
-                  <div class="col-sm-4">
-                    <%= link_to "コメント数：#{self_analysis.self_analysis_comments.count}", public_user_self_analysis_path(self_analysis,self_analysis.user) %>
+                  <div class="row card_text">
+                    <div class="col-sm-6">
+                      <%= self_analysis.answer.truncate(50) %>
+                    </div>
+                    <div class="col-sm-6">
+                      <%= self_analysis.analysis.truncate(50) %>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

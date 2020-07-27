@@ -7,6 +7,7 @@
   <div class="container">
     <div class="form_space">
       <%= form_with model: @self_analysis,url: public_user_self_analyses_path(current_user)  do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
         <div class="row part_form">
           <label class="col-sm-2"><%= f.label "編" %></label>
           <%= f.select :analysis_part_id, AnalysisPart.all.map{|analysis_part| [analysis_part.part, analysis_part.id]}, class:"part_select col-sm-5" %>
@@ -15,28 +16,30 @@
           <label class="col-sm-2"><%= f.label "step" %></label>
           <%= f.select :question_id, @questions.map{|question| ["step#{question.step}", question.step]}, class:"step_select col-sm-5" %>
         </div>
-        <div class="row">
+        <div class="row question_form">
           <label class="col-sm-2"><%= f.label "質問" %></label>
           <div class="question col-sm-6", id="question"></div>
         </div>
+        <div class="row contents_form">
+          <label class="col-2"><%= f.label "回答" %></label>
+          <div class="col-8 answer_form">
+            <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。", class:"answer_box" %>
+          </div>
+        </div>
+        <div class="row contents_form">
+          <label class="col-2"><%= f.label "回答の分析(必須ではありません)" %></label>
+          <div class="col-8 answer_form">
+            <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。", class:"answer_box" %>
+          </div>
+        </div>
+
         <!-- 公開範囲設定 -->
         <div class="row range_form">
           <label class="col-sm-2"><%= f.label "公開範囲" %></label>
           <%= f.select :range, [['すべての人に公開',0],['フォロワーだけに公開',1],['自分だけに公開',2]], class:"col-sm-5"%>
         </div>
-        <div class="row contents_form">
-          <label class="col-sm-2"><%= f.label "内容" %></label>
-          <div class="col-5 answer_form">
-            <h4>回答<br></h4>
-            <%= f.text_area :answer, placeholder:"あなたの回答を入力してください。" %>
-          </div>
-          <div class="col-5 analysis_form">
-            <h4>回答の分析<br>(必須ではありません)</h4>
-            <%= f.text_area :analysis, placeholder:"必須ではありません。左の回答から分かる分析を入力してください。" %>
-          </div>
-        </div>
 
-        <%= f.submit "投稿", class:"btn btn-success" %>
+        <%= f.submit "投稿", class:"btn btn-success submit-btn" %>
       <% end %>
     </div>
   </div>

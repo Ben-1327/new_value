@@ -10,58 +10,91 @@
   </head>
 
   <body>
-
-    <!--ヘッダーの記述-->
-    <header class="navbar">
-      <div class="container">
-        <nav>
-          <%= link_to root_path do %>
-            <img src="/assets/New_Value_logo2.png" width="250" height="65">
-          <% end %>
-        </nav>
-        <nav>
-          <% if user_signed_in? %>
-            <ul class="nav p-4">
-              <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "新規投稿", public_self_analyses_new_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "マイページ", public_user_path(current_user), class: "btn btn-nav" %></li>
-              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
-            </ul>
-          <% elsif company_signed_in?%>
-          <ul class="nav p-4">
-            <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
-            <li class="nav-item mr-3"><%= link_to "新規投稿", public_self_analyses_new_path, class: "btn btn-nav" %></li>
-            <li class="nav-item mr-3"><%= link_to "マイページ", public_company_path(current_company), class: "btn btn-nav" %></li>
-            <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
-          </ul>
-          <% else %>
-            <ul class="nav p-4">
-              <li class="nav-item mr-3"><%= link_to "Top", root_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "About", public_about_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "Login", new_user_session_path, class: "btn btn-nav" %></li>
-              <li class="nav-item mr-3"><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-nav" %></li>
-            </ul>
-          <% end %>
-        </nav>
-        <% if user_signed_in? || company_signed_in? %>
-          <div class="row form-inline mt-3 justify-content-end">
-            <%= form_with url: public_search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :search,placeholder: 'Search' %>
-                <%= f.select :option, [["user", "1"],["book","2"]]%>
-                <%= f.select :choice, [["完全一致", "1" ],["前方一致", "2" ],["後方一致", "3" ],["部分一致", "4" ]] %>
-                <%= f.submit 'Search' %>
+    <div class="wrapper">
+      <!--ヘッダーの記述-->
+      <header class="navbar">
+        <div class="container">
+          <nav>
+            <%= link_to root_path do %>
+              <img src="/assets/New_Value_logo2.png" width="250" height="65">
             <% end %>
-          </div>
-        <% end %>
+          </nav>
+          <nav>
+            <% if user_signed_in? && current_user.representative == true && current_user.company_id.present? %>
+              <ul class="nav p-4">
+                <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
+                <li class="nav-item mr-3"><%= link_to "新規投稿", public_self_analyses_new_path, class: "btn btn-nav" %></li>
+                <li class="nav-item mr-3"><%= link_to "会社ページ", public_user_path(current_user), class: "btn btn-nav" %></li>
+                <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
+              </ul>
+            <% elsif user_signed_in?  %>
+              <ul class="nav p-4">
+                <li class="nav-item mr-3"><%= link_to "TL", public_follow_index_path, class: "btn btn-nav" %></li>
+                <li class="nav-item mr-3"><%= link_to "新規投稿", public_self_analyses_new_path, class: "btn btn-nav" %></li>
+                <li class="nav-item mr-3"><%= link_to "マイページ", public_user_path(current_user), class: "btn btn-nav" %></li>
+                <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-nav" %></li>
+              </ul>
+            <% else %>
+              <ul class="nav p-4">
+                <li class="nav-item mr-3"><%= link_to "Top", root_path, class: "btn btn-nav" %></li>
+                <li class="nav-item mr-3"><a href="#about" class="btn btn-nav">About</a></li>
+                <li class="nav-item mr-3"><%= link_to "ログイン", new_user_session_path, class: "btn btn-nav" %></li>
+                <li class="nav-item mr-3"><%= link_to "新規登録", new_user_registration_path, class: "btn btn-nav" %></li>
+              </ul>
+            <% end %>
+          </nav>
+          <% unless @hide_searchbar == true %>
+            <% if user_signed_in? %>
+              <div class="row form-inline mt-3 justify-content-end">
+                <%= render 'public/searches/search_box' %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <nav class="row">
+          <ul class="nav p-3">
+            <li class="nav-item mr-4"><%= link_to "ユーザー", public_users_path, class: "btn btn-nav" %></li>
+            <li class="nav-item mr-4"><%= link_to "企業", public_companies_path, class: "btn btn-nav" %></li>
+            <li class="nav-item mr-4"><%= link_to "投稿", public_all_index_path, class: "btn btn-nav" %></li>
+          </ul>
+        </nav>
+      </header>
+      <% if flash[:notice] %>
+        <div class="flash">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <div class="page">
+        <%= yield %>
       </div>
-      <nav class="row">
-        <ul class="nav p-3">
-          <li class="nav-item mr-4"><%= link_to "Users", public_users_path, class: "btn btn-nav" %></li>
-          <li class="nav-item mr-4"><%= link_to "Companies", public_companies_path, class: "btn btn-nav" %></li>
-          <li class="nav-item mr-4"><%= link_to "Analyses", public_all_index_path, class: "btn btn-nav" %></li>
-        </ul>
-      </nav>
-    </header>
-    <%= yield %>
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-3 logo_space">
+              <img src="/assets/New_Value_logo2.png" width="250" height="65">
+            </div>
+            <div class="col-3 new_value_footer">
+              <h5>New Value</h5>
+              <ul class="none-li-point">
+                <li><%= link_to "トップページ", root_path, class:"link_text" %></li>
+              </ul>
+            </div>
+            <div class="col-3 user_footer">
+              <h5>ユーザー</h5>
+              <ul class="none-li-point">
+                <li><%= link_to "新規登録", new_user_registration_path, class:"link_text" %></li>
+                <li><%= link_to "ログイン", new_user_session_path, class:"link_text" %></li>
+              </ul>
+            </div>
+            <div class="col-3 company_footer">
+              <h5>企業</h5>
+              <ul class="none-li-point">
+                <li><%= link_to "新規登録", new_public_company_path, class:"link_text" %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

@@ -1,47 +1,73 @@
 <%= stylesheet_link_tag 'homes' %>
 <div class="top page">
-  <div class="row BG_img">
-    <div class="col text_contents_white">
-      <div class="app_name">
-        <ul>
-          <li>New</li> <li>Value</li>
-        </ul>
+  <div class="BG_img">
+    <div class="row">
+      <div class="col text_contents_white">
+        <div class="app_name">
+          <ul class="app_name_li">
+            <li class="app_name_li app_name_font">New</li> <li class="app_name_li app_name_font">Value</li>
+          </ul>
+        </div>
+        <h3>新しい価値観に触れてみませんか？</h3>
+        <p>他人の自己分析から価値観の変化が生まれるかもしれません</p>
       </div>
-      <h3>新しい価値観に触れてみませんか？</h3>
-      <p>他人の自己分析から価値観の変化が生まれるかもしれません</p>
-    </div>
-    <div class="col login">
-      <h5>一般ユーザーの方はこちら</h5>
-      <%= link_to "ログイン", new_user_session_path, class:"btn btn-success btn-lg" %>
-      <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary btn-lg" %>
-      <h5 class="company_head">企業の方はこちら</h5>
-      <div class="col">
-        <%= link_to "ログイン", new_company_session_path, class:"btn btn-success" %>
-      </div>
-      <div class="col">
-        <%= link_to "新規登録", new_company_registration_path, class:"btn btn-primary" %>
+      <div class="col login">
+        <h5>一般ユーザーの方はこちら</h5>
+        <%= link_to "ログイン", new_user_session_path, class:"btn btn-success btn-lg" %>
+        <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary btn-lg" %>
+        <h5 class="company_head">企業登録はこちら</h5>
+        <% if user_signed_in? %>
+          <%= link_to "企業連携", public_user_connect_path(current_user), class:"btn btn-success btn-lg" %>
+        <% end %>
+        <%= link_to "登録", new_public_company_path, class:"btn btn-primary btn-lg" %>
       </div>
     </div>
   </div>
-  <div class="BGC">
-    <div class="main_text_contents">
-      <h3>New Value は自己分析を共有できるサービスです。</h3>
-      <br>
-      <p>受信者・発信者のどちらであってもみなさんが成長できる一つの場所になることを目指してサービスを開始しました。</p>
-      <p>価値観というものを通して、何か見方の変化や成長を楽しんでください。</p>
-      <br>
-      <br>
-      <p>また、就活生のみなさんが自己分析をする時にも、自分の価値観を見つめる機会として使っていただけたら嬉しいです。<br>そこで、企業の方にも参加していただけるようなサービスとなっております。</p>
+  <div class="container">
+    <div class="BGC">
+      <div class="main_text_contents">
+        <h3><strong class="app_name_font">New Value</strong> は自己分析を共有できるサービスです。</h3>
+        <br>
+        <p>受信者・発信者のどちらであってもみなさんが成長できる一つの場所になることを目指してサービスを開始しました。</p>
+        <p>価値観というものを通して、何か見方の変化や成長を楽しんでください。</p>
+        <br>
+        <br>
+        <p>また、就活生のみなさんが自己分析をする時にも、自分の価値観を見つめる機会として使っていただけたら嬉しいです。<br>そこで、企業の方にも参加していただけるようなサービスとなっております。</p>
+      </div>
     </div>
-  </div>
-  <div class="row BGC">
-    <div class="col img_contents">
-      <img src="assets/" alt="">
-      <img src="assets/" alt="">
-      <img src="assets/" alt="">
+    <div class="BGC">
+      <div class="row">
+        <div class="col img_contents">
+          <img src="assets/" alt="">
+        </div>
+        <div class="col text_contents">
+        </div>
+      </div>
     </div>
-    <div class="col text_contents">
-
+    <div id="about">
+      <div class="BGC">
+        <h1>About</h1>
+        <div class="text_contents">
+          <h2>ーあなたを知ればわたしが変わるー</h2>
+          <p>New Valueは</p>
+          <h4>"新しい価値観を知ることで自分自身が成長できるのではないか"</h4>
+          <p>という問いから生まれました。</p>
+          <p>なので、自己分析を通して多くの価値観に触れて自分の考え方や価値観に変化を感じてもらえれば嬉しいです。</p>
+        </div>
+      </div>
+      <div class="BGC">
+        <h2>製作者</h2>
+        <div class="container">
+          <div class="row BGC producer">
+            <div class="col-sm text_contents">
+              <h3>岡田泰地（おかだ たいち）</h3>
+            </div>
+            <div class="col-sm img_contents">
+              <img src="/assets/Producer_img.jpg" alt="Producer_img" width="400" height="250">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
