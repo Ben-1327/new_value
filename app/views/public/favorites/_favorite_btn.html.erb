@@ -2,14 +2,14 @@
 
 <% if self_analysis.favorited_by?(current_user) %>
   <li class="favorite_btn_li">
-  <%= link_to public_user_self_analysis_favorites_path(self_analysis.user.id, self_analysis.id), method: :delete do %>
+  <%= link_to public_user_self_analysis_favorites_path(self_analysis.user.id, self_analysis.id), method: :delete, class:"link_text" do %>
     <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
     <%= self_analysis.favorites.count %> いいね
   <% end %>
   </li>
 <% else %>
   <li class="favorite_btn_li">
-    <%= link_to public_user_self_analysis_favorites_path(self_analysis.user.id, self_analysis.id), method: :post do %>
+    <%= link_to public_user_self_analysis_favorites_path(self_analysis.user.id, self_analysis.id), method: :post, class:"link_text" do %>
       <i class="fa fa-heart-o" aria-hidden="true"></i>
       <%= self_analysis.favorites.count %> いいね
     <% end %>
