@@ -44,7 +44,7 @@ class Public::SelfAnalysesController < ApplicationController
     @self_analysis = SelfAnalysis.find(params[:id])
     @self_analysis_comment = SelfAnalysisComment.new
     @user = @self_analysis.user
-    @question = @self_analysis.question
+    @question = @self_analysis.user_question
     @analysis_part = @question.analysis_part
     @self_analysis_comments = @self_analysis.self_analysis_comments
   end
