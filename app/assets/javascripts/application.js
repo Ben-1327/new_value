@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function() {
       console.log(data)
       $('#self_analysis_question_id option').remove();
       for (var i = 0; i < data.length; i++) {
-        $('#self_analysis_question_id').append(`<option value='${data[i].step}'>step${data[i].step}</option>`)
+        $('#self_analysis_question_id').append("<option value='${data[i].step}'>step${data[i].step}</option>")
         $('#question').text(data[0].question);
       }
     })
