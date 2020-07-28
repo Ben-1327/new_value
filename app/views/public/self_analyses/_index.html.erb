@@ -11,7 +11,6 @@
         </div> -->
     <div class="row row-cols-1 row-cols-md-2">
       <% self_analyses.each do |self_analysis| %>
-
         <% if self_analysis.range == 0 || current_user.following?(self_analysis.user) && self_analysis.range == 1 %>
           <div class="col mb-6", style="height:300px;">
             <%= link_to public_user_self_analysis_path(self_analysis.user, self_analysis) do %>
@@ -54,6 +53,7 @@
           </div>
         <% end %>
       <% end %>
+      <%= paginate self_analyses %>
     </div>
   </div>
 </div>
