@@ -42,7 +42,6 @@ $(document).on('turbolinks:load', function() {
   $('#self_analysis_user_question_id').on('change', function() {
 		hoge();
 	});
-	hoge();
 	function hoge() {
 		var inputAnalysisUserQuestion = $('#self_analysis_user_question_id').val();
     var inputAnalysisPart =  $('#self_analysis_analysis_part_id').val();
