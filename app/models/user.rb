@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validates :user_batch, presence: true
   validates :encrypted_password, presence: true
   validates :prefectures, presence: true
-  validates :ageencrypted_password, presence: true
+  validates :age, presence: true
 
   # relationshipsによるフォローではなくGemを使ったフォローに変更しました
 
