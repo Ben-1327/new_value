@@ -25,11 +25,10 @@ $(document).on('turbolinks:load', function() {
       dataType: 'json'
     })
     .done(function(data){
-      console.log(data)
       $('#self_analysis_question_id option').remove();
       for (var i = 0; i < data.length; i++) {
-        $('#self_analysis_question_id').append("<option value='${data[i].step}'>step${data[i].step}</option>")
-        $('#question').text(data[0].question);
+        $('#self_analysis_question_id').append("<option value='" + data[i].step + "'>step" + data[i].step + "</option>");
+          $('#question').text(data[0].question);
       }
     })
     .fail(function(){
@@ -39,11 +38,8 @@ $(document).on('turbolinks:load', function() {
 
 
 
-  $('#self_analysis_user_question_id').on('change', function() {
-		hoge();
-	});
-	function hoge() {
-		var inputAnalysisUserQuestion = $('#self_analysis_user_question_id').val();
+  $('#self_analysis_question_id').on('change', function() {
+    var inputAnalysisUserQuestion = $('#self_analysis_question_id').val();
     var inputAnalysisPart =  $('#self_analysis_analysis_part_id').val();
 		$.ajax({
 			type: 'GET',
@@ -51,11 +47,9 @@ $(document).on('turbolinks:load', function() {
 			data: { question_put: inputAnalysisUserQuestion, analysis_part: inputAnalysisPart },
 			dataType: 'json'
 		}).done(function(data) {
-			console.log(data);
-			$('#user_question').text(data.question);
+      $('#question').text(data.question);
 		});
-	}
-
+	});
 });
 
 
