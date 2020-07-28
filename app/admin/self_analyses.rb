@@ -5,7 +5,7 @@ ActiveAdmin.register SelfAnalysis do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :answer, :analysis, :range, :user_id, :analysis_part_id
+  permit_params :user_id, :user_question_id, :answer, :analysis, :range
   #
   # or
   #

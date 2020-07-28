@@ -5,7 +5,7 @@ ActiveAdmin.register AnalysisPart do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :part
+  permit_params :id, :part
   #
   # or
   #
