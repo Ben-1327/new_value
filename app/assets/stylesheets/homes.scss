@@ -78,3 +78,20 @@ nav{
   margin: 20px 0;
   text-align: center;
 }
+
+.how_to_use{
+  margin-top: 50px;
+}
+
+.ex_text_contents{
+  position: relative;
+}
+
+.ex_text_contents p{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}

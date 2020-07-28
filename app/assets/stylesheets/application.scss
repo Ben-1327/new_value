@@ -71,10 +71,25 @@
    font-weight: bold;
  }
 
-
- footer {
-   background-color: #FFC679;
+ .wrapper{
+     min-height: 100vh;
+     position: relative;/*←相対位置*/
+     padding-bottom: 120px;/*←footerの高さ*/
+     box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
  }
+
+ footer{
+     width: 100%;
+     background-color: #FFC679;
+     text-align: center;
+     padding: 30px 0;
+
+  position: absolute;/*←絶対位置*/
+     bottom: 0; /*下に固定*/
+ }
+ // footer {
+ //   background-color: #FFC679;
+ // }
 
 .none-li-point{
   list-style: none;
