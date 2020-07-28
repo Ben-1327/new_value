@@ -10,7 +10,7 @@
             <% if @user.icon_img.present? %>
               <%= image_tag @user.icon_img.to_s, class:"user_icon" %>
             <% else %>
-              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+              <%= image_tag 'default_icon.jpg', class:"default_icon"%>
             <% end %>
           </div>
           <% if @user.user_type == 1 && @user.representative == false && @user.company_id.present? %>
@@ -187,7 +187,7 @@
             <% if @company.icon_img.present? %>
               <%= image_tag @company.icon_img.to_s, class:"user_icon" %>
             <% else %>
-              <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+              <%= image_tag 'default_icon.jpg', class:"default_icon"%>
             <% end %>
           </div>
           <div class="col-sm-6 header_center">
@@ -231,7 +231,7 @@
         <div class="row info">
 
         </div>
-        
+
         <div class="row edit_space">
           <div class="col-sm-10"></div>
           <div class="col-sm-2 edit_btn">

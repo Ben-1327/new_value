@@ -21,7 +21,7 @@
                       <% if self_analysis.user.icon_img.present? %>
                         <%= image_tag self_analysis.user.icon_img.to_s, class:"user_icon", style:"width:70px; height:70px;"%>
                       <% else %>
-                        <%= image_tag '/assets/default_icon.jpg', class:"default_icon", style:"width:70px; height:70px;"%>
+                        <%= image_tag 'default_icon.jpg', class:"default_icon", style:"width:70px; height:70px;"%>
                       <% end %>
                     </div>
                     <div class="col-8 name_space">

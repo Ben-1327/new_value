@@ -54,7 +54,7 @@
           <% if self_analysis_comment.user.icon_img.present? %>
             <%= image_tag self_analysis_comment.user.icon_img.to_s, class:"user_icon" %>
           <% else %>
-            <%= image_tag '/assets/default_icon.jpg', class:"default_icon"%>
+            <%= image_tag 'default_icon.jpg', class:"default_icon"%>
           <% end %>
         </div>
         <div class="col-8">
