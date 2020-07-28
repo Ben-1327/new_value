@@ -7,7 +7,7 @@
   <div class="step_list">
     <% user_questions.each do |user_question| %>
       <% self_analysis = user_question.self_analyses.where(user_question_id: user_question.id, user_id: user.id).first %>
-      <h2>STEP. <%= user_question.step %><%= link_to user_question.question, public_user_self_analysis_path(@user, self_analysis),class:"link_text"%> </h2>
+      <h2>STEP.<%= user_question.step %><%= link_to user_question.question, public_user_self_analysis_path(@user, self_analysis),class:"link_text"%> </h2>
       <% if self_analysis.present? %>
         <div class="row self_analysis_text">
           <div class="col-sm-6">

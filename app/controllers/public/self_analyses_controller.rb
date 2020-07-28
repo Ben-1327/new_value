@@ -60,16 +60,17 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def create
-
-    user_question_id = UserQuestion.find_by(step: params[:self_analysis][:user_question_id], analysis_part_id: params[:self_analysis][:analysis_part_id]).id
-    present_answer = current_user.self_analyses.where(user_question_id: user_question_id)
+    user_question = UserQuestion.find_by(step: params[:self_analysis][:question_id], analysis_part_id: params[:self_analysis][:analysis_part_id])
+    if user_question
+      present_answer = current_user.self_analyses.where(user_question_id: user_question.id)
+    else
+      present_answer = []
+    end
     @user_questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
 
-    if present_answer.blank?
+    if user_question.present? && present_answer.empty?
       @self_analysis = current_user.self_analyses.build(self_analysis_params)
-      @self_analysis.user_question_id = user_question_id
-      #binding.pry
-
+      @self_analysis.user_question_id = user_question.id
       if @self_analysis.save
         redirect_to public_user_self_analysis_path(current_user.id, @self_analysis), notice: "投稿に成功しました!"#保存された場合の移動先を指定.
       else
