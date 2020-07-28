@@ -51,12 +51,12 @@ class Public::SelfAnalysesController < ApplicationController
 
   def new
     @self_analysis = SelfAnalysis.new
-    @questions = Question.where(analysis_part_id: AnalysisPart.first.id)
+    @questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
   end
 
   def edit
     @self_analysis = SelfAnalysis.find(params[:id])
-    @questions = Question.where(analysis_part_id: AnalysisPart.first.id)
+    @questions = UserQuestion.where(analysis_part_id: AnalysisPart.first.id)
   end
 
   def create
@@ -99,7 +99,7 @@ class Public::SelfAnalysesController < ApplicationController
 
   def part_select
     analysis_part = AnalysisPart.find(params[:step_select])
-    @steps = Question.where(analysis_part_id: analysis_part)
+    @steps = UserQuestion.where(analysis_part_id: analysis_part)
     render json: @steps
   end
 
@@ -120,7 +120,7 @@ class Public::SelfAnalysesController < ApplicationController
   end
 
   def self_analysis_params
-    params.require(:self_analysis).permit(:user_id, :question_id, :answer, :analysis, :range)
+    params.require(:self_analysis).permit(:user_id, :user_question_id, :answer, :analysis, :range)
   end
 
 end
