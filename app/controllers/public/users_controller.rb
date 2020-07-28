@@ -52,7 +52,10 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
 		@user.update(user_params)
-		redirect_to public_user_path, notice: "会員情報の編集に成功しました。"
+    if @user.user_type == 0
+      @user.update(company_id: nil)
+    end
+		redirect_to public_user_path(current_user), notice: "会員情報の編集に成功しました。"
   end
 
 
