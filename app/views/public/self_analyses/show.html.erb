@@ -66,7 +66,7 @@
           </div>
           <div class="col-2destroy_btn">
             <% if self_analysis_comment.user == current_user%>
-              <%= link_to "削除", public_user_self_analysis_self_analysis_comment_path(@self_analysis, self_analysis_comment), method: :delete, class: "btn btn-danger pull-right" %>
+              <%= link_to "削除", public_user_self_analysis_self_analysis_comment_path(self_analysis_comment.user,@self_analysis, self_analysis_comment), method: :delete, class: "btn btn-danger pull-right" %>
             <% end %>
           </div>
         </div>

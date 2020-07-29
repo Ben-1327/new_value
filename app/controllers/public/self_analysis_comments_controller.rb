@@ -12,7 +12,7 @@ class Public::SelfAnalysisCommentsController < ApplicationController
 
   def destroy
     @self_analysis = SelfAnalysis.find(params[:self_analysis_id])
-    SelfAnalysisComment.find_by(id: params[:id], self_analysis_id: params[:self_analysis_id]).destroy
+    SelfAnalysisComment.find_by(self_analysis_id: params[:self_analysis_id], id: params[:id]).destroy
     redirect_to public_user_self_analysis_path(@self_analysis.user, @self_analysis)
   end
 
