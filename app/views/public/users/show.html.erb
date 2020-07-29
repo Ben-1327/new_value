@@ -150,25 +150,25 @@
         </div>
         <div class="self_analyses_space">
           <h2><%= @user.name %>の自己分析</h2>
-          <div class="card-deck">
+          <div class="row row-cols-1 row-cols-md-2">
             <% @analysis_parts.each do |analysis_part| %>
-              <div class="card border-dark mb-6" style="max-width: 30rem;">
-                <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user, analysis_part), class:"link_text" %> </div>
-                <div class="card-body text-dark">
-                  <ul class="step_list card_text">
-                    <% analysis_part.user_questions.each do |user_question| %>
-                      <% @self_analysis = user_question.self_analyses.where(user_id: @user.id, user_question_id: user_question.id).first %>
-                      <% if @self_analysis.present? %>
-                        <% if current_user == @user || @self_analysis.range == 0 || current_user.following?(@self_analysis.user) && @self_analysis.range == 1 %>
-                          <%#= link_to public_user_self_analysis_path(@user), class:"link_text" do %>
+              <div class="col mb-6">
+                <div class="card border-dark" style="max-width: 30rem;">
+                  <div class="card-header"> <%= link_to analysis_part.part, public_user_part_index_path(@user, analysis_part), class:"link_text" %> </div>
+                  <div class="card-body text-dark">
+                    <ul class="step_list card_text">
+                      <% analysis_part.user_questions.each do |user_question| %>
+                        <% @self_analysis = user_question.self_analyses.where(user_id: @user.id, user_question_id: user_question.id).first %>
+                        <% if @self_analysis.present? %>
+                          <% if current_user == @user || @self_analysis.range == 0 || current_user.following?(@self_analysis.user) && @self_analysis.range == 1 %>
                             <li>Step.<%= user_question.step %><%= link_to user_question.question, public_user_self_analysis_path(@user, @self_analysis), class:"link_text" %></li>
-                          <%# end %>
+                          <% end %>
+                        <% else %>
+                          <li>Step.<%= user_question.step %>まだ回答がありません。</li>
                         <% end %>
-                      <% else %>
-                        <li>Step.<%= user_question.step %>まだ回答がありません。</li>
                       <% end %>
-                    <% end %>
-                  </ul>
+                    </ul>
+                  </div>
                 </div>
               </div>
             <% end %>
