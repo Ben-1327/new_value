@@ -15,8 +15,15 @@ class ApplicationController < ActionController::Base
     case resource
     when :user
       root_path
+
+    when :active_admin
+      new_admin_session_path
     end
   end
+
+  # def after_sign_in_path_for(resource_or_scope)
+  #   root_path || user_admin_path
+  # end
 
   def configure_permitted_parameters
    devise_parameter_sanitizer.permit(:sign_up, keys: [:user_type,:name,:prefectures,:age,:user_batch,:email])
